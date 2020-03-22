@@ -1,1 +1,0 @@
-{"_id":{"$oid":"5e6298391c9d440000e19bff"},"pseudo":"rayan","mail":"rayan@gmail.com","password":"1234","city":"Montpellier","isAdmin":false,"isConnected":false,"isBanned":false,"idPropositions":[],"idAnswers":[{"$oid":"5e629af61c9d440000e19c04"}]}
