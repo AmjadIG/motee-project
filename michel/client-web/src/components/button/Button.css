@@ -1,0 +1,73 @@
+*:active {
+    outline-width: 0;
+}
+.GrayHoverButton {
+    cursor: pointer;
+    margin: 5px;
+    padding: 5px;
+    background-color: white;
+    border-radius: 5px;
+    border: 2px solid lightgray;
+    color: gray;
+    font-weight: bolder;
+    font-size: medium;
+    transition-duration: 0.4s;
+}
+
+.GrayHoverButton:hover {
+    background-color: lightgray;
+    color: white;
+}
+
+.GreenHoverButton {
+    cursor: pointer;
+    margin: 5px;
+    padding: 5px;
+    background-color: white;
+    border-radius: 5px;
+    border: 2px solid #27a142;
+    color: #27a142;
+    font-weight: bolder;
+    font-size: medium;
+    transition-duration: 0.4s;
+}
+
+.GreenHoverButton:hover {
+    background-color: #27a142;
+    color: white;
+}
+
+.NavbarHoverButton {
+    background-color: #246e78;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 2px solid#246e78;
+    font-weight: bolder;
+    font-size: medium;
+    transition-duration: 0.4s;
+
+}
+
+.NavbarHoverButton:hover {
+    background-color: white;
+    color : #246e78;
+}
+
+.BlueSquaredButton {
+    background-color: #246e78;
+    color : white;
+    margin: 5px;
+    padding: 5px;
+    cursor: pointer;
+    font-size: medium;
+    font-weight: bolder;
+    border : none;
+    transition-duration: 0.4s;
+} 
+.BlueSquaredButton:hover {
+    background-color:#1e5e66;
+}
