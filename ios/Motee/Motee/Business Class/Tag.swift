@@ -62,3 +62,12 @@ class Tag : Identifiable, ObservableObject, Codable {
         return self.label == otherTag.label
     }
 }
+
+// get the best 9 tags
+func getTopTags() -> [Tag] {
+    /// REQUETE
+    return [Tag(label: "Humour"),Tag(label: "Metro"),Tag(label: "Paris"),
+            Tag(label: "Sport"),Tag(label: "Corona"),Tag(label: "Drague"),
+            Tag(label: "Travail"),Tag(label: "Tenue"),Tag(label: "Famille")
+            ]
+}

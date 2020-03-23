@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		8E18B31D241A7B4F00F495BF /* FilterKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E18B31C241A7B4F00F495BF /* FilterKit.swift */; };
+		8E46C14C24266A4000DCC705 /* TagListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E46C14B24266A4000DCC705 /* TagListView.swift */; };
+		8E5F727224290F4B00B89172 /* TopTags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5F727124290F4B00B89172 /* TopTags.swift */; };
+		8E5F72742429108800B89172 /* ShowTagsProposition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5F72732429108800B89172 /* ShowTagsProposition.swift */; };
+		8E5F727624292C9D00B89172 /* PropositionFiltred.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5F727524292C9D00B89172 /* PropositionFiltred.swift */; };
 		8E6E4D8A2418EC1B00517EC6 /* TrailingNavbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6E4D892418EC1B00517EC6 /* TrailingNavbar.swift */; };
 		8ECD8A4B241AA6C7007F2879 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECD8A4A241AA6C7007F2879 /* TagView.swift */; };
 		A14296CD2412AFE0005E73B5 /* PropositionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14296CC2412AFE0005E73B5 /* PropositionView.swift */; };
@@ -76,6 +80,10 @@
 
 /* Begin PBXFileReference section */
 		8E18B31C241A7B4F00F495BF /* FilterKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterKit.swift; sourceTree = "<group>"; };
+		8E46C14B24266A4000DCC705 /* TagListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagListView.swift; sourceTree = "<group>"; };
+		8E5F727124290F4B00B89172 /* TopTags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTags.swift; sourceTree = "<group>"; };
+		8E5F72732429108800B89172 /* ShowTagsProposition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTagsProposition.swift; sourceTree = "<group>"; };
+		8E5F727524292C9D00B89172 /* PropositionFiltred.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropositionFiltred.swift; sourceTree = "<group>"; };
 		8E6E4D892418EC1B00517EC6 /* TrailingNavbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailingNavbar.swift; sourceTree = "<group>"; };
 		8ECD8A4A241AA6C7007F2879 /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 		A14296CC2412AFE0005E73B5 /* PropositionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropositionView.swift; sourceTree = "<group>"; };
@@ -156,10 +164,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8E5F727024290E4C00B89172 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				A1A5A342240D42F20015CBBE /* Accueil.swift */,
+				A1B5EAE224100D00001824C6 /* Filter.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		8ECD8A49241AA6B1007F2879 /* Tag */ = {
 			isa = PBXGroup;
 			children = (
+				8E5F727124290F4B00B89172 /* TopTags.swift */,
 				8ECD8A4A241AA6C7007F2879 /* TagView.swift */,
+				8E46C14B24266A4000DCC705 /* TagListView.swift */,
 			);
 			path = Tag;
 			sourceTree = "<group>";
@@ -260,10 +279,6 @@
 				A1A5A33A240D41900015CBBE /* FieldGenerator.swift */,
 				A14296CE2412BB73005E73B5 /* Report.swift */,
 				A14296D02412BD57005E73B5 /* Comment.swift */,
-				A14296D42412CFA7005E73B5 /* PropositionFooter.swift */,
-				A14296D22412C3D7005E73B5 /* PropositionLiked.swift */,
-				F0C203E62417EC8000189E6A /* AnswerFooter.swift */,
-				F0A77C952418EB8000C5F3AA /* AnswerLiked.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -280,13 +295,12 @@
 		F016E233240D4B8B0063A034 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				8ECD8A49241AA6B1007F2879 /* Tag */,
 				A14A254C241474650030039B /* Account.swift */,
+				8E5F727024290E4C00B89172 /* Home */,
+				8ECD8A49241AA6B1007F2879 /* Tag */,
 				A14A254524140C4C0030039B /* Navbar */,
 				F016E246240D72260063A034 /* Proposition */,
 				F016E234240D4B9F0063A034 /* Answer */,
-				A1A5A342240D42F20015CBBE /* Accueil.swift */,
-				A1B5EAE224100D00001824C6 /* Filter.swift */,
 				A1A5A348240D44C50015CBBE /* Tools */,
 				A1A5A34F240D45D50015CBBE /* Register */,
 				A1A5A346240D449D0015CBBE /* Login */,
@@ -300,6 +314,8 @@
 				F016E235240D4BD40063A034 /* AnswerView.swift */,
 				F016E237240D4BF00063A034 /* AddAnswer.swift */,
 				F016E239240D4C050063A034 /* ListAnswers.swift */,
+				F0A77C952418EB8000C5F3AA /* AnswerLiked.swift */,
+				F0C203E62417EC8000189E6A /* AnswerFooter.swift */,
 			);
 			path = Answer;
 			sourceTree = "<group>";
@@ -307,9 +323,9 @@
 		F016E23B240D4C0C0063A034 /* Business Class */ = {
 			isa = PBXGroup;
 			children = (
-				F016E240240D4C4A0063A034 /* User.swift */,
 				F016E23C240D4C310063A034 /* Proposition.swift */,
 				F016E23E240D4C3E0063A034 /* Answer.swift */,
+				F016E240240D4C4A0063A034 /* User.swift */,
 				F016E242240D4C550063A034 /* Publication.swift */,
 				F016E244240D4C690063A034 /* Tag.swift */,
 			);
@@ -321,6 +337,10 @@
 			children = (
 				F016E247240D723B0063A034 /* AddProposition.swift */,
 				A14296CC2412AFE0005E73B5 /* PropositionView.swift */,
+				8E5F72732429108800B89172 /* ShowTagsProposition.swift */,
+				A14296D22412C3D7005E73B5 /* PropositionLiked.swift */,
+				A14296D42412CFA7005E73B5 /* PropositionFooter.swift */,
+				8E5F727524292C9D00B89172 /* PropositionFiltred.swift */,
 			);
 			path = Proposition;
 			sourceTree = "<group>";
@@ -474,7 +494,9 @@
 				A14A254924140DE80030039B /* NavbarView.swift in Sources */,
 				F0A77C962418EB8000C5F3AA /* AnswerLiked.swift in Sources */,
 				F0336FF024290E9C00753620 /* UserModel.swift in Sources */,
+				8E46C14C24266A4000DCC705 /* TagListView.swift in Sources */,
 				F016E248240D723B0063A034 /* AddProposition.swift in Sources */,
+				8E5F72742429108800B89172 /* ShowTagsProposition.swift in Sources */,
 				A1A5A33B240D41900015CBBE /* FieldGenerator.swift in Sources */,
 				A14296CF2412BB73005E73B5 /* Report.swift in Sources */,
 				A1A5A33F240D42890015CBBE /* LoginButton.swift in Sources */,
@@ -498,10 +520,12 @@
 				A1A5A30B240D40A30015CBBE /* Motee.xcdatamodeld in Sources */,
 				F0336FF224290F3100753620 /* TagModel.swift in Sources */,
 				A14A254D241474650030039B /* Account.swift in Sources */,
+				8E5F727224290F4B00B89172 /* TopTags.swift in Sources */,
 				A14296D32412C3D7005E73B5 /* PropositionLiked.swift in Sources */,
 				A1A5A30D240D40A30015CBBE /* ContentView.swift in Sources */,
 				F016E238240D4BF00063A034 /* AddAnswer.swift in Sources */,
 				A1A5A345240D44280015CBBE /* RegisterButton.swift in Sources */,
+				8E5F727624292C9D00B89172 /* PropositionFiltred.swift in Sources */,
 				A14A254724140D810030039B /* MenuView.swift in Sources */,
 				8ECD8A4B241AA6C7007F2879 /* TagView.swift in Sources */,
 				F02350B92417C86B0069AB06 /* Root.swift in Sources */,

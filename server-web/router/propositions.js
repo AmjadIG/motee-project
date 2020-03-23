@@ -10,7 +10,7 @@ const dotenv = require('dotenv')
 dotenv.config();
 
 // Return all propositions
-router.get('/', async (req,res) =>{
+router.get('/', (req,res) =>{
   propositionModel.find({}, function(err,query){
     if (err){
       return res.status(500).send(err);
@@ -25,6 +25,30 @@ router.get('/', async (req,res) =>{
   })
 });
 
+// all proposition sorted by ascending or descending
+router.get('/sort/:sort', async (req,res) =>{
+  try {
+    var userId = [];
+    var prop = [];
+    var proposition = await propositionModel.find({}).sort({"dateProp" : "desc"}).exec();
+    for (var i = 0; i < proposition.length; i++) {
+      var user = await userModel.findById(proposition[i].ownerProp);
+      userId.push(user.pseudo);
+      prop.push(proposition[i]);
+    }
+    console.log(prop);
+    for (var i = 0; i < proposition.length; i++) {
+      prop[i].ownerAnswer = "michel";
+      console.log("here");
+      console.log("here";)
+    }
+
+    console.log(prop)
+  }catch(error){
+    console.log(error);
+  }
+});
+
 
 // return proposition by id
 router.get('/:id_proposition', async (req,res) =>{
@@ -32,14 +56,11 @@ router.get('/:id_proposition', async (req,res) =>{
     if (err){
       return res.status(500).send(err);
     }
-
     // no proposition found
     if(query.length === 0) {
       res.status(204).send({errors : "No proposition found"});
     }
-
      // format the query
-     console.log("here");
      result = {};
      result[query._id] = query;
      res.status(200).json(result);
@@ -47,7 +68,8 @@ router.get('/:id_proposition', async (req,res) =>{
 });
 
 // add new proposition
-// return the proposition added
+// return the proposition added ( warning = resultat not updated for the tags )
+// to do : cas ou tags vide
 router.post('/newProposition', (req, res) => {
 
   // get the token
@@ -72,10 +94,10 @@ router.post('/newProposition', (req, res) => {
     var proposition = new propositionModel();
     proposition.contentProp = req.body.contentProp;
     proposition.isAnonymous = req.body.isAnonymous;
-    proposition.ownerProp = decoded.result._id;
+    proposition.ownerProp = decoded.user._id;
 
     // prepare tag for insert
-    var tagsReq = req.body.idProps;
+    var tagsReq = req.body.tagsProp;
     var tagsArray = tagsReq.split(' ');
 
     //save proposition in database collection
@@ -88,7 +110,7 @@ router.post('/newProposition', (req, res) => {
       console.log("proposition saved");
 
       // insert proposition in user Array
-      userModel.findOneAndUpdate({"_id": decoded.result._id},{$push : {"idPropositions" : prop._id}},{new: true}, function(err,user){
+      userModel.findOneAndUpdate({"_id": decoded.user._id},{$push : {"idPropositions" : prop._id}},{new: true}, function(err,user){
         if(err){
           console.log(err);
           return res.status(500).json(err);
@@ -101,7 +123,6 @@ router.post('/newProposition', (req, res) => {
 
       // insert each tags or update if exist
       for (var i = 0; i < tagsArray.length; i++) {
-        console.log(i)
         var query = {"label" : tagsArray[i]},
         update = { "label": tagsArray[i],
                     $inc : { "nbOccurence" : 1},
@@ -117,8 +138,8 @@ router.post('/newProposition', (req, res) => {
 
           console.log("tags insered !")
 
-          // update tag in proposition collection
-          propositionModel.findOneAndUpdate({ _id : prop},{$push : { "tagsProp" : tagRes.id}},{new: true}, function(err,propU){
+          // update tag array in proposition collection
+          propositionModel.findOneAndUpdate({ _id : prop.id},{$push : { "tagsProp" : tagRes.id}},{new: true}, function(err,propU){
             if(err){
               console.log(err);
               return res.status(500).json(err);
@@ -299,7 +320,7 @@ router.post('/delete', (req, res) => {
       return res.status(500).send({ errors: 'Failed to authenticate token.' });
     }
 
-    // check if update is own propostion
+    // check if delete is own propostion
     const user = decoded.result._id;
     if(user != req.body.ownerProp){
       return res.status(403).send({ errors: 'Forbidden' });

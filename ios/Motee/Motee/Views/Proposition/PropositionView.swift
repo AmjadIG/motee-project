@@ -9,78 +9,107 @@
 import SwiftUI
 
 struct PropositionView : View {
-    
     var currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser
-    var proposition : Proposition
-    let dateFormatter = DateFormatter()
-    
-    @State var showAnswers = false
-    @State var colorIfClicked = "white"
-    @State var colorIfClicked2 = "black"
-    
-    //utiliser un objet Proposition
-    init(proposition : Proposition){
-        self.proposition = proposition
-        dateFormatter.dateStyle = .short
-        dateFormatter.timeStyle = .short
+    @Binding var proposition : Proposition// A CHANGER ET A PASSER LA VRAIE PROP EN PARAM DANS LA VIEW SUPERIEURE
+    @State var showBestAnswer = false
+    @State var showAllAnswers = false
+    @State var colorIfClicked = generateColor(name: "white")
+    @State var colorIfClicked2 = generateColor(name: "black")
+    @State var bestAnswer : Answer = getBestAnswer()
+    @State var allAnswers : [Answer] = getAllAnswers()
+    var body: some View {
+        let drag = DragGesture()
+            .onEnded {
+                if $0.translation.width < -100 {
+                    withAnimation {
+                        self.showAllAnswers = false
+                        self.showBestAnswer = false
+                        self.toggleColor()
+                    }
+                }
+        }
+        return
+            VStack{
+                ShowTagsProposition(proposition: $proposition)
+                VStack{
+                    HStack{
+                        Text(proposition.owner.pseudo).bold().foregroundColor(colorIfClicked2)
+                        Spacer()
+                        Text(proposition.dateToString())
+                            .bold()
+                            .foregroundColor(colorIfClicked2)
+                    }.padding().background(colorIfClicked)
+                    
+                    Text(proposition.contentPub).padding(.top, 30.0).padding(.horizontal)
+                    
+                    PropositionFooter(proposition: proposition).padding()
+                    
+                }.frame(alignment: .leading)
+                    .edgesIgnoringSafeArea(.all)
+                    .background(lightGreyColor)
+                    .cornerRadius(20).shadow(radius: 20)
+                    .padding([.leading, .bottom, .trailing])
+                Button(action : {
+                    self.showBestAnswer.toggle()
+                    self.toggleColor()
+                }){
+                    if (showBestAnswer){
+                        Text("Cacher la meilleure réponse")
+                    }
+                    if(!showAllAnswers && !showBestAnswer){
+                        Text("Afficher la meilleure réponse")
+                    }
+                }
+                VStack{
+                    if (showBestAnswer){
+                        AnswerView(answer: $bestAnswer)
+                        Button(action : {
+                            self.showBestAnswer = false
+                            self.showAllAnswers.toggle()
+                        }){
+                            Text("Afficher toutes les réponses")
+                        }
+                    }
+                    if (showAllAnswers){
+                        AnswerView()
+                        AnswerView()
+                        Button(action : {
+                            self.showAllAnswers.toggle()
+                            self.toggleColor()
+                        }){
+                            Text("Cacher toutes les réponses")
+                        }
+                    }
+                }.onTapGesture { }
+                .gesture(drag)
+                ////////////////////////////////////// ///
+                /// REQUETE A ENVOYER pour recupere la meilleure reponse ///
+                /// ////////////////////////////// ///
+                
+            }
+        
     }
+    
     
     func toggleColor(){
-        if showAnswers{
-            colorIfClicked = "black"
-            colorIfClicked2 = "white"
+        if showBestAnswer{
+            colorIfClicked =  Color.blue.opacity(0.7)
+            colorIfClicked2 = generateColor(name: "white")
         }else{
-            colorIfClicked = "white"
-            colorIfClicked2 = "black"
-
+            colorIfClicked = generateColor(name: "white")
+            colorIfClicked2 = generateColor(name: "black")
+            
         }
-    }
-    
-    func getDate() -> String {
-        //return dateFormatter.string(from: proposition.datePublication)
-        return proposition.datePublication
-    }
-    
-    func getLike() -> String {
-        return String(proposition.idLikesProp.count)
-    }
-    
-    var body: some View {
-        //NavigationView{
-            VStack{
-            VStack{
-                HStack{
-                    Text("Pseudo").bold().foregroundColor(generateColor(name: self.colorIfClicked2))
-                    Spacer()
-                    Text(getDate()).bold().foregroundColor(generateColor(name: self.colorIfClicked2))
-                }.padding()
-                    .padding(.horizontal).background(generateColor(name: self.colorIfClicked))
-            Spacer()
-                Text(proposition.contentPub)
-                    .padding(.horizontal)
-            Spacer()
-                PropositionFooter(proposition: proposition).padding()
-                Button(
-                    action : {
-                        self.showAnswers.toggle()
-                        self.toggleColor()
-                    }){
-                       Text("Voir la meilleure réponse")
-                }
-                Spacer()
-                
-                }.frame(maxWidth: 380, maxHeight : 220 , alignment: .leading).edgesIgnoringSafeArea(.all)
-            .background(lightGreyColor)
-            .cornerRadius(20).shadow(radius: 20)
-            .padding()
-            if (showAnswers){
-                ListAnswersView(proposition: proposition)
-            }
-        }
-        //}
     }
 }
 /*
+func getProposition() -> Proposition {
+    let contentProp = "Ceci est un propos test test test test :)"
+    let tags = [Tag(label: "tag1"),Tag(label: "tag2")]
+    return Proposition(userP: "Niska", identifierP: 1, contentP: contentProp, anonymousP: false, tagsP: tags, titleP: "titre",dateP: Date())
+}
+
+
 struct PropositionView_Previews: PreviewProvider {
     static var previews: some View {
         PropositionView()
