@@ -10,25 +10,27 @@ import SwiftUI
 
 
 struct TagListView: View {
-    @Binding var tagList : [String]
+    @Binding var tagList : [Tag]
     var body: some View {
         HStack{
-            ForEach(tagList,id: \.self){oneTag in
-                Text(" #\(oneTag.description) ").bold().background(Color.blue).cornerRadius(5).foregroundColor(Color.white)
+            ForEach(tagList,id: \.id){oneTag in
+                Text(" #\(oneTag.label) ").bold().background(Color.blue).cornerRadius(5).foregroundColor(Color.white)
             }
             Button(action: {
                 self.tagList.removeAll()
             }){
-                SymbolGenerator(mySymbol: "trash", myColor: "gray")
+                Image(systemName: "trash")
+                    .font(.title)
+                    .foregroundColor(Color.gray)
             }
         }
     }
 }
 
 struct TagListView_Previews: PreviewProvider {
-    @State static var list : [String] = ["tag1","tag2","tag3"]
+     @State static var listTag : [Tag] = [Tag(label: "tag1"),Tag(label: "tag2"),Tag(label: "tag3"),]
     static var previews: some View {
-        TagListView(tagList: $list)
+        TagListView(tagList: $listTag)
     }
 }
 

@@ -10,26 +10,26 @@ import SwiftUI
 
 struct TagView: View {
     @EnvironmentObject var fk : FilterKit
+    @Binding var tag : Tag
+    var color : String
     var body : some View {
         
         VStack{
-            Text("todo")
-//            HStack{
-//                List{
-//                    ForEach(self.fk.tags){ tag in
-//                        tag.label
-//                    }
-//
-//                }
-//
-//            }
+            Text(" #\(tag.label) ")
+                .bold()
+                .padding()
+                .background(generateColor(name: color))
+                .cornerRadius(5)
+                .foregroundColor(Color.white)
         }
     }
 }
 
 struct TagView_Previews: PreviewProvider {
+    @State static var tag = Tag(label: "Humour")
+    @State static var color = "red"
     static var previews: some View {
-        TagView().environmentObject(FilterKit())
+        TagView(tag: $tag, color : color).environmentObject(FilterKit())
     }
 }
 

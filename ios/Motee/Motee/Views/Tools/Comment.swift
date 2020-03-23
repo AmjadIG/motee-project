@@ -9,24 +9,10 @@
 import SwiftUI
 
 struct Comment: View {
-    @State var isNotHide = false
-    @State var comment = ""
+    @Binding var isNotHide : Bool
+    @Binding var comment : String
     var body: some View {
         VStack{
-            VStack{
-            Button(action:{
-                self.isNotHide.toggle()
-            }){
-                
-                HStack{
-                    Text("Commenter")
-                    Image(systemName: "message.fill")
-                }
-                .padding(7)
-                .foregroundColor(.white)
-                .background(Color.blue).cornerRadius(40)
-            }
-        }
             if isNotHide {
                 HStack{
                     TextField("Commentaire...", text: $comment).cornerRadius(40)
@@ -43,7 +29,9 @@ struct Comment: View {
 }
 
 struct Comment_Previews: PreviewProvider {
+    @State static var isNoteHide = true
+    @State static var comment = ""
     static var previews: some View {
-        Comment()
+        Comment(isNotHide: $isNoteHide, comment: $comment)
     }
 }
