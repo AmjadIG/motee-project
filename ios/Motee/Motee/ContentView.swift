@@ -10,10 +10,29 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var filterKit : FilterKit
+    @State var boolTest : Bool = false
+    
     var body: some View {
-        ZStack{
-            NavbarView()
-            LoginForm()
+        VStack{
+            /*NavbarView()
+            LoginForm()*/
+            //Accueil()
+            Button(action:{
+                if !UserModel.getAll().isEmpty {
+                    self.boolTest = true
+                    for(_, value) in UserModel.getAll(){
+                        print(value.pseudo)
+                        print(value.email)
+                        print()
+                    }
+                }
+            }){
+                ButtonGenerator(myText: "Users", myColor: "red")
+            }
+            if boolTest {
+                ButtonGenerator(myText: "Requete ok!", myColor: "blue")
+                
+            }
         }
         
     }

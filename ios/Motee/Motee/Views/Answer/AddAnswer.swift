@@ -25,7 +25,7 @@ struct AddAnswerView: View {
             if propos.anonymous {
                 Text("Répondre à Anonyme").font(.system(size: 18)).bold().foregroundColor(.blue)
             } else {
-                Text("Répondre à \(propos.owner.pseudo)").font(.system(size: 18)).bold().foregroundColor(.blue)
+                //Text("Répondre à \(propos.owner.pseudo)").font(.system(size: 18)).bold().foregroundColor(.blue)
             }
             Text(propos.contentPub).font(.system(size: 18))
             Divider()
@@ -39,10 +39,10 @@ struct AddAnswerView: View {
                 } else{
                     //
                     self.alertEmptyAnswer = false
-                    if AnswerDAO.putAnswer(idAnswer: "testId", token: self.newContent){
+                    /*if AnswerDAO.putAnswer(idAnswer: "testId", token: self.newContent){
                         //Renvoie la liste de reponses ensuite
                         
-                    }
+                    }*/
                 }
             }){
                 Text("Envoyer Réponse").bold().padding(10).foregroundColor(Color.white).background(Color.green).cornerRadius(40)
@@ -55,9 +55,9 @@ struct AddAnswerView: View {
                 } else{
                     //
                     self.alertEmptyAnswer = false
-                    if AnswerDAO.putAnswer(idAnswer: "testId", token: self.newContent){
+                    /*if AnswerDAO.putAnswer(idAnswer: "testId", token: self.newContent){
                         //Renvoie la liste de reponses ensuite
-                    }
+                    }*/
                 }
             }){
                 Text("Envoyer Réponse Anonyme").bold().padding(10).foregroundColor(Color.white).background(Color.gray).cornerRadius(40)

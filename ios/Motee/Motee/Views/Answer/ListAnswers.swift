@@ -38,7 +38,7 @@ struct ListAnswersView: View {
                         }
                     }
                     List{
-                        ForEach(AnswerDAO.getAnswersByPropId(propId : proposition.id)){ answer in
+                        ForEach(PropositionModel.getAllAnswer(proposition: PropositionModel.getPropositionById(idProp: proposition.id))){ answer in
                             AnswerView(answer: answer)
                         }
                     }

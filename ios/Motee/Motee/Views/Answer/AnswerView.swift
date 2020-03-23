@@ -28,7 +28,7 @@ struct AnswerView: View {
                 HStack{
                     Text("Pseudo").bold().foregroundColor(.white)
                     Spacer()
-                    Text(self.dateFormatter.string(from: answer.datePublication)).bold().foregroundColor(.white)
+                    Text(answer.datePublication).bold().foregroundColor(.white)
                 }.padding()
                     .padding(.horizontal)
             Spacer()

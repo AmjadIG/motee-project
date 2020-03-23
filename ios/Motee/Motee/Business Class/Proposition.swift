@@ -12,13 +12,13 @@ import Foundation
 class Proposition : Publication, Identifiable, Codable {
     
     private var idPublication : String = "0"
-    var datePublication : Date = Date()
+    var datePublication : String = ""
     @Published var contentPub : String = ""
     @Published var idLikesProp : [String] = [] //Array d'object ID de User
     @Published var anonymous : Bool = false
-    @Published var owner : User
-    @Published var tags : [Tag] = []
-    @Published var answers : [Answer] = []
+    @Published var owner : String = ""
+    @Published var tags : [String] = []
+    @Published var answers : [String] = []
 
     var id : String {return idPublication}
     
@@ -42,16 +42,16 @@ class Proposition : Publication, Identifiable, Codable {
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: PropositionEncodingKeys.self)
         self.idPublication = try container.decode(String.self, forKey: ._id)
-        self.datePublication = try container.decode(Date.self, forKey: .dateProp)
+        self.datePublication = try container.decode(String.self, forKey: .dateProp)
         self.contentPub = try container.decode(String.self, forKey: .contentProp)
         self.idLikesProp = try container.decode(Array.self, forKey: .idLikesProp)
         self.anonymous = try container.decode(Bool.self, forKey: .isAnonymous)
-        self.owner = try container.decode(User.self, forKey: .ownerProp)
+        self.owner = try container.decode(String.self, forKey: .ownerProp)
         self.tags = try container.decode(Array.self, forKey: .tagsProp)
         self.answers = try container.decode(Array.self, forKey: .idAnswers)
     }
     
-    func addAnswer(newAnswer: Answer)->Bool{
+    func addAnswer(newAnswer: String)->Bool{
         self.answers.append(newAnswer)
         return true
     }
@@ -69,7 +69,7 @@ class Proposition : Publication, Identifiable, Codable {
     }
     
     func estProprietaire(utilisateur: User)->Bool{
-        if utilisateur.equals(utilisateur: self.owner) {
+        if utilisateur.id == self.id {
             return true
         }else {
             return false
@@ -86,7 +86,8 @@ class Proposition : Publication, Identifiable, Codable {
     
     func revelerIdentitePublication(utilisateur : User)->User?{
         if utilisateur.admin && self.anonymous {
-            return self.owner
+            //return self.owner
+            return nil
         } else {
             return nil
         }

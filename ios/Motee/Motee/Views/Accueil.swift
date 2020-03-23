@@ -32,11 +32,11 @@ struct Accueil: View {
                         }else if self.fk.filtered.elementsEqual("dateAsc"){
                             Title(myTitle: "Les plus anciens propos")
                         }
-                        List{
-                            ForEach(PropositionDAO.getAll()){ prop in
-                                PropositionView(proposition: prop)
+                        /*List{
+                            for (_,value) in PropositionModel.getAll(){
+                                PropositionView(proposition: value)
                             }
-                        }
+                        }*/
                     }
                     Spacer()
                 }

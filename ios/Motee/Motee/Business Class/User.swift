@@ -18,8 +18,8 @@ class User : Identifiable, ObservableObject, Codable {
     @Published var admin : Bool = false
     @Published var banned : Bool = false
     @Published var connected : Bool = false
-    @Published var idPropositions : [Proposition] = []
-    @Published var idAnswers : [Answer] = []
+    @Published var idPropositions : [String] = []
+    @Published var idAnswers : [String] = []
     
     var passwordProperties : String {
         get{

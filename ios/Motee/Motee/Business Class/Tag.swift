@@ -16,8 +16,8 @@ class Tag : Identifiable, ObservableObject, Codable {
     
     var id : String {return self.idTag}
     
-    private var idPropositions : [Int] = []
-    private var idAnswers : [Int] = []
+    private var idPropositions : [String] = []
+    private var idAnswers : [String] = []
     
     //Enumeration utile pour l'encodage en JSON
     enum TagEncodingKeys : CodingKey {

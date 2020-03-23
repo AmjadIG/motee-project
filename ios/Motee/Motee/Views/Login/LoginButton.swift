@@ -34,8 +34,8 @@ struct LoginButton: View {
 }
 
 func findConnexion(pseudo : String, mdp : String) -> Bool {
-    for user in UserDAO.getAll() {
-        if(user.pseudo == pseudo && user.passwordProperties == mdp){
+    for (_,value) in UserModel.getAll() {
+        if(value.pseudo == pseudo && value.passwordProperties == mdp){
             return true
         }
     }

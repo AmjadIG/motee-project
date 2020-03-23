@@ -49,10 +49,10 @@
 		F016E245240D4C690063A034 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = F016E244240D4C690063A034 /* Tag.swift */; };
 		F016E248240D723B0063A034 /* AddProposition.swift in Sources */ = {isa = PBXBuildFile; fileRef = F016E247240D723B0063A034 /* AddProposition.swift */; };
 		F02350B92417C86B0069AB06 /* Root.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02350B82417C86B0069AB06 /* Root.swift */; };
-		F078D501241C1293009FEB31 /* PropositionDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F078D500241C1293009FEB31 /* PropositionDAO.swift */; };
-		F078D503241C12B5009FEB31 /* UserDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F078D502241C12B5009FEB31 /* UserDAO.swift */; };
-		F0A3DD9D241A53EC0088F7A7 /* AnswerDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A3DD9C241A53EC0088F7A7 /* AnswerDAO.swift */; };
-		F0A3DD9F241A74760088F7A7 /* TagDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A3DD9E241A74760088F7A7 /* TagDAO.swift */; };
+		F0336FF024290E9C00753620 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0336FEF24290E9C00753620 /* UserModel.swift */; };
+		F0336FF224290F3100753620 /* TagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0336FF124290F3100753620 /* TagModel.swift */; };
+		F034AE302428D64E0053F4E2 /* PropositionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F034AE2F2428D64E0053F4E2 /* PropositionModel.swift */; };
+		F034AE322429085C0053F4E2 /* AnswerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F034AE312429085C0053F4E2 /* AnswerModel.swift */; };
 		F0A77C962418EB8000C5F3AA /* AnswerLiked.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A77C952418EB8000C5F3AA /* AnswerLiked.swift */; };
 		F0C203E72417EC8000189E6A /* AnswerFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C203E62417EC8000189E6A /* AnswerFooter.swift */; };
 /* End PBXBuildFile section */
@@ -123,10 +123,10 @@
 		F016E244240D4C690063A034 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		F016E247240D723B0063A034 /* AddProposition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProposition.swift; sourceTree = "<group>"; };
 		F02350B82417C86B0069AB06 /* Root.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Root.swift; sourceTree = "<group>"; };
-		F078D500241C1293009FEB31 /* PropositionDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropositionDAO.swift; sourceTree = "<group>"; };
-		F078D502241C12B5009FEB31 /* UserDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDAO.swift; sourceTree = "<group>"; };
-		F0A3DD9C241A53EC0088F7A7 /* AnswerDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerDAO.swift; sourceTree = "<group>"; };
-		F0A3DD9E241A74760088F7A7 /* TagDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagDAO.swift; sourceTree = "<group>"; };
+		F0336FEF24290E9C00753620 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		F0336FF124290F3100753620 /* TagModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagModel.swift; sourceTree = "<group>"; };
+		F034AE2F2428D64E0053F4E2 /* PropositionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropositionModel.swift; sourceTree = "<group>"; };
+		F034AE312429085C0053F4E2 /* AnswerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerModel.swift; sourceTree = "<group>"; };
 		F0A77C952418EB8000C5F3AA /* AnswerLiked.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerLiked.swift; sourceTree = "<group>"; };
 		F0C203E62417EC8000189E6A /* AnswerFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerFooter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -199,7 +199,7 @@
 		A1A5A304240D40A30015CBBE /* Motee */ = {
 			isa = PBXGroup;
 			children = (
-				F0A3DD9B241A53D20088F7A7 /* DAO */,
+				F034AE2E2428D61F0053F4E2 /* Models */,
 				F016E23B240D4C0C0063A034 /* Business Class */,
 				F016E233240D4B8B0063A034 /* Views */,
 				8E18B31C241A7B4F00F495BF /* FilterKit.swift */,
@@ -325,15 +325,15 @@
 			path = Proposition;
 			sourceTree = "<group>";
 		};
-		F0A3DD9B241A53D20088F7A7 /* DAO */ = {
+		F034AE2E2428D61F0053F4E2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				F078D502241C12B5009FEB31 /* UserDAO.swift */,
-				F078D500241C1293009FEB31 /* PropositionDAO.swift */,
-				F0A3DD9C241A53EC0088F7A7 /* AnswerDAO.swift */,
-				F0A3DD9E241A74760088F7A7 /* TagDAO.swift */,
+				F034AE2F2428D64E0053F4E2 /* PropositionModel.swift */,
+				F034AE312429085C0053F4E2 /* AnswerModel.swift */,
+				F0336FEF24290E9C00753620 /* UserModel.swift */,
+				F0336FF124290F3100753620 /* TagModel.swift */,
 			);
-			path = DAO;
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -470,11 +470,10 @@
 				F016E243240D4C550063A034 /* Publication.swift in Sources */,
 				A14A254F241477390030039B /* SingleLinkNavBar.swift in Sources */,
 				A1B5EAE324100D00001824C6 /* Filter.swift in Sources */,
-				F078D503241C12B5009FEB31 /* UserDAO.swift in Sources */,
 				A1A5A343240D42F20015CBBE /* Accueil.swift in Sources */,
 				A14A254924140DE80030039B /* NavbarView.swift in Sources */,
 				F0A77C962418EB8000C5F3AA /* AnswerLiked.swift in Sources */,
-				F0A3DD9D241A53EC0088F7A7 /* AnswerDAO.swift in Sources */,
+				F0336FF024290E9C00753620 /* UserModel.swift in Sources */,
 				F016E248240D723B0063A034 /* AddProposition.swift in Sources */,
 				A1A5A33B240D41900015CBBE /* FieldGenerator.swift in Sources */,
 				A14296CF2412BB73005E73B5 /* Report.swift in Sources */,
@@ -487,17 +486,18 @@
 				A1A5A34E240D459F0015CBBE /* LoginPicture.swift in Sources */,
 				A14296D52412CFA7005E73B5 /* PropositionFooter.swift in Sources */,
 				A1B5EAE1240ED06D001824C6 /* SymbolGenerator.swift in Sources */,
+				F034AE302428D64E0053F4E2 /* PropositionModel.swift in Sources */,
 				F016E23A240D4C050063A034 /* ListAnswers.swift in Sources */,
 				F016E241240D4C4A0063A034 /* User.swift in Sources */,
-				F078D501241C1293009FEB31 /* PropositionDAO.swift in Sources */,
 				F016E236240D4BD40063A034 /* AnswerView.swift in Sources */,
 				A1A5A33D240D41CE0015CBBE /* Title.swift in Sources */,
 				F016E23F240D4C3E0063A034 /* Answer.swift in Sources */,
+				F034AE322429085C0053F4E2 /* AnswerModel.swift in Sources */,
 				A1A5A34C240D45810015CBBE /* RegisterForm.swift in Sources */,
 				A1A5A306240D40A30015CBBE /* AppDelegate.swift in Sources */,
 				A1A5A30B240D40A30015CBBE /* Motee.xcdatamodeld in Sources */,
+				F0336FF224290F3100753620 /* TagModel.swift in Sources */,
 				A14A254D241474650030039B /* Account.swift in Sources */,
-				F0A3DD9F241A74760088F7A7 /* TagDAO.swift in Sources */,
 				A14296D32412C3D7005E73B5 /* PropositionLiked.swift in Sources */,
 				A1A5A30D240D40A30015CBBE /* ContentView.swift in Sources */,
 				F016E238240D4BF00063A034 /* AddAnswer.swift in Sources */,

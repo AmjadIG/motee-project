@@ -37,7 +37,8 @@ struct PropositionView : View {
     }
     
     func getDate() -> String {
-        return dateFormatter.string(from: proposition.datePublication)
+        //return dateFormatter.string(from: proposition.datePublication)
+        return proposition.datePublication
     }
     
     func getLike() -> String {

@@ -12,13 +12,12 @@ import Foundation
 class Answer : Publication, Identifiable, Codable {
     
     private var idPublication : String = "0"
-    var datePublication : Date = Date()
+    var datePublication : String = ""
     @Published var contentPub : String = ""
     @Published var idLikesAnswer : [String] = [] //Array d'object ID de User
     @Published var anonymous : Bool = false
-    @Published var owner : User
-    @Published var tags : [Tag] = []
-    var idProposition : Proposition
+    @Published var owner : String
+    var idProposition : String
         
     var id : String {return idPublication}
     
@@ -29,26 +28,23 @@ class Answer : Publication, Identifiable, Codable {
         case idLikesAnswer
         case isAnonymous
         case ownerAnswer
-        case tagAnswer
         case idProp
     }
     //Encoder
     func encode(to encoder : Encoder) throws{
         var container = encoder.container(keyedBy: AnswerEncodingKeys.self)
-        try container.encode(tags, forKey: .tagAnswer)
     }
     //Decoder by require init
     //No need of a second initializer
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: AnswerEncodingKeys.self)
         self.idPublication = try container.decode(String.self, forKey: ._id)
-        self.datePublication = try container.decode(Date.self, forKey: .dateAnswer)
+        self.datePublication = try container.decode(String.self, forKey: .dateAnswer)
         self.contentPub = try container.decode(String.self, forKey: .contentAnswer)
         self.idLikesAnswer = try container.decode(Array.self, forKey: .idLikesAnswer)
         self.anonymous = try container.decode(Bool.self, forKey: .isAnonymous)
-        self.owner = try container.decode(User.self, forKey: .ownerAnswer)
-        self.tags = try container.decode(Array.self, forKey: .tagAnswer)
-        self.idProposition = try container.decode(Proposition.self, forKey: .idProp)
+        self.owner = try container.decode(String.self, forKey: .ownerAnswer)
+        self.idProposition = try container.decode(String.self, forKey: .idProp)
     }
     
     //methods
@@ -66,11 +62,7 @@ class Answer : Publication, Identifiable, Codable {
     }
     
     func estProprietaire(utilisateur: User)->Bool{
-        if utilisateur.equals(utilisateur: self.owner) {
-            return true
-        }else {
-            return false
-        }
+        return utilisateur.id == self.id
     }
     
     func peutSupprimer(utilisateur: User) -> Bool {
@@ -83,7 +75,8 @@ class Answer : Publication, Identifiable, Codable {
     
     func revelerIdentitePublication(utilisateur : User)->User?{
         if utilisateur.admin && self.anonymous {
-            return self.owner
+            //return self.owner
+            return nil
         } else {
             return nil
         }

@@ -36,8 +36,8 @@ func availableRegistration(pseudo : String, mail : String, mdp : String, mdp2 : 
 }
 
 func isAvailablePseudo(pseudo : String) -> Bool{
-    for user in UserDAO.getAll() {
-        if user.pseudo == pseudo {
+    for (_,value) in UserModel.getAll() {
+        if value.pseudo == pseudo {
             return false
         }
     }
@@ -45,8 +45,8 @@ func isAvailablePseudo(pseudo : String) -> Bool{
 }
 
 func isAvailablePassword(mdp : String)->Bool {
-    for user in UserDAO.getAll() {
-        if user.passwordProperties == mdp {
+    for (_,value) in UserModel.getAll() {
+        if value.passwordProperties == mdp {
             return false
         }
     }
@@ -57,8 +57,8 @@ func isSamePasword(mdp1 : String ,mdp2 : String) -> Bool{
 }
 
 func isAvailableMail(mail : String) -> Bool {
-    for user in UserDAO.getAll() {
-        if user.email == mail {
+    for (_,value) in UserModel.getAll() {
+        if value.email == mail {
             return false
         }
     }
