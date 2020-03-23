@@ -10,18 +10,11 @@ import SwiftUI
 
 struct Accueil: View {
     @EnvironmentObject var fk : FilterKit
-    
     var body: some View {
         NavigationView{
             ScrollView{
                 VStack{
-                    
-                    HStack{
-                        NavigationLink(destination : { AddProposition() }() ){
-                            SymbolGenerator(mySymbol :"plus.square.fill", myColor: "pink")
-                            Text("Ajouter").foregroundColor(.black).bold()
-                        }
-                    }
+                    TopTags()
                     VStack(){
                         if(self.fk.filtered.elementsEqual("all")){
                             Title(myTitle: "Tous les propos")
@@ -32,11 +25,17 @@ struct Accueil: View {
                         }else if self.fk.filtered.elementsEqual("dateAsc"){
                             Title(myTitle: "Les plus anciens propos")
                         }
-                        List{
-                            ForEach(PropositionDAO.getAll()){ prop in
-                                PropositionView(proposition: prop)
+                        HStack{
+                            NavigationLink(destination : { AddProposition() }() ){
+                                SymbolGenerator(mySymbol :"plus.square.fill", myColor: "pink")
+                                Text("Ajouter").foregroundColor(.black).bold()
                             }
                         }
+                        ////////////////////////////////////// ///
+                        /// REQUETE A ENVOYER SELON LE FILTRE ///
+                        /// ////////////////////////////// ///
+                        PropositionFiltred()
+                        Spacer()
                     }
                     Spacer()
                 }
