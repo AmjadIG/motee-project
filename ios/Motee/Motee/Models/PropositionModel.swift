@@ -11,8 +11,8 @@ import Foundation
 class PropositionModel {
     
     //Model for Proposition :
-    
-    static func getAll()->[String:Proposition]{
+}
+     func getAll()->[String:Proposition]{
         // Prepare URL
         let stringURL = "https://mootee-api.herokuapp.com/propositions"
         let url = URL(string: stringURL)
@@ -51,11 +51,11 @@ class PropositionModel {
         return res
     }
     
-    static func getPropositionById(idProp : String)->Proposition!{
+     func getPropositionById(idProp : String)->Proposition!{
         return getAll()[idProp]
     }
     
-    static func getAllAnswer(proposition : Proposition)->[Answer]{
+     func getAllAnswer(proposition : Proposition)->[Answer]{
         var answerArray : [Answer] = []
         for answer in proposition.answers {
             answerArray.append((AnswerModel.getAnswerById(idAns: answer)!))
@@ -63,7 +63,7 @@ class PropositionModel {
         return answerArray
     }
     
-    static func getBestAnswer(proposition : Proposition)->Answer?{
+     func getBestAnswer(proposition : Proposition)->Answer?{
         let answerArray = getAllAnswer(proposition: proposition)
         if answerArray.count == 0 {
             return nil
@@ -78,8 +78,8 @@ class PropositionModel {
         }
     }
     
-    static func getFilteredProps(filter: String, tags : [Tag]){
+     func getFilteredProps(filter: String, tags : [Tag]){
         //
     }
 
-}
+

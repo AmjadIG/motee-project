@@ -12,7 +12,7 @@ import UserNotifications
 
 struct AnswerView: View {
     
-    @Binding var answer : Answer
+    var answer : Answer
     let dateFormatter = DateFormatter()
     var currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser
     
@@ -26,7 +26,7 @@ struct AnswerView: View {
         VStack{
             VStack{
                 HStack{
-                    Text(answer.owner.pseudo).bold().foregroundColor(.white)
+                    Text(answer.owner).bold().foregroundColor(.white)
                     Spacer()
                     Text(answer.datePublication).bold().foregroundColor(.white)
                 }.padding()

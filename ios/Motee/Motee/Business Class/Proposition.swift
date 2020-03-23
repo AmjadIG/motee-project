@@ -106,9 +106,4 @@ class Proposition : Publication, Identifiable, Codable {
         return isLiked
     }
     
-    func dateToString() -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd/MM/yyyy à HH:mm"
-        return formatter.string(from: self.datePublication)
-    }
 }

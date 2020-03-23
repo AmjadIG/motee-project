@@ -91,9 +91,9 @@ class User : Identifiable, ObservableObject, Codable {
     }
     
 }
-func getUserById(id : String) -> User {
+//func getUserById(id : String) -> User {
     ///
     /// REQUETE POUR RECUPERER UN USER PAR SON ID
     ///
     //return User(pseudo: "obsolete", password: "obsolete", email: "obsolete", city: "obsolete")
-}
+//}

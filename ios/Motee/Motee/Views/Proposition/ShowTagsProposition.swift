@@ -13,8 +13,8 @@ struct ShowTagsProposition: View {
     var body: some View {
         HStack{
             Spacer()
-            ForEach(proposition.tags,id: \.id){oneTag in
-                Text(" #\(oneTag.label) ").bold().background(Color.blue).cornerRadius(5).foregroundColor(Color.white)
+            ForEach(proposition.tags,id: \.self){oneTag in
+                Text(" #\(oneTag) ").bold().background(Color.blue).foregroundColor(Color.white)
             }
         }.padding([.top, .leading, .trailing])
     }
