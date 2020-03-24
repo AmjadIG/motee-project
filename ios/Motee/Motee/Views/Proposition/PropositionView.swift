@@ -10,7 +10,7 @@ import SwiftUI
 
 struct PropositionView : View {
     var currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser
-    var proposition : Proposition
+    @Binding var proposition : Proposition
     @State var showBestAnswer = false
     @State var showAllAnswers = false
     @State var colorIfClicked = generateColor(name: "white")
@@ -37,7 +37,7 @@ struct PropositionView : View {
                 .cornerRadius(20).shadow(radius: 20)
                 .padding([.leading, .bottom, .trailing])
             
-            AnswersPropsView(proposition: proposition, showBestAnswer: $showBestAnswer, showAllAnswers: $showAllAnswers, colorIfClicked: $colorIfClicked, colorIfClicked2: $colorIfClicked2)
+            AnswersPropsView(proposition: $proposition, showBestAnswer: $showBestAnswer, showAllAnswers: $showAllAnswers, colorIfClicked: $colorIfClicked, colorIfClicked2: $colorIfClicked2)
         }
     }
 }
