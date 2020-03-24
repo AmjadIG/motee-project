@@ -11,14 +11,23 @@ import SwiftUI
 struct AnswersPropsView : View {
     var currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser
     @Binding var proposition : Proposition
-    @State var showBestAnswer = false
-    @State var showAllAnswers = false
-    @State var colorIfClicked = generateColor(name: "white")
-    @State var colorIfClicked2 = generateColor(name: "black")
+    @Binding var showBestAnswer : Bool
+    @Binding var showAllAnswers : Bool
+    @Binding var colorIfClicked : Color
+    @Binding var colorIfClicked2 : Color
     @State var bestAnswer : Answer?
     var body: some View {
         bestAnswer = getBestAnswer(proposition: proposition)
-        
+        let drag = DragGesture()
+            .onEnded {
+                if $0.translation.width < -100 {
+                    withAnimation {
+                        self.showAllAnswers = false
+                        self.showBestAnswer = false
+                        self.toggleColor()
+                    }
+                }
+        }
         guard let bestAnswer = bestAnswer else {
             return AnyView(VStack {
                 Text("il n'existe pas encore de réponse à afficher")
@@ -58,4 +67,15 @@ struct AnswersPropsView : View {
                 .gesture(drag)
             )
         }
+    
+    func toggleColor(){
+        if showBestAnswer{
+            colorIfClicked =  Color.blue.opacity(0.7)
+            colorIfClicked2 = generateColor(name: "white")
+        }else{
+            colorIfClicked = generateColor(name: "white")
+            colorIfClicked2 = generateColor(name: "black")
+            
+        }
+    }
 }

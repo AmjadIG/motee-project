@@ -15,25 +15,10 @@ struct PropositionView : View {
     @State var showAllAnswers = false
     @State var colorIfClicked = generateColor(name: "white")
     @State var colorIfClicked2 = generateColor(name: "black")
-    @State var bestAnswer : Answer
-    @State var allAnswers : [Answer]
-    init(){
-        self.bestAnswer = getBestAnswer(proposition: proposition)!
-        self.allAnswers = getAllAnswer(proposition: proposition)
-    }
+    
     var body: some View {
-        let drag = DragGesture()
-            .onEnded {
-                if $0.translation.width < -100 {
-                    withAnimation {
-                        self.showAllAnswers = false
-                        self.showBestAnswer = false
-                        self.toggleColor()
-                    }
-                }
-        }
-        return
-            VStack{
+        
+            return VStack{
                 ShowTagsProposition(proposition: $proposition)
                 VStack{
                     HStack{
@@ -53,66 +38,13 @@ struct PropositionView : View {
                     .background(lightGreyColor)
                     .cornerRadius(20).shadow(radius: 20)
                     .padding([.leading, .bottom, .trailing])
-                Button(action : {
-                    self.showBestAnswer.toggle()
-                    self.toggleColor()
-                }){
-                    if (showBestAnswer){
-                        Text("Cacher la meilleure réponse")
-                    }
-                    if(!showAllAnswers && !showBestAnswer){
-                        Text("Afficher la meilleure réponse")
-                    }
-                }
-                VStack{
-                    if (showBestAnswer){
-                        AnswerView(answer: $bestAnswer)
-                        Button(action : {
-                            self.showBestAnswer = false
-                            self.showAllAnswers.toggle()
-                        }){
-                            Text("Afficher toutes les réponses")
-                        }
-                    }
-                    if (showAllAnswers){
-                        ListAnswersView(proposition: proposition)
-                        Button(action : {
-                            self.showAllAnswers.toggle()
-                            self.toggleColor()
-                        }){
-                            Text("Cacher toutes les réponses")
-                        }
-                    }
-                }.onTapGesture { }
-                .gesture(drag)
-                ////////////////////////////////////// ///
-                /// REQUETE A ENVOYER pour recupere la meilleure reponse ///
-                /// ////////////////////////////// ///
-                
+                    AnswersPropsView(proposition: $proposition, showBestAnswer: $showBestAnswer, showAllAnswers: $showAllAnswers, colorIfClicked: $colorIfClicked, colorIfClicked2: $colorIfClicked2)
             }
         
     }
-    
-    
-    func toggleColor(){
-        if showBestAnswer{
-            colorIfClicked =  Color.blue.opacity(0.7)
-            colorIfClicked2 = generateColor(name: "white")
-        }else{
-            colorIfClicked = generateColor(name: "white")
-            colorIfClicked2 = generateColor(name: "black")
-            
-        }
-    }
 }
+
 /*
-func getProposition() -> Proposition {
-    let contentProp = "Ceci est un propos test test test test :)"
-    let tags = [Tag(label: "tag1"),Tag(label: "tag2")]
-    return Proposition(userP: "Niska", identifierP: 1, contentP: contentProp, anonymousP: false, tagsP: tags, titleP: "titre",dateP: Date())
-}
-
-
 struct PropositionView_Previews: PreviewProvider {
     static var previews: some View {
         PropositionView()

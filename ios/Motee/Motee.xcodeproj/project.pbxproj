@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8E18B31D241A7B4F00F495BF /* FilterKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E18B31C241A7B4F00F495BF /* FilterKit.swift */; };
 		8E46C14C24266A4000DCC705 /* TagListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E46C14B24266A4000DCC705 /* TagListView.swift */; };
+		8E537E54242A4E99007F3480 /* AnswersPropsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E537E53242A4E99007F3480 /* AnswersPropsView.swift */; };
 		8E5F727224290F4B00B89172 /* TopTags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5F727124290F4B00B89172 /* TopTags.swift */; };
 		8E5F72742429108800B89172 /* ShowTagsProposition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5F72732429108800B89172 /* ShowTagsProposition.swift */; };
 		8E5F727624292C9D00B89172 /* PropositionFiltred.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5F727524292C9D00B89172 /* PropositionFiltred.swift */; };
@@ -81,6 +82,7 @@
 /* Begin PBXFileReference section */
 		8E18B31C241A7B4F00F495BF /* FilterKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterKit.swift; sourceTree = "<group>"; };
 		8E46C14B24266A4000DCC705 /* TagListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagListView.swift; sourceTree = "<group>"; };
+		8E537E53242A4E99007F3480 /* AnswersPropsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswersPropsView.swift; sourceTree = "<group>"; };
 		8E5F727124290F4B00B89172 /* TopTags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTags.swift; sourceTree = "<group>"; };
 		8E5F72732429108800B89172 /* ShowTagsProposition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTagsProposition.swift; sourceTree = "<group>"; };
 		8E5F727524292C9D00B89172 /* PropositionFiltred.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropositionFiltred.swift; sourceTree = "<group>"; };
@@ -337,6 +339,7 @@
 			children = (
 				F016E247240D723B0063A034 /* AddProposition.swift */,
 				A14296CC2412AFE0005E73B5 /* PropositionView.swift */,
+				8E537E53242A4E99007F3480 /* AnswersPropsView.swift */,
 				8E5F72732429108800B89172 /* ShowTagsProposition.swift */,
 				A14296D22412C3D7005E73B5 /* PropositionLiked.swift */,
 				A14296D42412CFA7005E73B5 /* PropositionFooter.swift */,
@@ -534,6 +537,7 @@
 				A1A5A308240D40A30015CBBE /* SceneDelegate.swift in Sources */,
 				A14296D12412BD57005E73B5 /* Comment.swift in Sources */,
 				A1A5A34A240D452F0015CBBE /* ButtonGenerator.swift in Sources */,
+				8E537E54242A4E99007F3480 /* AnswersPropsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
