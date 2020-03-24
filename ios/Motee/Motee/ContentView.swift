@@ -19,7 +19,7 @@ struct ContentView: View {
             //LoginForm()
             //Accueil()
             Button(action:{
-                print(paramTags(tags: purifyRequest(dictionary: TagModel.getAll()) as! [Tag]))
+                print(PropositionModel.getFilteredProps(filter: "asc", tags: purifyRequest(dictionary: TagModel.getTop9Tags()) as! [Tag]))
             }){
                 ButtonGenerator(myText: "Test tags", myColor: "red")
             }

@@ -24,7 +24,7 @@ struct AnswerView: View {
         VStack{
             VStack{
                 HStack{
-                    Text(UserModel.getUserById(idUser: answer.owner)!.pseudo).bold().foregroundColor(.white)
+                    Text(UserModel.getUserById(idUser: answer.owner).pseudo).bold().foregroundColor(.white)
                     Spacer()
                     Text(answer.datePublication).bold().foregroundColor(.white)
                 }.padding()

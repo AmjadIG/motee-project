@@ -13,7 +13,8 @@ class PropositionModel {
     //Model for Proposition :
 
     //Get All : https://mootee-api.herokuapp.com/propositions
-    
+    //Get by id : https://mootee-api.herokuapp.com/propositions/id
+
      static func getAll()->[String:Proposition]{
         // Prepare URL
         let stringURL = "https://mootee-api.herokuapp.com/propositions"
@@ -54,12 +55,7 @@ class PropositionModel {
     }
     
     static func getAllProps()->[Proposition]{
-        var propositions : [Proposition] = []
-        for (_, value) in getAll() {
-            propositions.append(value)
-        }
-        print(propositions.count)
-        return propositions
+        return (purifyRequest(dictionary: getAll()) as! [Proposition])
     }
     
     static func getPropositionById(idProp : String)->[String:Proposition]{
@@ -148,7 +144,7 @@ class PropositionModel {
         let semaphore = DispatchSemaphore(value :0)
         print("request ok")
         // Perform HTTP Request
-        var res : [String:Proposition] = [:]
+        var res : [Proposition] = []
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
                 
             // Check for Error
@@ -160,7 +156,7 @@ class PropositionModel {
             // Convert HTTP Response Data to a String
             if let data = data{
                 do{
-                    res = try JSONDecoder().decode([String:Proposition].self, from: data)
+                    res = try JSONDecoder().decode([Proposition].self, from: data)
                     print("decoder ok!")
                 }catch let error {
                     print(error)
@@ -172,7 +168,7 @@ class PropositionModel {
         
         semaphore.wait()
         
-        return (purifyRequest(dictionary: res) as! [Proposition])
+        return res
     }
 
 }
