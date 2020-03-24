@@ -16,14 +16,12 @@ struct Accueil: View {
                 VStack{
                     TopTags()
                     VStack(){
-                        if(self.fk.filtered.elementsEqual("all")){
-                            Title(myTitle: "Tous les propos")
-                        }else if self.fk.filtered.elementsEqual("like"){
+                        if(self.fk.filtered.elementsEqual("byLike")){
                             Title(myTitle: "Les meilleurs propos")
-                        }else if self.fk.filtered.elementsEqual("dateDesc"){
-                            Title(myTitle: "Les plus récents propos")
-                        }else if self.fk.filtered.elementsEqual("dateAsc"){
-                            Title(myTitle: "Les plus anciens propos")
+                        }else if self.fk.filtered.elementsEqual("desc"){
+                            Title(myTitle: "Propos les plus récents")
+                        }else if self.fk.filtered.elementsEqual("asc"){
+                            Title(myTitle: "Propos les plus anciens")
                         }
                         HStack{
                             NavigationLink(destination : { AddProposition() }() ){
@@ -31,8 +29,7 @@ struct Accueil: View {
                                 Text("Ajouter").foregroundColor(.black).bold()
                             }
                         }
-                        //Requête à envoyer selon le filtre
-                        PropositionFiltred()
+                        PropositionFiltred(filtre: fk.filtered, tags: fk.tags)
                         Spacer()
                     }
                     Spacer()

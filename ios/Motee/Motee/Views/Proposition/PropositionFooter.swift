@@ -10,23 +10,16 @@ import SwiftUI
 
 struct PropositionFooter : View {
     var currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser
-    var proposition : Proposition
-    
+    @Binding var proposition : Proposition
     @State var isNotHide :Bool = false
     @State var comment = ""
     
-    init(proposition : Proposition){
-        self.proposition = proposition
-    }
-    
     var body: some View {
-        
         VStack{
             VStack{
                 HStack {
-                    PropositionLiked(proposition: proposition)
+                    PropositionLiked(proposition: $proposition)
                     Spacer()
-                    
                     Button(action:{
                         self.isNotHide.toggle()
                     }){
@@ -56,9 +49,10 @@ struct PropositionFooter : View {
         }.padding()
     }
 }
-/*
+
 struct PropositionFooter_Previews: PreviewProvider {
+    @State static var proposition = PropositionModel.getAllProps()[2]
     static var previews: some View {
-        PropositionFooter(proposition: Proposition)
+        PropositionFooter(proposition: $proposition)
     }
-}*/
+}

@@ -340,8 +340,8 @@
 			isa = PBXGroup;
 			children = (
 				F016E247240D723B0063A034 /* AddProposition.swift */,
-				A14296CC2412AFE0005E73B5 /* PropositionView.swift */,
 				8E537E53242A4E99007F3480 /* AnswersPropsView.swift */,
+				A14296CC2412AFE0005E73B5 /* PropositionView.swift */,
 				8E5F72732429108800B89172 /* ShowTagsProposition.swift */,
 				A14296D22412C3D7005E73B5 /* PropositionLiked.swift */,
 				A14296D42412CFA7005E73B5 /* PropositionFooter.swift */,

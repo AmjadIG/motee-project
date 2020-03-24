@@ -10,11 +10,7 @@ import SwiftUI
 
 struct PropositionLiked : View {
     var currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser
-    var proposition : Proposition
-    
-    init(proposition : Proposition) {
-        self.proposition = proposition
-    }
+    @Binding var proposition : Proposition
     
     var body: some View {
         Button(action:{
@@ -35,9 +31,10 @@ struct PropositionLiked : View {
         }
     }
 }
-/*
+
 struct PropositionLiked_Previews: PreviewProvider {
+    @State static var proposition = PropositionModel.getAllProps()[2]
     static var previews: some View {
-        PublicationLiked()
+        PropositionLiked(proposition : $proposition)
     }
-}*/
+}

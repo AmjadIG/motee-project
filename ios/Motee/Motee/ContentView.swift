@@ -14,15 +14,7 @@ struct ContentView: View {
     
     var body: some View {
         VStack{
-            //NavbarView()
-            
-            //LoginForm()
-            //Accueil()
-            Button(action:{
-                print(PropositionModel.getFilteredProps(filter: "asc", tags: purifyRequest(dictionary: TagModel.getTop9Tags()) as! [Tag]))
-            }){
-                ButtonGenerator(myText: "Test tags", myColor: "red")
-            }
+            NavbarView()
         }
         
     }
@@ -30,6 +22,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView().environmentObject(FilterKit())
     }
 }
