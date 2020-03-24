@@ -11,12 +11,14 @@ import SwiftUI
 struct PropositionFiltred : View {
     var currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser
     @EnvironmentObject var fk : FilterKit
-    @State var filteredProps : [Proposition] = getPropositionFiltered()
+    
     var body: some View {
         VStack{
-            forEach(filteredProps){ prop in
-                PropositionView(proposition: prop)
-            }
+             List{
+                ForEach(PropositionModel.getAllProps()){ proposition in
+                    PropositionView(proposition: proposition)
+                }
+             }
         }
     }
 }

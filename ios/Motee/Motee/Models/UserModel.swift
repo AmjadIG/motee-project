@@ -5,7 +5,7 @@
 //  Created by Amjad Menouer on 23/03/2020.
 //  Copyright © 2020 groupe3. All rights reserved.
 //
-
+import SwiftUI
 import Foundation
 
 class UserModel {

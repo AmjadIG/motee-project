@@ -31,10 +31,12 @@ struct Accueil: View {
                                 Text("Ajouter").foregroundColor(.black).bold()
                             }
                         }
-                        ////////////////////////////////////// ///
-                        /// REQUETE A ENVOYER SELON LE FILTRE ///
-                        /// ////////////////////////////// ///
-                        PropositionFiltred()
+                        //Requête à envoyer selon le filtre
+                        List{
+                           ForEach(PropositionModel.getAllProps()){ proposition in
+                               PropositionView(proposition: proposition)
+                           }
+                        }
                         Spacer()
                     }
                     Spacer()

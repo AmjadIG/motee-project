@@ -14,7 +14,7 @@ class User : Identifiable, ObservableObject, Codable {
     @Published var pseudo : String
     private var password : String
     @Published var email : String
-    @Published var city : String
+    //@Published var city : String
     @Published var admin : Bool = false
     @Published var banned : Bool = false
     @Published var connected : Bool = false
@@ -38,7 +38,7 @@ class User : Identifiable, ObservableObject, Codable {
         case pseudo
         case mail
         case password
-        case city
+        //case city
         case isAdmin
         case isConnected
         case isBanned
@@ -58,7 +58,7 @@ class User : Identifiable, ObservableObject, Codable {
         self.pseudo = try container.decode(String.self, forKey: .pseudo)
         self.email = try container.decode(String.self, forKey: .mail)
         self.password = try container.decode(String.self, forKey: .password)
-        self.city = try container.decode(String.self, forKey: .city)
+        //self.city = try container.decode(String.self, forKey: .city)
         self.admin = try container.decode(Bool.self, forKey: .isAdmin)
         self.banned = try container.decode(Bool.self, forKey: .isBanned)
         self.connected = try container.decode(Bool.self, forKey: .isConnected)
@@ -91,9 +91,3 @@ class User : Identifiable, ObservableObject, Codable {
     }
     
 }
-//func getUserById(id : String) -> User {
-    ///
-    /// REQUETE POUR RECUPERER UN USER PAR SON ID
-    ///
-    //return User(pseudo: "obsolete", password: "obsolete", email: "obsolete", city: "obsolete")
-//}

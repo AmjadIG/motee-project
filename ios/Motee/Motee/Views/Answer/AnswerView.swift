@@ -16,17 +16,15 @@ struct AnswerView: View {
     let dateFormatter = DateFormatter()
     var currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser
     
-    /*init(answer : Answer){
+    init(answer : Answer){
         self.answer = answer
-        dateFormatter.dateStyle = .short
-        dateFormatter.timeStyle = .short
-    }*/
+    }
         
     var body: some View {
         VStack{
             VStack{
                 HStack{
-                    Text(answer.owner).bold().foregroundColor(.white)
+                    Text(UserModel.getUserById(idUser: answer.owner)!.pseudo).bold().foregroundColor(.white)
                     Spacer()
                     Text(answer.datePublication).bold().foregroundColor(.white)
                 }.padding()

@@ -9,12 +9,17 @@
 import SwiftUI
 
 struct ShowTagsProposition: View {
-    @Binding var proposition : Proposition
+    var proposition : Proposition
+    
+    init(proposition : Proposition){
+        self.proposition = proposition
+    }
+    
     var body: some View {
         HStack{
             Spacer()
-            ForEach(proposition.tags,id: \.self){oneTag in
-                Text(" #\(oneTag) ").bold().background(Color.blue).foregroundColor(Color.white)
+            ForEach(PropositionModel.getAllTags(proposition: proposition),id: \.id){oneTag in
+                Text(" #\(oneTag.label) ").bold().background(Color.blue).cornerRadius(CGFloat(5)).foregroundColor(Color.white)
             }
         }.padding([.top, .leading, .trailing])
     }

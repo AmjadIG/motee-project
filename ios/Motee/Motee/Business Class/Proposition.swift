@@ -106,4 +106,7 @@ class Proposition : Publication, Identifiable, Codable {
         return isLiked
     }
     
+    func dateToString() -> String {
+        return datePublication
+    }
 }

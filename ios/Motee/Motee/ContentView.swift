@@ -14,10 +14,11 @@ struct ContentView: View {
     
     var body: some View {
         VStack{
-            /*NavbarView()
-            LoginForm()*/
+            NavbarView()
+            
+            //LoginForm()
             //Accueil()
-            Button(action:{
+            /*Button(action:{
                 if !UserModel.getAll().isEmpty {
                     self.boolTest = true
                     for(_, value) in UserModel.getAll(){
@@ -32,7 +33,7 @@ struct ContentView: View {
             if boolTest {
                 ButtonGenerator(myText: "Requete ok!", myColor: "blue")
                 
-            }
+            }*/
         }
         
     }
