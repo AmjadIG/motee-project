@@ -12,8 +12,8 @@ class TagModel {
     
     //Model for Tag :
     
-    //Get All : https://mootee-api.herokuapp.com/tags/
-    //Get by id : https://mootee-api.herokuapp.com/answers/id => Fonctionne plus pour l'instant
+    //Get All : https://mootee-api.herokuapp.com/tags/ => Fonctionne plus pour l'instant
+    //Get by id : https://mootee-api.herokuapp.com/tags/bestTags
     
     static func getAll()->[String:Tag]{
         // Prepare URL

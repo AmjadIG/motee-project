@@ -14,26 +14,15 @@ struct ContentView: View {
     
     var body: some View {
         VStack{
-            NavbarView()
+            //NavbarView()
             
             //LoginForm()
             //Accueil()
-            /*Button(action:{
-                if !UserModel.getAll().isEmpty {
-                    self.boolTest = true
-                    for(_, value) in UserModel.getAll(){
-                        print(value.pseudo)
-                        print(value.email)
-                        print()
-                    }
-                }
+            Button(action:{
+                print(paramTags(tags: purifyRequest(dictionary: TagModel.getAll()) as! [Tag]))
             }){
-                ButtonGenerator(myText: "Users", myColor: "red")
+                ButtonGenerator(myText: "Test tags", myColor: "red")
             }
-            if boolTest {
-                ButtonGenerator(myText: "Requete ok!", myColor: "blue")
-                
-            }*/
         }
         
     }

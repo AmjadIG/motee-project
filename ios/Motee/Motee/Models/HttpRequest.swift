@@ -15,3 +15,20 @@ func purifyRequest(dictionary : [String:Any])->[Any]{
     }
     return arrayAny
 }
+
+func paramTags(tags: [Tag])->String {
+    var postString = ""
+    var iterator = 1
+    
+    for tag in tags {
+        if tag.equals(otherTag : tags[0]) {
+            postString += "?"
+        }
+        postString += "tag" + String(iterator) + "=" + tag.id
+        iterator += 1
+        if !tag.equals(otherTag : tags[tags.count-1]) {
+            postString += "&"
+        }
+    }
+    return postString
+}

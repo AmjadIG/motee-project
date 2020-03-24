@@ -136,8 +136,43 @@ class PropositionModel {
         return tagArray
     }
     
-    static func getFilteredProps(filter: String, tags : [Tag]){
-        //
+    static func getFilteredProps(filter: String, tags : [Tag])->[Proposition]{
+        // Prepare URL
+        let stringURL = "https://mootee-api.herokuapp.com/propositions/sort/"+filter+paramTags(tags: tags)
+        let url = URL(string: stringURL)
+        print(stringURL)
+        guard let requestUrl = url else { fatalError() }
+        // Prepare URL Request Object (GET)
+        var request = URLRequest(url: requestUrl)
+        request.httpMethod = "GET"
+        let semaphore = DispatchSemaphore(value :0)
+        print("request ok")
+        // Perform HTTP Request
+        var res : [String:Proposition] = [:]
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+                
+            // Check for Error
+            if let error = error {
+                print("Error took place :\(error)")
+                return
+            }
+        
+            // Convert HTTP Response Data to a String
+            if let data = data{
+                do{
+                    res = try JSONDecoder().decode([String:Proposition].self, from: data)
+                    print("decoder ok!")
+                }catch let error {
+                    print(error)
+                }
+            }
+            semaphore.signal()
+        }
+        task.resume()
+        
+        semaphore.wait()
+        
+        return (purifyRequest(dictionary: res) as! [Proposition])
     }
 
 }
