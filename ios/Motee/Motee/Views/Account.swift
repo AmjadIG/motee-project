@@ -19,8 +19,8 @@ struct Account: View {
     init(){
         dateFormatter.dateStyle = .short
         dateFormatter.timeStyle = .short
-        nbProposition = String(PropositionModel.getAll().count)
-        nbAnswer = String(AnswerModel.getAll().count)
+        nbProposition = String(UserModel.getPropositionsByUser(user: currentUser!).count)
+        nbAnswer = String(AnswerModel.getAnswersByUser(user: currentUser!).count) //same function than above
     }
     
     var body: some View {

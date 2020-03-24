@@ -52,4 +52,12 @@ class UserModel {
     static func getUserById(idUser : String)->User?{
         return getAll()[idUser]
     }
+    
+    static func getPropositionsByUser(user : User)->[Proposition]{
+        var propositionArray : [Proposition] = []
+        for idProp in user.idPropositions {
+            propositionArray.append(PropositionModel.getPropositionById(idProp: idProp))
+        }
+        return propositionArray
+    }
 }

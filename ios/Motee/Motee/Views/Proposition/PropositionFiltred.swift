@@ -14,11 +14,18 @@ struct PropositionFiltred : View {
     @State var props = PropositionModel.getAllProps()
     var body: some View {
         VStack{
+<<<<<<< HEAD
              List{
                 ForEach(props.indices){ index in
                     PropositionView(proposition: self.$props[index])
+=======
+             /*List{
+                ForEach(PropositionModel.getAllProps()){ proposition in
+                    PropositionView(proposition: proposition)
+>>>>>>> 2d9e1e3d27d5a4001008b36c782432a3074d2948
                 }
-             }
+             }*/
+            Text("Rayan will do this part")
         }
     }
 }

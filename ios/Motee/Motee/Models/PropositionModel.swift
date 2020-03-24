@@ -12,6 +12,8 @@ class PropositionModel {
     
     //Model for Proposition :
 
+    //Get All : https://mootee-api.herokuapp.com/propositions
+    
      static func getAll()->[String:Proposition]{
         // Prepare URL
         let stringURL = "https://mootee-api.herokuapp.com/propositions"
@@ -65,11 +67,15 @@ class PropositionModel {
     }
     
     static func getAllAnswer(proposition : Proposition)->[Answer]{
-        var answerArray : [Answer] = []
-        for answer in proposition.answers {
-            answerArray.append((AnswerModel.getAnswerById(idAns: answer)!))
+        var result : [Answer] = []
+        for (key,value) in AnswerModel.getAll() {
+            for answer in proposition.answers {
+                if answer == key {
+                    result.append(value)
+                }
+            }
         }
-        return answerArray
+        return result
     }
     
     static func getBestAnswer(proposition : Proposition)->Answer?{
