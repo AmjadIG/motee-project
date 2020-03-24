@@ -56,8 +56,16 @@ class UserModel {
     static func getPropositionsByUser(user : User)->[Proposition]{
         var propositionArray : [Proposition] = []
         for idProp in user.idPropositions {
-            propositionArray.append(PropositionModel.getPropositionById(idProp: idProp))
+            propositionArray.append(purifyRequest(dictionary: PropositionModel.getPropositionById(idProp: idProp))[0] as! Proposition )
         }
         return propositionArray
+    }
+    
+    static func getAnswersByUser(user : User)->[Answer]{
+        var answerArray : [Answer] = []
+        for idAns in user.idAnswers {
+            answerArray.append(purifyRequest(dictionary: AnswerModel.getAnswerById(idAns: idAns))[0] as! Answer)
+        }
+        return answerArray
     }
 }

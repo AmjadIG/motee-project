@@ -20,7 +20,7 @@ struct Account: View {
         dateFormatter.dateStyle = .short
         dateFormatter.timeStyle = .short
         nbProposition = String(UserModel.getPropositionsByUser(user: currentUser!).count)
-        nbAnswer = String(AnswerModel.getAnswersByUser(user: currentUser!).count) //same function than above
+        nbAnswer = String(UserModel.getAnswersByUser(user: currentUser!).count)
     }
     
     var body: some View {

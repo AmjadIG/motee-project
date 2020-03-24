@@ -94,7 +94,7 @@ class AnswerModel {
     }
     
     static func getPropOfAnswer(answer : Answer)->Proposition{
-        return PropositionModel.getPropositionById(idProp: answer.idProposition)
+        return (purifyRequest(dictionary: PropositionModel.getPropositionById(idProp: answer.idProposition))[0] as! Proposition)
     }
 
 }
