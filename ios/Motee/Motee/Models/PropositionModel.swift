@@ -51,6 +51,15 @@ class PropositionModel {
         return res
     }
     
+    static func getAllProps()->[Proposition]{
+        var propositions : [Proposition] = []
+        for (_, value) in getAll() {
+            propositions.append(value)
+        }
+        print(propositions.count)
+        return propositions
+    }
+    
     static func getPropositionById(idProp : String)->Proposition!{
         return getAll()[idProp]
     }
@@ -76,6 +85,14 @@ class PropositionModel {
             }
             return bestAnswer
         }
+    }
+    
+    static func getAllTags(proposition:Proposition)->[Tag]{
+        var tagArray : [Tag] = []
+        for tag in proposition.tags {
+            tagArray.append((TagModel.getTagById(idTag: tag)!))
+        }
+        return tagArray
     }
     
     static func getFilteredProps(filter: String, tags : [Tag]){

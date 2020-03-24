@@ -36,10 +36,10 @@ struct Account: View {
                         SymbolGenerator(mySymbol: "envelope", myColor: "black")
                         Text(currentUser!.email).padding(.vertical)
                     }
-                    HStack{
+                    /*HStack{
                         SymbolGenerator(mySymbol: "location", myColor: "black")
                         Text(currentUser!.city).padding(.vertical)
-                    }
+                    }*/
                 }
                 Title(myTitle: "Mes contributions").padding(.vertical)
                 

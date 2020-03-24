@@ -10,13 +10,25 @@ import SwiftUI
 
 struct PropositionView : View {
     var currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser
-    @Binding var proposition : Proposition// A CHANGER ET A PASSER LA VRAIE PROP EN PARAM DANS LA VIEW SUPERIEURE
+    var proposition : Proposition// A CHANGER ET A PASSER LA VRAIE PROP EN PARAM DANS LA VIEW SUPERIEURE
     @State var showBestAnswer = false
     @State var showAllAnswers = false
     @State var colorIfClicked = generateColor(name: "white")
     @State var colorIfClicked2 = generateColor(name: "black")
-    @State var bestAnswer : Answer = getBestAnswer()
-    @State var allAnswers : [Answer] = getAllAnswers()
+    @State var allAnswers : [Answer] = []
+    
+    init(proposition : Proposition){
+        self.proposition = proposition
+    }
+    
+    func getBestAnswer()->Answer{
+        return PropositionModel.getBestAnswer(proposition: proposition)!
+    }
+    
+    func getAllAnswer()->[Answer]{
+        return PropositionModel.getAllAnswer(proposition: proposition)
+    }
+    
     var body: some View {
         let drag = DragGesture()
             .onEnded {
@@ -30,10 +42,10 @@ struct PropositionView : View {
         }
         return
             VStack{
-                ShowTagsProposition(proposition: $proposition)
+                ShowTagsProposition(proposition: proposition)
                 VStack{
                     HStack{
-                        Text(proposition.owner.pseudo).bold().foregroundColor(colorIfClicked2)
+                        Text(UserModel.getUserById(idUser: proposition.owner)!.pseudo).bold().foregroundColor(colorIfClicked2)
                         Spacer()
                         Text(proposition.dateToString())
                             .bold()
@@ -62,7 +74,7 @@ struct PropositionView : View {
                 }
                 VStack{
                     if (showBestAnswer){
-                        AnswerView(answer: $bestAnswer)
+                        AnswerView(answer: self.getBestAnswer())
                         Button(action : {
                             self.showBestAnswer = false
                             self.showAllAnswers.toggle()
@@ -71,8 +83,8 @@ struct PropositionView : View {
                         }
                     }
                     if (showAllAnswers){
-                        AnswerView()
-                        AnswerView()
+                        //AnswerView()
+                        //AnswerView()
                         Button(action : {
                             self.showAllAnswers.toggle()
                             self.toggleColor()
@@ -82,9 +94,7 @@ struct PropositionView : View {
                     }
                 }.onTapGesture { }
                 .gesture(drag)
-                ////////////////////////////////////// ///
-                /// REQUETE A ENVOYER pour recupere la meilleure reponse ///
-                /// ////////////////////////////// ///
+                // Request to send
                 
             }
         

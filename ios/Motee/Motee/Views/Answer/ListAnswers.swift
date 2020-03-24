@@ -17,6 +17,10 @@ struct ListAnswersView: View {
     init(proposition : Proposition){
         self.proposition = proposition
     }
+    
+    func getAnswers(proposition : Proposition)->[Answer]{
+        return PropositionModel.getAllAnswer(proposition: proposition)
+    }
 
     var body: some View {
         NavigationView{
@@ -31,14 +35,15 @@ struct ListAnswersView: View {
                     }else if filter.elementsEqual("dateAsc"){
                         Title(myTitle: "Les plus anciennes réponses")
                     }
-                    HStack{
+                    /*HStack{
                         NavigationLink(destination : { AddAnswerView(propos: proposition) }() ){
                             SymbolGenerator(mySymbol :"plus.square.fill", myColor: "blue")
                             Text("Ajouter").foregroundColor(.blue).bold()
                         }
-                    }
+                    }*/
+                    
                     List{
-                        ForEach(PropositionModel.getAllAnswer(proposition: PropositionModel.getPropositionById(idProp: proposition.id))){ answer in
+                        ForEach(getAnswers(proposition: self.proposition)){ answer in
                             AnswerView(answer: answer)
                         }
                     }
