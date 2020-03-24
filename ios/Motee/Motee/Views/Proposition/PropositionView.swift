@@ -43,10 +43,11 @@ struct PropositionView : View {
 }
 
 
-/*
+
  struct PropositionView_Previews: PreviewProvider {
+    @State static var proposition = PropositionModel.getAllProps()[0]
  static var previews: some View {
- PropositionView()
+    PropositionView(proposition: $proposition)
  }
  }
- */
+ 

@@ -21,18 +21,18 @@ struct Filter: View {
                     .background(Color.green)
                     .foregroundColor(Color.white)
                 Spacer()
-                if !fk.filtered.elementsEqual("all"){
-                    Button(action: { self.fk.filtered = "all"; self.fk.showFilters = false}){
+                if !fk.filtered.elementsEqual("byLike"){
+                    Button(action: { self.fk.filtered = ""; self.fk.showFilters = false}){
                         Text("Aucun filtre").bold().foregroundColor(Color.black)
                     }
                 }
-                Button(action: { self.fk.filtered = "like" ; self.fk.showFilters = false}){
+                Button(action: { self.fk.filtered = "byLike" ; self.fk.showFilters = false}){
                     Text("Les mieux notés").bold().foregroundColor(Color.black)
                 }
-                Button(action: { self.fk.filtered = "dateDesc";self.fk.showFilters = false}){
+                Button(action: { self.fk.filtered = "desc";self.fk.showFilters = false}){
                     Text("Les plus récents").bold().foregroundColor(Color.black)
                 }
-                Button(action: {self.fk.filtered = "dateAsc";self.fk.showFilters = false}){
+                Button(action: {self.fk.filtered = "asc";self.fk.showFilters = false}){
                     Text("Les plus anciens").bold().foregroundColor(Color.black)
                 }
                 Button(action: {self.fk.showFilters = false}) {
