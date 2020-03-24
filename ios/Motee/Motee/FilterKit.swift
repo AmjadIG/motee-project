@@ -9,7 +9,7 @@
 import Foundation
             
 class FilterKit: ObservableObject, Identifiable{
-    @Published var filtered : String = "byLike"
+    @Published var filtered : String = "asc"
     @Published var showFilters : Bool = false
     @Published var tags : [Tag] = []
 }

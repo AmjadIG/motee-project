@@ -18,7 +18,7 @@ struct Filter: View {
                     .bold()
                     .padding(.vertical)
                     .frame(maxWidth: .infinity)
-                    .background(Color.green)
+                    .background(Color.pink)
                     .foregroundColor(Color.white)
                 Spacer()
                 if !fk.filtered.elementsEqual("byLike"){

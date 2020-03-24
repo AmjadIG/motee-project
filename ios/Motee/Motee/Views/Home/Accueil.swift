@@ -29,7 +29,7 @@ struct Accueil: View {
                                 Text("Ajouter").foregroundColor(.black).bold()
                             }
                         }
-                        PropositionFiltred()
+                        PropositionFiltred(filtre: fk.filtered, tags: fk.tags)
                         Spacer()
                     }
                     Spacer()

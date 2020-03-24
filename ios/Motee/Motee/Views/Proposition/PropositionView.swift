@@ -20,7 +20,7 @@ struct PropositionView : View {
         VStack{
             VStack{
                 HStack{
-                    Text(proposition.owner).bold().foregroundColor(colorIfClicked2)
+                    Text(UserModel.getUserById(idUser: proposition.owner).pseudo).bold().foregroundColor(colorIfClicked2)
                     Spacer()
                     Text(proposition.datePublication)
                         .bold()
@@ -29,13 +29,13 @@ struct PropositionView : View {
                 
                 Text(proposition.contentPub).padding(.top, 30.0).padding(.horizontal)
                 
-                PropositionFooter(proposition: proposition).padding()
+                PropositionFooter(proposition: $proposition).padding()
                 
             }.frame(alignment: .leading)
                 .edgesIgnoringSafeArea(.all)
                 .background(lightGreyColor)
                 .cornerRadius(20).shadow(radius: 20)
-                .padding([.leading, .bottom, .trailing])
+                .padding()
             
             AnswersPropsView(proposition: $proposition, showBestAnswer: $showBestAnswer, showAllAnswers: $showAllAnswers, colorIfClicked: $colorIfClicked, colorIfClicked2: $colorIfClicked2)
         }
@@ -45,7 +45,7 @@ struct PropositionView : View {
 
 
  struct PropositionView_Previews: PreviewProvider {
-    @State static var proposition = PropositionModel.getAllProps()[0]
+    @State static var proposition = PropositionModel.getAllProps()[2]
  static var previews: some View {
     PropositionView(proposition: $proposition)
  }

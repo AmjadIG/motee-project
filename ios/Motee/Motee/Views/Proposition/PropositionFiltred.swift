@@ -11,12 +11,17 @@ import SwiftUI
 struct PropositionFiltred : View {
     var currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser
     @EnvironmentObject var fk : FilterKit
+    var filtre : String
+    var tags : [Tag]
+    @State var props : [Proposition] = []
     
-    @State var props : [Proposition] = PropositionModel.getFilteredProps(filter: "desc",tags: [])
+    init(filtre : String, tags : [Tag]){
+        self.filtre = filtre
+        self.tags = tags
+        _props = State(wrappedValue: PropositionModel.getFilteredProps(filter: filtre, tags: tags))
+    }
     
-    //init(f : String, t : [Tag]) {
-    //    _props = State(initialValue: PropositionModel.getFilteredProps(filter: f, tags: t))
-    //    }
+
     var body: some View {
         VStack{
             ForEach(props.indices){ index in
@@ -27,6 +32,6 @@ struct PropositionFiltred : View {
 }
 struct PropositionFiltred_Previews: PreviewProvider {
     static var previews: some View {
-        PropositionFiltred().environmentObject(FilterKit())
+        PropositionFiltred(filtre: "asc",tags: []).environmentObject(FilterKit())
     }
 }
