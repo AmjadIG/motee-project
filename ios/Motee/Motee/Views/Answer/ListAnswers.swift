@@ -11,52 +11,28 @@ import SwiftUI
 
 struct ListAnswersView: View {
     var currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser
-    var proposition : Proposition
+    @Binding var proposition : Proposition
     @State var filter : String = "all"
     
-    init(proposition : Proposition){
-        self.proposition = proposition
-    }
-    
-    func getAnswers(proposition : Proposition)->[Answer]{
-        return PropositionModel.getAllAnswer(proposition: proposition)
-    }
-
     var body: some View {
         NavigationView{
-            ScrollView{
-                VStack(){
-                    if(filter.elementsEqual("all")){
-                        Title(myTitle: "Toutes les réponses")
-                    }else if filter.elementsEqual("like"){
-                        Title(myTitle: "Les meilleurs réponses")
-                    }else if filter.elementsEqual("dateDesc"){
-                        Title(myTitle: "Les plus récents réponses")
-                    }else if filter.elementsEqual("dateAsc"){
-                        Title(myTitle: "Les plus anciennes réponses")
-                    }
-                    /*HStack{
-                        NavigationLink(destination : { AddAnswerView(propos: proposition) }() ){
-                            SymbolGenerator(mySymbol :"plus.square.fill", myColor: "blue")
-                            Text("Ajouter").foregroundColor(.blue).bold()
-                        }
-                    }*/
-                    
-                    List{
-                        ForEach(getAnswers(proposition: self.proposition)){ answer in
-                            AnswerView(answer: answer)
-                        }
-                    }
+            VStack{
+                if(filter.elementsEqual("all")){
+                    Title(myTitle: "Toutes les réponses")
+                }else if filter.elementsEqual("like"){
+                    Title(myTitle: "Les meilleurs réponses")
+                }else if filter.elementsEqual("dateDesc"){
+                    Title(myTitle: "Les plus récents réponses")
+                }else if filter.elementsEqual("dateAsc"){
+                    Title(myTitle: "Les plus anciennes réponses")
                 }
+                
+                ForEach(getAllAnswer(proposition: proposition)){ answr in
+                    AnswerView(answer: answr)
+                }
+                
                 Spacer()
             }
         }
     }
 }
-/*
-struct ListAnswersView_Previews: PreviewProvider {
-    static var previews: some View {
-        ListAnswersView()
-    }
-}
-*/

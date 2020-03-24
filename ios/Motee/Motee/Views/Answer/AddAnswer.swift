@@ -12,13 +12,9 @@ import SwiftUI
 struct AddAnswerView: View {
     @State var newContent : String = ""
     @State var alertEmptyAnswer : Bool = false
-    var propos : Proposition
+    @Binding var propos : Proposition
     
     var user = (UIApplication.shared.delegate as! AppDelegate).currentUser
-
-    init(propos : Proposition){
-        self.propos = propos
-    }
     
     var body: some View {
         VStack(alignment:HorizontalAlignment.center,spacing: 15){

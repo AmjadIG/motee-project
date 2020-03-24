@@ -15,20 +15,12 @@ struct PropositionView : View {
     @State var showAllAnswers = false
     @State var colorIfClicked = generateColor(name: "white")
     @State var colorIfClicked2 = generateColor(name: "black")
-    @State var allAnswers : [Answer] = []
-    
-    init(proposition : Proposition){
-        self.proposition = proposition
+    @State var bestAnswer : Answer
+    @State var allAnswers : [Answer]
+    init(){
+        self.bestAnswer = getBestAnswer(proposition: proposition)!
+        self.allAnswers = getAllAnswer(proposition: proposition)
     }
-    
-    func getBestAnswer()->Answer{
-        return PropositionModel.getBestAnswer(proposition: proposition)!
-    }
-    
-    func getAllAnswer()->[Answer]{
-        return PropositionModel.getAllAnswer(proposition: proposition)
-    }
-    
     var body: some View {
         let drag = DragGesture()
             .onEnded {
@@ -45,9 +37,9 @@ struct PropositionView : View {
                 ShowTagsProposition(proposition: proposition)
                 VStack{
                     HStack{
-                        Text(UserModel.getUserById(idUser: proposition.owner)!.pseudo).bold().foregroundColor(colorIfClicked2)
+                        Text(proposition.owner).bold().foregroundColor(colorIfClicked2)
                         Spacer()
-                        Text(proposition.dateToString())
+                        Text(proposition.datePublication)
                             .bold()
                             .foregroundColor(colorIfClicked2)
                     }.padding().background(colorIfClicked)
@@ -83,8 +75,7 @@ struct PropositionView : View {
                         }
                     }
                     if (showAllAnswers){
-                        //AnswerView()
-                        //AnswerView()
+                        ListAnswersView(proposition: proposition)
                         Button(action : {
                             self.showAllAnswers.toggle()
                             self.toggleColor()

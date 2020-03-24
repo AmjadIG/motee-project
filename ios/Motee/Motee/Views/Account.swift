@@ -19,7 +19,7 @@ struct Account: View {
     init(){
         dateFormatter.dateStyle = .short
         dateFormatter.timeStyle = .short
-        nbProposition = String(PropositionModel.getAll().count)
+        nbProposition = String(getAll().count)
         nbAnswer = String(AnswerModel.getAll().count)
     }
     

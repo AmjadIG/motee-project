@@ -56,7 +56,7 @@ class AnswerModel {
     }
     
     static func getPropOfAnswer(answer : Answer)->Proposition{
-        return PropositionModel.getPropositionById(idProp: answer.idProposition)
+        return getPropositionById(idProp: answer.idProposition)
     }
 
 }
