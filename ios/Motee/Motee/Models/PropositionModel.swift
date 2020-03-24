@@ -100,4 +100,9 @@ class PropositionModel {
         }
         return tagArray
     }
+    
+    static func getFilteredProps(filter: String, tags : [Tag]){
+        //
+    }
+
 }

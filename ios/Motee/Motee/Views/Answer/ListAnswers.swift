@@ -11,7 +11,7 @@ import SwiftUI
 
 struct ListAnswersView: View {
     var currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser
-    @Binding var proposition : Proposition
+    var proposition : Proposition
     @State var filter : String = "all"
     
     var body: some View {
@@ -30,7 +30,6 @@ struct ListAnswersView: View {
                 ForEach(PropositionModel.getAllAnswer(proposition: proposition)){ answr in
                     AnswerView(answer: answr)
                 }
-                
                 Spacer()
             }
         }
