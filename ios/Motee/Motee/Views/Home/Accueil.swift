@@ -32,12 +32,12 @@ struct Accueil: View {
                             }
                         }
                         //Requête à envoyer selon le filtre
-                        List{
+                        /*List{
                            ForEach(PropositionModel.getAllProps()){ proposition in
                                PropositionView(proposition: proposition)
                            }
                         }
-                        Spacer()
+                        Spacer()*/
                     }
                     Spacer()
                 }

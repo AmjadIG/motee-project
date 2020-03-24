@@ -17,10 +17,13 @@ struct PropositionView : View {
     @State var colorIfClicked2 = generateColor(name: "black")
     @State var bestAnswer : Answer
     @State var allAnswers : [Answer]
-    init(){
-        self.bestAnswer = getBestAnswer(proposition: proposition)!
-        self.allAnswers = getAllAnswer(proposition: proposition)
-    }
+    /*
+    init(propositionI : Proposition){
+        self.proposition = propositionI
+        self.bestAnswer = PropositionModel.getBestAnswer(proposition: propositionI)!
+        self.allAnswers = PropositionModel.getAllAnswer(proposition: propositionI)
+    }*/
+    
     var body: some View {
         let drag = DragGesture()
             .onEnded {
@@ -66,7 +69,7 @@ struct PropositionView : View {
                 }
                 VStack{
                     if (showBestAnswer){
-                        AnswerView(answer: self.getBestAnswer())
+                        AnswerView(answer: bestAnswer)
                         Button(action : {
                             self.showBestAnswer = false
                             self.showAllAnswers.toggle()
@@ -75,7 +78,7 @@ struct PropositionView : View {
                         }
                     }
                     if (showAllAnswers){
-                        ListAnswersView(proposition: proposition)
+                        //ListAnswersView(proposition: proposition)
                         Button(action : {
                             self.showAllAnswers.toggle()
                             self.toggleColor()

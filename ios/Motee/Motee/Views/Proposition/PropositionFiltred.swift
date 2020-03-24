@@ -14,11 +14,12 @@ struct PropositionFiltred : View {
     
     var body: some View {
         VStack{
-             List{
+             /*List{
                 ForEach(PropositionModel.getAllProps()){ proposition in
                     PropositionView(proposition: proposition)
                 }
-             }
+             }*/
+            Text("Rayan will do this part")
         }
     }
 }

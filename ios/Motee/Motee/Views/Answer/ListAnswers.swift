@@ -27,7 +27,7 @@ struct ListAnswersView: View {
                     Title(myTitle: "Les plus anciennes réponses")
                 }
                 
-                ForEach(getAllAnswer(proposition: proposition)){ answr in
+                ForEach(PropositionModel.getAllAnswer(proposition: proposition)){ answr in
                     AnswerView(answer: answr)
                 }
                 
