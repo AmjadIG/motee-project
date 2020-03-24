@@ -95,7 +95,11 @@ class UserModel {
     static func getPropositionsByUser(user : User)->[Proposition]{
         var propositionArray : [Proposition] = []
         for idProp in user.idPropositions {
-            propositionArray.append(purifyRequest(dictionary: PropositionModel.getPropositionById(idProp: idProp))[0] as! Proposition )
+            for prop in PropositionModel.getAllProps() {
+                if prop.id == idProp {
+                    propositionArray.append(prop)
+                }
+            }
         }
         return propositionArray
     }

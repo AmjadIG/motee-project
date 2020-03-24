@@ -14,6 +14,8 @@ class PropositionModel {
 
     //Get All : https://mootee-api.herokuapp.com/propositions
     //Get by id : https://mootee-api.herokuapp.com/propositions/id
+    //Post : https://mootee-api.herokuapp.com/propositions/newProposition => Pas encore testé
+    //Delete : https://mootee-api.herokuapp.com/propositions/delete => Pas encore testé
 
      static func getAll()->[String:Proposition]{
         // Prepare URL
@@ -58,7 +60,7 @@ class PropositionModel {
         return (purifyRequest(dictionary: getAll()) as! [Proposition])
     }
     
-    static func getPropositionById(idProp : String)->[String:Proposition]{
+    static func getPropositionById(idProp : String)->Proposition{
         // Prepare URL
         let stringURL = "https://mootee-api.herokuapp.com/propositions/"+idProp
         let url = URL(string: stringURL)
@@ -94,7 +96,7 @@ class PropositionModel {
         
         semaphore.wait()
         
-        return res
+        return (purifyRequest(dictionary: res)[0] as! Proposition)
     }
     
     static func getAllAnswer(proposition : Proposition)->[Answer]{
@@ -127,7 +129,7 @@ class PropositionModel {
     static func getAllTags(proposition:Proposition)->[Tag]{
         var tagArray : [Tag] = []
         for tag in proposition.tags {
-            tagArray.append((TagModel.getTagById(idTag: tag)!))
+            tagArray.append((TagModel.getTagById(idTag: tag)))
         }
         return tagArray
     }
@@ -168,6 +170,96 @@ class PropositionModel {
         
         semaphore.wait()
         
+        return res
+    }
+    
+    static func addProposition(prop: Proposition, token: String) -> Bool{
+        // Prepare URL
+        //guard let token = currentUser?.authToken else{return false}
+        
+        let stringurl = "https://mootee-api.herokuapp.com/propositions/newProposition"
+        let url = URL(string: stringurl)//ICI
+        
+        let tagsProp : String = paramTags(tags: getAllTags(proposition: prop))
+        let body = [
+            "contentProp" : prop.contentPub,
+            "isAnonymous" : "\(prop.anonymous)",
+            "tagsProp" : tagsProp
+        ]
+        
+        guard let requestUrl = url else { fatalError() }
+        // Prepare URL Request Object
+        var request = URLRequest(url: requestUrl)
+        request.httpMethod = "POST"
+        let semaphore = DispatchSemaphore(value :0)
+        var res : Bool = false
+        // Set HTTP Request Body
+        guard let requestBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {return false}
+        
+        request.httpBody = requestBody
+        request.setValue(token, forHTTPHeaderField: "Bearer Token")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        print("json : " , String(data : request.httpBody!, encoding: .utf8)!)
+        // Perform HTTP Request
+         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let error = error {
+                print("Error took place \(error)")
+                return
+            }
+                
+                let resp = response as? HTTPURLResponse
+            print("code d'erreur")
+                res = (resp?.statusCode == 200)
+                
+            if let data = data{
+                if let jsonString = String(data: data, encoding: .utf8){
+                    print(jsonString)
+                }
+            }
+            semaphore.signal()
+        }
+        task.resume()
+        semaphore.wait()
+        return res
+    }
+    
+    static func deleteProposition(idProp: String, token: String)->Bool{
+        // Prepare URL
+        //guard let token = currentUser?.authToken else{return false}
+        let stringurl = "https://mootee-api.herokuapp.com/propositions/delete"
+        let url = URL(string: stringurl)
+        guard let requestUrl = url else { fatalError() }
+        // Prepare URL Request Object
+        var request = URLRequest(url: requestUrl)
+        request.httpMethod = "DELETE"
+        var res : Bool = false
+        
+        // HTTP Request Parameters which will be sent in HTTP Request Body
+        let body = [
+            "id_proposition": idProp
+        ]
+        
+        // Set HTTP Request Body
+        guard let requestBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {return false}
+        request.httpBody = requestBody
+        request.setValue(token, forHTTPHeaderField: "Bearer Token")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        // Perform HTTP Request
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+                
+                // Check for Error
+                if let error = error {
+                    print("Error took place \(error)")
+                    return
+                }
+         
+                // Convert HTTP Response Data to a String
+                    let resp = response as? HTTPURLResponse
+                    res = (resp?.statusCode == 200)
+                
+        }
+        task.resume()
         return res
     }
 

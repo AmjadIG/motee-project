@@ -32,3 +32,14 @@ func paramTags(tags: [Tag])->String {
     }
     return postString
 }
+
+func paramTagsToLabel(tags: [Tag])->String {
+    var string = ""
+    for tag in tags {
+        string += tag.label
+        if !tag.equals(otherTag : tags[tags.count-1]) {
+            string += " "
+        }
+    }
+    return string
+}
