@@ -10,14 +10,14 @@ import SwiftUI
 
 struct AnswersPropsView : View {
     var currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser
-    @Binding var proposition : Proposition
+    var proposition : Proposition
     @Binding var showBestAnswer : Bool
     @Binding var showAllAnswers : Bool
     @Binding var colorIfClicked : Color
     @Binding var colorIfClicked2 : Color
     @State var bestAnswer : Answer?
     var body: some View {
-        bestAnswer = getBestAnswer(proposition: proposition)
+        bestAnswer = PropositionModel.getBestAnswer(proposition: proposition)
         let drag = DragGesture()
             .onEnded {
                 if $0.translation.width < -100 {
@@ -55,7 +55,7 @@ struct AnswersPropsView : View {
                     }
                 }
                 if (showAllAnswers){
-                    ListAnswersView(proposition: $proposition)
+                    ListAnswersView(proposition: proposition)
                     Button(action : {
                         self.showAllAnswers.toggle()
                         self.toggleColor()
