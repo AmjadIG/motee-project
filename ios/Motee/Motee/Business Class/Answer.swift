@@ -49,13 +49,13 @@ class Answer : Publication, Identifiable, Codable {
     
     //methods
     
-    func liker(userLike : User?){
-        self.idLikesAnswer.append(userLike!.id)
+    func liker(userLike : User){
+        self.idLikesAnswer.append(userLike.id)
     }
     
-    func disliker(userDislike : User?){
+    func disliker(userDislike : User){
         for i in 0..<self.idLikesAnswer.count {
-            if self.idLikesAnswer[i] == userDislike!.id {
+            if self.idLikesAnswer[i] == userDislike.id {
                 self.idLikesAnswer.remove(at: i)
             }
         }

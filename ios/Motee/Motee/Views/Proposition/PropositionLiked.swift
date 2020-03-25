@@ -9,21 +9,20 @@
 import SwiftUI
 
 struct PropositionLiked : View {
-    var currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser
     @Binding var proposition : Proposition
     @EnvironmentObject var fk : FilterKit
     var body: some View {
         VStack{
             if fk.currentUSer != nil {
                 Button(action:{
-                    if self.proposition.estLikee(utilisateur: self.currentUser){
-                        self.proposition.disliker(userDislike: self.currentUser)
+                    if self.proposition.estLikee(utilisateur: self.fk.currentUSer){
+                        self.proposition.disliker(userDislike: self.fk.currentUSer!)
                     }else{
-                        self.proposition.liker(userLike: self.currentUser)
+                        self.proposition.liker(userLike: self.fk.currentUSer!)
                     }
                 }){
                     HStack{
-                        if proposition.estLikee(utilisateur: currentUser){
+                        if proposition.estLikee(utilisateur: fk.currentUSer){
                             Image(systemName: "heart.fill").foregroundColor(Color.red)
                         } else {
                             Image(systemName: "heart").foregroundColor(Color.black)

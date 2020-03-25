@@ -56,13 +56,13 @@ class Proposition : Publication, Identifiable, Codable {
         return true
     }
     
-    func liker(userLike : User?){
-        self.idLikesProp.append(userLike!.id)
+    func liker(userLike : User){
+        self.idLikesProp.append(userLike.id)
     }
     
-    func disliker(userDislike : User?){
+    func disliker(userDislike : User){
         for i in 0..<self.idLikesProp.count {
-            if self.idLikesProp[i] == userDislike!.id {
+            if self.idLikesProp[i] == userDislike.id {
                 self.idLikesProp.remove(at: i)
             }
         }

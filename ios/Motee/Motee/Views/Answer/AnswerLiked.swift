@@ -10,22 +10,21 @@ import SwiftUI
 
 struct AnswerLiked : View {
     var answer : Answer
-    var currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser
-    
+    @EnvironmentObject var fk : FilterKit
     init(answer : Answer){
         self.answer = answer
     }
     
     var body: some View {
         Button(action:{
-            if self.answer.estLikee(utilisateur: self.currentUser){
-                self.answer.disliker(userDislike: self.currentUser)
+            if self.answer.estLikee(utilisateur: self.fk.currentUSer){
+                self.answer.disliker(userDislike: self.fk.currentUSer!)
             }else{
-                self.answer.liker(userLike: self.currentUser)
+                self.answer.liker(userLike: self.fk.currentUSer!)
             }
         }){
             HStack{
-                if self.answer.estLikee(utilisateur: self.currentUser){
+                if self.answer.estLikee(utilisateur: self.fk.currentUSer){
                     Image(systemName: "heart.fill").foregroundColor(Color.red)
                 } else {
                     Image(systemName: "heart").foregroundColor(Color.pink)
