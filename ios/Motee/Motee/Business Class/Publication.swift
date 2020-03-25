@@ -11,9 +11,9 @@ import Foundation
 
 protocol Publication {
 
-    func liker(userLike : User?)
+    func liker(userLike : User)
     
-    func disliker(userDislike : User?)
+    func disliker(userDislike : User)
     
     func estProprietaire(utilisateur: User)->Bool
     
