@@ -12,9 +12,10 @@ class TagModel {
     
     //Model for Tag :
     
-    //Get All : https://mootee-api.herokuapp.com/tags/ => Fonctionne plus pour l'instant
-    //Get by id : https://mootee-api.herokuapp.com/tags/bestTags
-    
+    //Get All : https://mootee-api.herokuapp.com/tags/ => 200
+    //Get best tags : https://mootee-api.herokuapp.com/tags/bestTags => 200
+    //Get by id : https://mootee-api.herokuapp.com/tags/id => 200
+
     static func getAll()->[String:Tag]{
         // Prepare URL
         let stringURL = "https://mootee-api.herokuapp.com/tags/"
@@ -130,5 +131,45 @@ class TagModel {
         semaphore.wait()
         
         return (purifyRequest(dictionary: res)[0] as! Tag)
+    }
+    
+    //Résultat : renvoie true si le tag a bien été détruit, false sinon
+    static func deleteTag(idTag: String, token: String)->Bool{
+        // Prepare URL
+        //guard let token = currentUser?.authToken else{return false}
+        let stringurl = "https://mootee-api.herokuapp.com/tags/delete"
+        let url = URL(string: stringurl)
+        guard let requestUrl = url else { fatalError() }
+        // Prepare URL Request Object
+        var request = URLRequest(url: requestUrl)
+        request.httpMethod = "POST"
+        var res : Bool = false
+        
+        // HTTP Request Parameters which will be sent in HTTP Request Body
+        let body = [
+            "id_tag": idTag
+        ]
+        
+        // Set HTTP Request Body
+        guard let requestBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {return false}
+        request.httpBody = requestBody
+        request.setValue(token, forHTTPHeaderField: "Bearer Token")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        // Perform HTTP Request
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+                
+                // Check for Error
+                if let error = error {
+                    print("Error took place \(error)")
+                    return
+                }
+         
+                // Convert HTTP Response Data to a String
+                    let resp = response as? HTTPURLResponse
+                    res = (resp?.statusCode == 200)
+        }
+        task.resume()
+        return res
     }
 }

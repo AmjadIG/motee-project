@@ -15,8 +15,11 @@ class PropositionModel {
     //Get All : https://mootee-api.herokuapp.com/propositions => 200
     //Get by id : https://mootee-api.herokuapp.com/propositions/id => 200
     //Post : https://mootee-api.herokuapp.com/propositions/newProposition => Testé, 400 ??
-    //Delete : https://mootee-api.herokuapp.com/propositions/delete => 400 => Problème côté server
-
+    //Delete(=>Post) : https://mootee-api.herokuapp.com/propositions/delete => 400 => Problème côté server
+    //Put : https://mootee-api.herokuapp.com/propositions/like => Pas encore testé
+    //Put : https://mootee-api.herokuapp.com/propositions/dislike => Pas encore testé
+    //Put : https://mootee-api.herokuapp.com/propositions/update => Pas encore testé
+    
     //Resultat : Renvoie un dictionnaire [ clé : id des propositions | valeur : Toutes les Propositions ]
     static func getAll()->[String:Proposition]{
         // Prepare URL
@@ -247,7 +250,7 @@ class PropositionModel {
         guard let requestUrl = url else { fatalError() }
         // Prepare URL Request Object
         var request = URLRequest(url: requestUrl)
-        request.httpMethod = "DELETE"
+        request.httpMethod = "POST"
         var res : Bool = false
         
         // HTTP Request Parameters which will be sent in HTTP Request Body
@@ -279,4 +282,119 @@ class PropositionModel {
         return res
     }
 
+    //Données : un url (String), un id de proposition (String) et un token pour l'autorisation (String)
+    //Résultat : renvoie true si la requête a bien été effectuée, false sinon
+    static func propositionLD(url : String, idProposition : String, token : String)->Bool{
+        // Prepare URL
+        //guard let token = currentUser?.authToken else{return false}
+        
+        let stringurl = url
+        let url = URL(string: stringurl)//ICI
+        
+        let body = [
+            "_id" : idProposition
+        ]
+        
+        guard let requestUrl = url else { fatalError() }
+        // Prepare URL Request Object
+        var request = URLRequest(url: requestUrl)
+        request.httpMethod = "PUT"
+        let semaphore = DispatchSemaphore(value :0)
+        var res : Bool = false
+        // Set HTTP Request Body
+        guard let requestBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {return false}
+        
+        request.httpBody = requestBody
+        request.setValue(token, forHTTPHeaderField: "Bearer Token")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        print("json : " , String(data : request.httpBody!, encoding: .utf8)!)
+        // Perform HTTP Request
+         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let error = error {
+                print("Error took place \(error)")
+                return
+            }
+                
+                let resp = response as? HTTPURLResponse
+            print("code d'erreur")
+                res = (resp?.statusCode == 200)
+                print(res)
+            if let data = data{
+                print(data)
+                if let jsonString = String(data: data, encoding: .utf8){
+                    print(jsonString)
+                }
+            }
+            semaphore.signal()
+        }
+        task.resume()
+        semaphore.wait()
+        return res
+    }
+    
+    //Données : un id de proposition (String) et un token pour l'autorisation (String)
+    //Résultat : renvoie true si la proposition a bien été likée, false sinon
+    static func likeProp(idProposition : String, token : String)->Bool{
+        print("propos liké")
+        return propositionLD(url: "https://mootee-api.herokuapp.com/propositions/like", idProposition: idProposition, token: token)
+    }
+    
+    //Données : un id de proposition (String) et un token pour l'autorisation (String)
+    //Résultat : renvoie true si la proposition a bien été dislikée, false sinon
+    static func dislikeProp(idProposition : String, token : String)->Bool{
+        print("propos disliké")
+        return propositionLD(url: "https://mootee-api.herokuapp.com/propositions/dislike", idProposition: idProposition, token: token)
+    }
+    
+    //Résultat : renvoie true si la proposition a bien été modifiée (requête envoyée et validée), false sinon
+    static func updateProp(idProp : String, contentProp : String, isAnonymous : Bool, token : String)->Bool {
+        // Prepare URL
+        //guard let token = currentUser?.authToken else{return false}
+        
+        let stringurl = "https://mootee-api.herokuapp.com/propositions/update"
+        let url = URL(string: stringurl)//ICI
+        
+        let body = [
+            "_id" : idProp,
+            "contentProp" : contentProp,
+            "isAnonymous" : "\(isAnonymous)"
+        ]
+        
+        guard let requestUrl = url else { fatalError() }
+        // Prepare URL Request Object
+        var request = URLRequest(url: requestUrl)
+        request.httpMethod = "PUT"
+        let semaphore = DispatchSemaphore(value :0)
+        var res : Bool = false
+        // Set HTTP Request Body
+        guard let requestBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {return false}
+        
+        request.httpBody = requestBody
+        request.setValue(token, forHTTPHeaderField: "Bearer Token")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        print("json : " , String(data : request.httpBody!, encoding: .utf8)!)
+        // Perform HTTP Request
+         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let error = error {
+                print("Error took place \(error)")
+                return
+            }
+                
+                let resp = response as? HTTPURLResponse
+            print("code d'erreur")
+                res = (resp?.statusCode == 200)
+                print(res)
+            if let data = data{
+                print(data)
+                if let jsonString = String(data: data, encoding: .utf8){
+                    print(jsonString)
+                }
+            }
+            semaphore.signal()
+        }
+        task.resume()
+        semaphore.wait()
+        return res
+    }
+    
 }

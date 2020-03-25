@@ -8,6 +8,9 @@
 import SwiftUI
 import Foundation
 
+
+//Données : Dictionnaire prenant en clé un string, et en valeur, n'importe quel type
+//Résultat : Transforme le dictionnaire, en array => utile surtout pour les requêtes
 func purifyRequest(dictionary : [String:Any])->[Any]{
     var arrayAny : [Any] = []
     for(_,value) in dictionary {
@@ -16,6 +19,8 @@ func purifyRequest(dictionary : [String:Any])->[Any]{
     return arrayAny
 }
 
+//Donnée : Tableau T de Tags
+//Résultat : Renvoie un string composé pour un URL particulier
 func paramTags(tags: [Tag])->String {
     var postString = ""
     var iterator = 1
@@ -33,6 +38,8 @@ func paramTags(tags: [Tag])->String {
     return postString
 }
 
+//Donnée : Tableau T de Tags
+//Résultat : Renvoie un string composé pour le corps d'une requête
 func paramTagsToLabel(tags: [Tag])->String {
     var string = ""
     for tag in tags {
