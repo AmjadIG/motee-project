@@ -94,6 +94,18 @@ class UserModel {
         return purifyRequest(dictionary: res)[0] as! User
     }
     
+    static func getAnswersByUser(user : User)->[Answer]{
+        var answerArray : [Answer] = []
+        for idAns in user.idAnswers {
+            answerArray.append(purifyRequest(dictionary: AnswerModel.getAnswerById(idAns: idAns))[0] as! Answer)
+        }
+        return answerArray
+    }
+    
+    static func getAnswersByUserId(idUser : String)->[Answer]{
+        return getAnswersByUser(user: getUserById(idUser: idUser))
+    }
+    
     static func getPropositionsByUser(user : User)->[Proposition]{
         var propositionArray : [Proposition] = []
         for idProp in user.idPropositions {
@@ -106,6 +118,10 @@ class UserModel {
         return propositionArray
     }
     
+    static func getPropsByUserId(idUser : String)->[Proposition]{
+        return getPropositionsByUser(user: getUserById(idUser: idUser))
+    }
+    
     static func getUserByPseudo(pseudo : String)->User?{
         for(_,value) in getAll(){
             if value.pseudo == pseudo {
@@ -113,14 +129,6 @@ class UserModel {
             }
         }
         return nil
-    }
-    
-    static func getAnswersByUser(user : User)->[Answer]{
-        var answerArray : [Answer] = []
-        for idAns in user.idAnswers {
-            answerArray.append(purifyRequest(dictionary: AnswerModel.getAnswerById(idAns: idAns))[0] as! Answer)
-        }
-        return answerArray
     }
     
     static func authenticate(pseudo : String, password : String)->String{
@@ -147,7 +155,7 @@ class UserModel {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         print("json : " , String(data : request.httpBody!, encoding: .utf8)!)
         
-        var res : String = ""
+        var res : String = "Bearer "
         // Perform HTTP Request
          let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let error = error {
@@ -160,7 +168,7 @@ class UserModel {
                     if let data = data{
                         print(data)
                         if let token = String(data: data, encoding: .utf8){
-                            res = token
+                            res += token
                             print(token)
                         }
                     }

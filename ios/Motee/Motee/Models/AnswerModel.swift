@@ -15,9 +15,9 @@ class AnswerModel {
     //Get All : https://mootee-api.herokuapp.com/answers => 200
     //Get by id : https://mootee-api.herokuapp.com/answers/id => 200
     //Post : https://mootee-api.herokuapp.com/answers/newAnswer => 200
-    //Delete(=>Post) : https://mootee-api.herokuapp.com/answers/delete => Pas encore testé
-    //Put : https://mootee-api.herokuapp.com/answers/like => Pas encore testé
-    //Put : https://mootee-api.herokuapp.com/answers/dislike => Pas encore testé
+    //Delete(=>Post) : https://mootee-api.herokuapp.com/answers/delete => 500
+    //Put : https://mootee-api.herokuapp.com/answers/like => 200
+    //Put : https://mootee-api.herokuapp.com/answers/dislike => 200
     //Put : https://mootee-api.herokuapp.com/answers/update => Pas encore testé
 
     static func getAll()->[String:Answer]{
@@ -131,7 +131,7 @@ class AnswerModel {
         guard let requestBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {return false}
         
         request.httpBody = requestBody
-        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        request.setValue(token, forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         print("json : " , String(data : request.httpBody!, encoding: .utf8)!)
         // Perform HTTP Request
@@ -179,7 +179,7 @@ class AnswerModel {
         // Set HTTP Request Body
         guard let requestBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {return false}
         request.httpBody = requestBody
-        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        request.setValue(token, forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         print("body ok + auth ok")
         // Perform HTTP Request
@@ -223,7 +223,7 @@ class AnswerModel {
         guard let requestBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {return false}
         
         request.httpBody = requestBody
-        request.setValue(token, forHTTPHeaderField: "Bearer Token")
+        request.setValue(token, forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         print("json : " , String(data : request.httpBody!, encoding: .utf8)!)
         // Perform HTTP Request
@@ -250,22 +250,22 @@ class AnswerModel {
         return res
     }
     
-    //Données : un id de réponse (String) et un token pour l'autorisation (String)
+    //Données : un id de proposition (String) et un token pour l'autorisation (String)
     //Résultat : renvoie true si la proposition a bien été likée, false sinon
-    static func likeAnswer(idAnswer : String, token : String)->Bool{
-        print("reponse likée")
+    static func likeAns(idAnswer : String, token : String)->Bool{
+        print("propos liké")
         return answerLD(url: "https://mootee-api.herokuapp.com/answers/like", idAnswer: idAnswer, token: token)
     }
     
-    //Données : un id de réponse (String) et un token pour l'autorisation (String)
+    //Données : un id de proposition (String) et un token pour l'autorisation (String)
     //Résultat : renvoie true si la proposition a bien été dislikée, false sinon
-    static func dislikeAnswer(idAnswer : String, token : String)->Bool{
-        print("reponse dislikée")
+    static func dislikeAns(idAnswer : String, token : String)->Bool{
+        print("propos disliké")
         return answerLD(url: "https://mootee-api.herokuapp.com/answers/dislike", idAnswer: idAnswer, token: token)
     }
     
-    //Résultat : renvoie true si la réponse a bien été modifiée (requête envoyée et validée), false sinon
-    static func updateAns(idAns : String, contentAns : String, isAnonymous : Bool, token : String)->Bool {
+    //Résultat : renvoie true si la proposition a bien été modifiée (requête envoyée et validée), false sinon
+    static func updateAns(idAns : String, contentAns : String, isAnonymous : Bool, idUser : String, token : String)->Bool {
         // Prepare URL
         //guard let token = currentUser?.authToken else{return false}
         
@@ -274,8 +274,9 @@ class AnswerModel {
         
         let body = [
             "_id" : idAns,
-            "contentAns" : contentAns,
-            "isAnonymous" : "\(isAnonymous)"
+            "contentAnswer" : contentAns,
+            "isAnonymous" : "\(isAnonymous)",
+            "ownerAnswer" : idUser
         ]
         
         guard let requestUrl = url else { fatalError() }
@@ -288,7 +289,7 @@ class AnswerModel {
         guard let requestBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {return false}
         
         request.httpBody = requestBody
-        request.setValue(token, forHTTPHeaderField: "Bearer Token")
+        request.setValue(token, forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         print("json : " , String(data : request.httpBody!, encoding: .utf8)!)
         // Perform HTTP Request

@@ -15,9 +15,9 @@ class PropositionModel {
     //Get All : https://mootee-api.herokuapp.com/propositions => 200
     //Get by id : https://mootee-api.herokuapp.com/propositions/id => 200
     //Post : https://mootee-api.herokuapp.com/propositions/newProposition => 200
-    //Delete(=>Post) : https://mootee-api.herokuapp.com/propositions/delete => 400 => Problème côté server
-    //Put : https://mootee-api.herokuapp.com/propositions/like => Pas encore testé
-    //Put : https://mootee-api.herokuapp.com/propositions/dislike => Pas encore testé
+    //Delete(=>Post) : https://mootee-api.herokuapp.com/propositions/delete => 200
+    //Put : https://mootee-api.herokuapp.com/propositions/like => 200
+    //Put : https://mootee-api.herokuapp.com/propositions/dislike => 200
     //Put : https://mootee-api.herokuapp.com/propositions/update => Pas encore testé
     
     //Resultat : Renvoie un dictionnaire [ clé : id des propositions | valeur : Toutes les Propositions ]
@@ -214,7 +214,7 @@ class PropositionModel {
         guard let requestBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {return false}
         
         request.httpBody = requestBody
-        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        request.setValue(token, forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         print("json : " , String(data : request.httpBody!, encoding: .utf8)!)
         // Perform HTTP Request
@@ -261,7 +261,7 @@ class PropositionModel {
         // Set HTTP Request Body
         guard let requestBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {return false}
         request.httpBody = requestBody
-        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        request.setValue(token, forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         print("body ok + auth ok")
         // Perform HTTP Request
@@ -306,7 +306,7 @@ class PropositionModel {
         guard let requestBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {return false}
         
         request.httpBody = requestBody
-        request.setValue(token, forHTTPHeaderField: "Bearer Token")
+        request.setValue(token, forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         print("json : " , String(data : request.httpBody!, encoding: .utf8)!)
         // Perform HTTP Request
@@ -348,7 +348,7 @@ class PropositionModel {
     }
     
     //Résultat : renvoie true si la proposition a bien été modifiée (requête envoyée et validée), false sinon
-    static func updateProp(idProp : String, contentProp : String, isAnonymous : Bool, token : String)->Bool {
+    static func updateProp(idProp : String, contentProp : String, isAnonymous : Bool, idUser : String, token : String)->Bool {
         // Prepare URL
         //guard let token = currentUser?.authToken else{return false}
         
@@ -358,7 +358,8 @@ class PropositionModel {
         let body = [
             "_id" : idProp,
             "contentProp" : contentProp,
-            "isAnonymous" : "\(isAnonymous)"
+            "isAnonymous" : "\(isAnonymous)",
+            "ownerProp" : idUser
         ]
         
         guard let requestUrl = url else { fatalError() }
@@ -371,7 +372,7 @@ class PropositionModel {
         guard let requestBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {return false}
         
         request.httpBody = requestBody
-        request.setValue(token, forHTTPHeaderField: "Bearer Token")
+        request.setValue(token, forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         print("json : " , String(data : request.httpBody!, encoding: .utf8)!)
         // Perform HTTP Request
