@@ -12,7 +12,7 @@ struct Root : View {
     var currentPage : String
     var body: some View {
         VStack{
-            if(fk.currentPage == "home"){
+            if(fk.currentPage == "Accueil"){
                 Accueil()
             }else if fk.currentPage == "login" {
                 LoginForm()
@@ -21,7 +21,7 @@ struct Root : View {
             }else if fk.currentPage == "register"{
                 RegisterForm()
             }
-            else if fk.currentPage == "addProp"{
+            else if fk.currentPage == "Ajouter propos"{
                 AddProposition()
             }
             else{

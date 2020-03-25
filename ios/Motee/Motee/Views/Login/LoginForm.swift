@@ -28,7 +28,7 @@ struct LoginForm: View {
                     if self.noError {
                         self.fk.token = UserModel.checkAuthenticate(pseudo: self.pseudo, password: self.mdp)[0] as! String
                         self.fk.currentUSer = (UserModel.checkAuthenticate(pseudo: self.pseudo, password: self.mdp)[1] as! User)
-                        self.fk.currentPage = "home"
+                        self.fk.currentPage = "Accueil"
                     }
                 }){
                     ButtonGenerator(myText: "Se connecter", myColor: "green").padding()

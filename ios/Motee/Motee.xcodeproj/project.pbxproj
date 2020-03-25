@@ -194,10 +194,10 @@
 			isa = PBXGroup;
 			children = (
 				A14A254624140D810030039B /* MenuView.swift */,
+				F02350B82417C86B0069AB06 /* Root.swift */,
 				A14A254E241477390030039B /* SingleLinkNavBar.swift */,
 				A14A254824140DE80030039B /* NavbarView.swift */,
 				8E6E4D892418EC1B00517EC6 /* TrailingNavbar.swift */,
-				F02350B82417C86B0069AB06 /* Root.swift */,
 			);
 			path = Navbar;
 			sourceTree = "<group>";
