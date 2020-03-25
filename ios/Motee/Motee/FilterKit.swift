@@ -14,4 +14,5 @@ class FilterKit: ObservableObject, Identifiable{
     @Published var tags : [Tag] = []
     @Published var currentUSer : User? = nil
     @Published var token : String = ""
+    @Published var currentPage = "home"
 }

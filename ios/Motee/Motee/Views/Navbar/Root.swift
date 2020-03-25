@@ -8,14 +8,15 @@
 import SwiftUI
 
 struct Root : View {
+    @EnvironmentObject var fk : FilterKit
     var currentPage : String
     var body: some View {
         VStack{
-            if(currentPage == "Accueil"){
+            if(fk.currentPage == "home"){
                 Accueil()
-            }else if currentPage == "Login" {
+            }else if fk.currentPage == "login" {
                 LoginForm()
-            }else if currentPage == "Compte"{
+            }else if fk.currentPage == "Compte"{
                 Account()
             }
             else{
@@ -27,7 +28,6 @@ struct Root : View {
 
 struct Root_Previews: PreviewProvider {
     @State static var page = "login"
-    @State static var filter = "all"
     static var previews: some View {
         Root(currentPage: page).environmentObject(FilterKit())
     }
