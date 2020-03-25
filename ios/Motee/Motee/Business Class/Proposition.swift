@@ -11,8 +11,8 @@ import Foundation
 
 class Proposition : Publication, Identifiable, Codable {
     
-    private var idPublication : String = "0"
-    var datePublication : String = ""
+    @Published var idPublication : String = "0"
+    @Published var datePublication : String = ""
     @Published var contentPub : String = ""
     @Published var idLikesProp : [String] = [] //Array d'object ID de User
     @Published var anonymous : Bool = false

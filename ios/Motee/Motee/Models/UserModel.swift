@@ -155,7 +155,7 @@ class UserModel {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         print("json : " , String(data : request.httpBody!, encoding: .utf8)!)
         
-        var res : String = "Bearer "
+        var res : String = ""
         // Perform HTTP Request
          let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let error = error {
@@ -184,8 +184,9 @@ class UserModel {
     }
     
     static func checkAuthenticate(pseudo : String, password : String)->[Any]{
-        let token = authenticate(pseudo: pseudo, password: password)
+        var token = authenticate(pseudo: pseudo, password: password)
         if token != "" {
+            token = "Bearer \(token)"
             return [token, getUserByPseudo(pseudo: pseudo)!]
         } else {
             return []
