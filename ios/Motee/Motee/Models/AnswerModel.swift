@@ -188,8 +188,7 @@ class AnswerModel {
          
                 // Convert HTTP Response Data to a String
                     let resp = response as? HTTPURLResponse
-                    res = (resp?.statusCode == 200)
-                
+                    res = (resp?.statusCode == 200)                
         }
         task.resume()
         return res

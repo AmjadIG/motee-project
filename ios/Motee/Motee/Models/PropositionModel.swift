@@ -12,12 +12,13 @@ class PropositionModel {
     
     //Model for Proposition :
 
-    //Get All : https://mootee-api.herokuapp.com/propositions
-    //Get by id : https://mootee-api.herokuapp.com/propositions/id
-    //Post : https://mootee-api.herokuapp.com/propositions/newProposition => Pas encore testé
-    //Delete : https://mootee-api.herokuapp.com/propositions/delete => Pas encore testé
+    //Get All : https://mootee-api.herokuapp.com/propositions => 200
+    //Get by id : https://mootee-api.herokuapp.com/propositions/id => 200
+    //Post : https://mootee-api.herokuapp.com/propositions/newProposition => Testé, 400 ??
+    //Delete : https://mootee-api.herokuapp.com/propositions/delete => 400 => Problème côté server
 
-     static func getAll()->[String:Proposition]{
+    //Resultat : Renvoie un dictionnaire [ clé : id des propositions | valeur : Toutes les Propositions ]
+    static func getAll()->[String:Proposition]{
         // Prepare URL
         let stringURL = "https://mootee-api.herokuapp.com/propositions"
         let url = URL(string: stringURL)
@@ -56,10 +57,13 @@ class PropositionModel {
         return res
     }
     
+    //Resultat : Renvoie un tableau contenant toute les propositions contenues dans la base
     static func getAllProps()->[Proposition]{
         return (purifyRequest(dictionary: getAll()) as! [Proposition])
     }
     
+    //Données : idProp (id Proposition) => String
+    //Résultat : Renvoie une proposition (qui possède idProp comme id)
     static func getPropositionById(idProp : String)->Proposition{
         // Prepare URL
         let stringURL = "https://mootee-api.herokuapp.com/propositions/"+idProp
@@ -75,13 +79,13 @@ class PropositionModel {
         var res : [String:Proposition] = [:]
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
                 
-            // Check for Error
+            // Vérifie si on récupère une erreur
             if let error = error {
                 print("Error took place :\(error)")
                 return
             }
         
-            // Convert HTTP Response Data to a String
+            // On vérifie l'état de la donnée
             if let data = data{
                 do{
                     res = try JSONDecoder().decode([String:Proposition].self, from: data)
@@ -99,18 +103,23 @@ class PropositionModel {
         return (purifyRequest(dictionary: res)[0] as! Proposition)
     }
     
+    //Donnée : Une proposition sur lequel on réalisera les itérations (sur idAnswers)
+    //Résultat : Renvoie un tableau des réponses rattachées au propos associé
     static func getAllAnswer(proposition : Proposition)->[Answer]{
         var result : [Answer] = []
+        
         for (key,value) in AnswerModel.getAll() {
             for answer in proposition.answers {
                 if answer == key {
                     result.append(value)
-                }
+                }//arrêt : on a parcouru chaque id de réponse contenues dans notre propositions
             }
-        }
+        }//arrêt :
         return result
     }
     
+    //Données : Proposition prop
+    //Résultat : Récupère la réponse avec le plus de likes, parmi les réponses associées à la proposition prop en paramètre
     static func getBestAnswer(proposition : Proposition)->Answer?{
         let answerArray = getAllAnswer(proposition: proposition)
         if answerArray.count == 0 {
@@ -126,6 +135,8 @@ class PropositionModel {
         }
     }
     
+    //Donnée : Proposition prop
+    //Résultat : Récupère tout les tags associés à la proposition prop
     static func getAllTags(proposition:Proposition)->[Tag]{
         var tagArray : [Tag] = []
         for tag in proposition.tags {
@@ -134,6 +145,8 @@ class PropositionModel {
         return tagArray
     }
     
+    //Données : un string caractérisant le type de tri, et une liste de tag pour filtrer les propositions que l'on récupèrera
+    //Résultat : Renvoie un tableau de proposition contenant les propositions triées/filtrées en fonction des paramètres
     static func getFilteredProps(filter: String, tags : [Tag])->[Proposition]{
         // Prepare URL
         let stringURL = "https://mootee-api.herokuapp.com/propositions/sort/"+filter+paramTags(tags: tags)
@@ -173,6 +186,7 @@ class PropositionModel {
         return res
     }
     
+    //Résultat : ajoute une proposition à la base de donnée en passant par une requête http de type POST
     static func addProposition(contentPub: String, isAnonymous: Bool, tagsProp: [Tag], token: String) -> Bool{
         // Prepare URL
         //guard let token = currentUser?.authToken else{return false}
@@ -224,6 +238,7 @@ class PropositionModel {
         return res
     }
     
+    //Résultat : Supprime une proposition, renvoie true si c'est bon, false sinon
     static func deleteProposition(idProp: String, token: String)->Bool{
         // Prepare URL
         //guard let token = currentUser?.authToken else{return false}

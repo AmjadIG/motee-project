@@ -12,8 +12,10 @@ class UserModel {
     
     //Model for User :
     
-    //Get All : https://mootee-api.herokuapp.com/users
-    //Get by id : https://mootee-api.herokuapp.com/users/id
+    //Get All : https://mootee-api.herokuapp.com/users => 200
+    //Get by id : https://mootee-api.herokuapp.com/users/id => 200
+    //authenticate : https://mootee-api.herokuapp.com/users/authenticate => 200
+    //register : https://mootee-api.herokuapp.com/users/register
     
     static func getAll()->[String:User]{
         // Prepare URL
@@ -153,9 +155,8 @@ class UserModel {
                 return
             } else {
                 let resp = response as? HTTPURLResponse
-                print("code d'erreur")
+                print("code d'erreur?")
                 if (resp?.statusCode == 200) {
-                    print(resp?.statusCode)
                     if let data = data{
                         print(data)
                         if let token = String(data: data, encoding: .utf8){
@@ -181,5 +182,55 @@ class UserModel {
         } else {
             return []
         }
+    }
+    
+    static func register(pseudo: String, password: String, mail: String)->Bool{
+        // Prepare URL
+        //guard let token = currentUser?.authToken else{return false}
+        
+        let stringurl = "https://mootee-api.herokuapp.com/users/register"
+        let url = URL(string: stringurl)
+        
+        let body = [
+            "pseudo" : pseudo,
+            "password" : password,
+            "mail" : mail
+        ]
+        
+        guard let requestUrl = url else { fatalError() }
+        // Prepare URL Request Object
+        var request = URLRequest(url: requestUrl)
+        request.httpMethod = "POST"
+        let semaphore = DispatchSemaphore(value :0)
+        // Set HTTP Request Body
+        guard let requestBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {return false}
+        
+        request.httpBody = requestBody
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        print("json : " , String(data : request.httpBody!, encoding: .utf8)!)
+        
+        var res : Bool = false
+        // Perform HTTP Request
+         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let error = error {
+                print("Error took place \(error)")
+                return
+            }
+            let resp = response as? HTTPURLResponse
+            print("code d'erreur")
+            res = (resp?.statusCode == 200)
+                        
+            if let data = data{
+                if let jsonString = String(data: data, encoding: .utf8){
+                    print(jsonString)
+                    }
+                }
+                semaphore.signal()
+            }
+            task.resume()
+            semaphore.wait()
+        return res
+            
+        
     }
 }
