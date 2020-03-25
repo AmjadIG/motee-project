@@ -147,7 +147,7 @@ class UserModel {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         print("json : " , String(data : request.httpBody!, encoding: .utf8)!)
         
-        var res : String = ""
+        var res : String = "Bearer "
         // Perform HTTP Request
          let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let error = error {
@@ -160,7 +160,7 @@ class UserModel {
                     if let data = data{
                         print(data)
                         if let token = String(data: data, encoding: .utf8){
-                            res = token
+                            res += token
                             print(token)
                         }
                     }
