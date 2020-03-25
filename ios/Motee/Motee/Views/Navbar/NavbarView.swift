@@ -12,7 +12,6 @@ struct NavbarView: View {
     
     @State var showMenu = false
     @EnvironmentObject var fk : FilterKit
-    @State var currentPage = "Accueil"
     var body: some View {
         let drag = DragGesture()
             .onEnded {
@@ -29,9 +28,9 @@ struct NavbarView: View {
             }
             GeometryReader { geometry in
                 ZStack(alignment: .leading) {
-                    Root(currentPage: self.currentPage)
+                    Root(currentPage: self.fk.currentPage)
                     if self.showMenu {
-                        MenuView(currentPage : self.$currentPage, showMenu: self.$showMenu)
+                        MenuView(showMenu: self.$showMenu)
                             .frame(width: geometry.size.width/2)
                             .transition(.move(edge: .leading))
                     }
@@ -39,7 +38,7 @@ struct NavbarView: View {
                 
                 .edgesIgnoringSafeArea(.all)
             }
-            .navigationBarTitle(Text(currentPage), displayMode: .inline)
+            .navigationBarTitle(Text(self.fk.currentPage), displayMode: .inline)
             .navigationBarItems(leading: (
                 Button(action: {
                     withAnimation {
@@ -50,7 +49,7 @@ struct NavbarView: View {
                         .imageScale(.large)
                 })
                 , trailing :
-                TrailingNavbar(currentPage: self.$currentPage)
+                TrailingNavbar()
             )
             
         }
