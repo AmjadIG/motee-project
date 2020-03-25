@@ -14,7 +14,7 @@ class PropositionModel {
 
     //Get All : https://mootee-api.herokuapp.com/propositions => 200
     //Get by id : https://mootee-api.herokuapp.com/propositions/id => 200
-    //Post : https://mootee-api.herokuapp.com/propositions/newProposition => Testé, 400 ??
+    //Post : https://mootee-api.herokuapp.com/propositions/newProposition => 200
     //Delete(=>Post) : https://mootee-api.herokuapp.com/propositions/delete => 400 => Problème côté server
     //Put : https://mootee-api.herokuapp.com/propositions/like => Pas encore testé
     //Put : https://mootee-api.herokuapp.com/propositions/dislike => Pas encore testé
@@ -214,7 +214,7 @@ class PropositionModel {
         guard let requestBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {return false}
         
         request.httpBody = requestBody
-        request.setValue(token, forHTTPHeaderField: "Bearer Token")
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         print("json : " , String(data : request.httpBody!, encoding: .utf8)!)
         // Perform HTTP Request
@@ -261,9 +261,9 @@ class PropositionModel {
         // Set HTTP Request Body
         guard let requestBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {return false}
         request.httpBody = requestBody
-        request.setValue(token, forHTTPHeaderField: "Bearer Token")
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
+        print("body ok + auth ok")
         // Perform HTTP Request
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
                 
@@ -275,6 +275,7 @@ class PropositionModel {
          
                 // Convert HTTP Response Data to a String
                     let resp = response as? HTTPURLResponse
+                    print(resp?.statusCode)
                     res = (resp?.statusCode == 200)
                 
         }

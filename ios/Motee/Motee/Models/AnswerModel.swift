@@ -12,9 +12,9 @@ class AnswerModel {
     
     //Model for Answer :
     
-    //Get All : https://mootee-api.herokuapp.com/answers
-    //Get by id : https://mootee-api.herokuapp.com/answers/id
-    //Post : https://mootee-api.herokuapp.com/answers/newAnswer => Pas encore testé... probleme de tags ???
+    //Get All : https://mootee-api.herokuapp.com/answers => 200
+    //Get by id : https://mootee-api.herokuapp.com/answers/id => 200
+    //Post : https://mootee-api.herokuapp.com/answers/newAnswer => 200
     //Delete(=>Post) : https://mootee-api.herokuapp.com/answers/delete => Pas encore testé
     //Put : https://mootee-api.herokuapp.com/answers/like => Pas encore testé
     //Put : https://mootee-api.herokuapp.com/answers/dislike => Pas encore testé
@@ -131,7 +131,7 @@ class AnswerModel {
         guard let requestBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {return false}
         
         request.httpBody = requestBody
-        request.setValue(token, forHTTPHeaderField: "Bearer Token")
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         print("json : " , String(data : request.httpBody!, encoding: .utf8)!)
         // Perform HTTP Request
@@ -179,9 +179,9 @@ class AnswerModel {
         // Set HTTP Request Body
         guard let requestBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {return false}
         request.httpBody = requestBody
-        request.setValue(token, forHTTPHeaderField: "Bearer Token")
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
+        print("body ok + auth ok")
         // Perform HTTP Request
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
                 
@@ -193,6 +193,7 @@ class AnswerModel {
          
                 // Convert HTTP Response Data to a String
                     let resp = response as? HTTPURLResponse
+                    print(resp?.statusCode)
                     res = (resp?.statusCode == 200)                
         }
         task.resume()
