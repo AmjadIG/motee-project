@@ -10,7 +10,7 @@ import Combine
 import Foundation
 
 class User : Identifiable, ObservableObject, Codable {
-    private var idUser : String = "0" //en attendant de récupérer les objectId
+    @Published var idUser : String = "0" //en attendant de récupérer les objectId
     @Published var pseudo : String
     private var password : String
     @Published var email : String

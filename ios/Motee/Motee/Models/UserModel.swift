@@ -94,6 +94,18 @@ class UserModel {
         return purifyRequest(dictionary: res)[0] as! User
     }
     
+    static func getAnswersByUser(user : User)->[Answer]{
+        var answerArray : [Answer] = []
+        for idAns in user.idAnswers {
+            answerArray.append(purifyRequest(dictionary: AnswerModel.getAnswerById(idAns: idAns))[0] as! Answer)
+        }
+        return answerArray
+    }
+    
+    static func getAnswersByUserId(idUser : String)->[Answer]{
+        return getAnswersByUser(user: getUserById(idUser: idUser))
+    }
+    
     static func getPropositionsByUser(user : User)->[Proposition]{
         var propositionArray : [Proposition] = []
         for idProp in user.idPropositions {
@@ -106,6 +118,10 @@ class UserModel {
         return propositionArray
     }
     
+    static func getPropsByUserId(idUser : String)->[Proposition]{
+        return getPropositionsByUser(user: getUserById(idUser: idUser))
+    }
+    
     static func getUserByPseudo(pseudo : String)->User?{
         for(_,value) in getAll(){
             if value.pseudo == pseudo {
@@ -113,14 +129,6 @@ class UserModel {
             }
         }
         return nil
-    }
-    
-    static func getAnswersByUser(user : User)->[Answer]{
-        var answerArray : [Answer] = []
-        for idAns in user.idAnswers {
-            answerArray.append(purifyRequest(dictionary: AnswerModel.getAnswerById(idAns: idAns))[0] as! Answer)
-        }
-        return answerArray
     }
     
     static func authenticate(pseudo : String, password : String)->String{
