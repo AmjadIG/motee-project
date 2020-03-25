@@ -13,6 +13,7 @@ struct RegisterButton: View {
     @Binding var mail : String
     @Binding var mdp : String
     @Binding var mdp2 : String
+    @Binding var availablePseudo : Bool
     var body: some View {
         VStack{
             if(availableRegistration(pseudo: pseudo, mail: mail, mdp: mdp, mdp2: mdp2)){
@@ -26,43 +27,39 @@ struct RegisterButton: View {
         }
         .padding(.top , 10)
     }
-}
-
-func availableRegistration(pseudo : String, mail : String, mdp : String, mdp2 : String ) -> Bool {
-    return(isAvailablePseudo(pseudo : pseudo)
-        && isSamePasword(mdp1: mdp, mdp2: mdp2) && isAvailablePassword(mdp : mdp)
-        && isAvailableMail(mail : mail)
-    )
-}
-
-func isAvailablePseudo(pseudo : String) -> Bool{
-    for (_,value) in UserModel.getAll() {
-        if value.pseudo == pseudo {
-            return false
-        }
+    
+    
+    func availableRegistration(pseudo : String, mail : String, mdp : String, mdp2 : String ) -> Bool {
+        return(isAvailablePseudo(pseudo : pseudo)
+            && isSamePasword(mdp1: mdp, mdp2: mdp2) && isAvailablePassword(mdp : mdp)
+            && isAvailableMail(mail : mail)
+        )
     }
-    return true
-}
-
-func isAvailablePassword(mdp : String)->Bool {
-    for (_,value) in UserModel.getAll() {
-        if value.passwordProperties == mdp {
-            return false
+    
+    func isAvailablePseudo(pseudo : String) -> Bool{
+        for (_,value) in UserModel.getAll() {
+            if value.pseudo == pseudo {
+                return false
+            }
         }
+        return true
     }
-    return true
-}
-func isSamePasword(mdp1 : String ,mdp2 : String) -> Bool{
-    return (mdp1 == mdp2 && mdp1.count > 3)
-}
-
-func isAvailableMail(mail : String) -> Bool {
-    for (_,value) in UserModel.getAll() {
-        if value.email == mail {
-            return false
+    
+    func isAvailablePassword(mdp : String)->Bool {
+        return mdp.count>5
+    }
+    func isSamePasword(mdp1 : String ,mdp2 : String) -> Bool{
+        return (mdp1 == mdp2)
+    }
+    
+    func isAvailableMail(mail : String) -> Bool {
+        for (_,value) in UserModel.getAll() {
+            if value.email == mail {
+                return false
+            }
         }
+        return true
     }
-    return true
 }
 
 struct RegisterButton_Previews: PreviewProvider {
@@ -70,7 +67,8 @@ struct RegisterButton_Previews: PreviewProvider {
     @State static var mail = "mail"
     @State static var mdp = "mdp"
     @State static var mdp2 = "mdp"
+    @State static var availablePseudo = true
     static var previews: some View {
-        RegisterButton(pseudo : $pseudo, mail : $mail , mdp : $mdp, mdp2 : $mdp2 )
+        RegisterButton(pseudo : $pseudo, mail : $mail , mdp : $mdp, mdp2 : $mdp2, availablePseudo: $availablePseudo )
     }
 }

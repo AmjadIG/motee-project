@@ -18,19 +18,23 @@ struct LoginForm: View {
             VStack{
                 Title(myTitle: "Connexion")
                 LoginPicture()
-                if !noError{
-                    Text("Pseudo ou mdp incorrect").foregroundColor(Color.red)
+                if !noError {
+                    Text("Pseudo ou mot de passe incorrect").foregroundColor(Color.red)
                 }
                 FieldGenerator.plain(label: "",field: "Pseudo", text: $pseudo)
                 FieldGenerator.secure(label: "",field: "Mot de passe", text: $mdp)
                 Button(action: {
-                    self.findConnexion(pseudo: self.pseudo, mdp: self.mdp)
-                    self.noError = self.findConnexion(pseudo: self.pseudo, mdp: self.mdp)
+                    self.noError = UserModel.checkAuthenticate(pseudo: self.pseudo, password: self.mdp).count > 0
+                    if self.noError {
+                        self.fk.token = UserModel.checkAuthenticate(pseudo: self.pseudo, password: self.mdp)[0] as! String
+                        self.fk.currentUSer = (UserModel.checkAuthenticate(pseudo: self.pseudo, password: self.mdp)[1] as! User)
+                        self.fk.currentPage = "home"
+                    }
                 }){
                     ButtonGenerator(myText: "Se connecter", myColor: "green").padding()
                 }
                 //LoginButton(pseudo: $pseudo,mdp: $mdp)
-                NavigationLink(destination : RegisterForm()){
+                Button(action: { self.fk.currentPage = "register"}){
                     ButtonGenerator(myText: "S'inscrire", myColor: "blue")
                 }
             }

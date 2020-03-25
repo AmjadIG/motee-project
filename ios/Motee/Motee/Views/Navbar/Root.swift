@@ -18,6 +18,8 @@ struct Root : View {
                 LoginForm()
             }else if fk.currentPage == "Compte"{
                 Account()
+            }else if fk.currentPage == "register"{
+                RegisterForm()
             }
             else{
                 Accueil()
