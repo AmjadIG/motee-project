@@ -13,7 +13,7 @@ struct ContentView: View {
     @State var boolTest : Bool = false
     
     var body: some View {
-        VStack{
+        ZStack{
             NavbarView()
         }
         

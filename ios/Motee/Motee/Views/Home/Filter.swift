@@ -22,7 +22,7 @@ struct Filter: View {
                     .foregroundColor(Color.white)
                 Spacer()
                 if !fk.filtered.elementsEqual("byLike"){
-                    Button(action: { self.fk.filtered = ""; self.fk.showFilters = false}){
+                    Button(action: { self.fk.filtered = "byLike"; self.fk.showFilters = false}){
                         Text("Aucun filtre").bold().foregroundColor(Color.black)
                     }
                 }

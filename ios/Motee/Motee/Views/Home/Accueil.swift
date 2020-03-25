@@ -14,6 +14,7 @@ struct Accueil: View {
         NavigationView{
             ScrollView{
                 VStack{
+                    LoginBanner()
                     TopTags()
                     VStack(){
                         if(self.fk.filtered.elementsEqual("byLike")){
@@ -23,17 +24,19 @@ struct Accueil: View {
                         }else if self.fk.filtered.elementsEqual("asc"){
                             Title(myTitle: "Propos les plus anciens")
                         }
+                        if(fk.currentUSer != nil){
                         HStack{
                             NavigationLink(destination : { AddProposition() }() ){
                                 SymbolGenerator(mySymbol :"plus.square.fill", myColor: "pink")
                                 Text("Ajouter").foregroundColor(.black).bold()
                             }
                         }
+                        }
                         PropositionFiltred(filtre: fk.filtered, tags: fk.tags)
                         Spacer()
                     }
                     Spacer()
-                }
+                    }
             }
         }
     }
