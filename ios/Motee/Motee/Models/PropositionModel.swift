@@ -173,17 +173,17 @@ class PropositionModel {
         return res
     }
     
-    static func addProposition(prop: Proposition, token: String) -> Bool{
+    static func addProposition(contentPub: String, isAnonymous: Bool, tagsProp: [Tag], token: String) -> Bool{
         // Prepare URL
         //guard let token = currentUser?.authToken else{return false}
         
         let stringurl = "https://mootee-api.herokuapp.com/propositions/newProposition"
         let url = URL(string: stringurl)//ICI
         
-        let tagsProp : String = paramTags(tags: getAllTags(proposition: prop))
+        let tagsProp : String = paramTagsToLabel(tags: tagsProp)
         let body = [
-            "contentProp" : prop.contentPub,
-            "isAnonymous" : "\(prop.anonymous)",
+            "contentProp" : contentPub,
+            "isAnonymous" : "\(isAnonymous)",
             "tagsProp" : tagsProp
         ]
         
@@ -210,8 +210,9 @@ class PropositionModel {
                 let resp = response as? HTTPURLResponse
             print("code d'erreur")
                 res = (resp?.statusCode == 200)
-                
+                print(res)
             if let data = data{
+                print(data)
                 if let jsonString = String(data: data, encoding: .utf8){
                     print(jsonString)
                 }

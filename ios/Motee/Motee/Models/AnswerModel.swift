@@ -103,19 +103,19 @@ class AnswerModel {
         return PropositionModel.getAllTags(proposition: getPropOfAnswer(answer : answer))
     }
     
-    static func addAnswer (ans: Answer, token: String) -> Bool{
+    static func addAnswer (contentPub: String, isAnonymous: Bool, tagsAns: [Tag], idProposition : String, token: String) -> Bool{
         // Prepare URL
         //guard let token = currentUser?.authToken else{return false}
         
         let stringurl = "https://mootee-api.herokuapp.com/answers/newAnswer"
         let url = URL(string: stringurl)//ICI
         
-        let tagsAnswer : String = paramTags(tags: getAllTags(answer: ans))
+        let tagsAnswer : String = paramTagsToLabel(tags: tagsAns)
         let body = [
-            "contentAnswer" : ans.contentPub,
-            "isAnonymous" : "\(ans.anonymous)",
+            "contentAnswer" : contentPub,
+            "isAnonymous" : "\(isAnonymous)",
             "tagsAnswer" : tagsAnswer,
-            "idProp" : ans.idProposition
+            "idProp" : idProposition
         ]
         
         guard let requestUrl = url else { fatalError() }
@@ -141,8 +141,9 @@ class AnswerModel {
                 let resp = response as? HTTPURLResponse
             print("code d'erreur")
                 res = (resp?.statusCode == 200)
-                
+                print(res)
             if let data = data{
+                print(data)
                 if let jsonString = String(data: data, encoding: .utf8){
                     print(jsonString)
                 }

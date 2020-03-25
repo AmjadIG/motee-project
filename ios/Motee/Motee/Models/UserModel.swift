@@ -104,11 +104,82 @@ class UserModel {
         return propositionArray
     }
     
+    static func getUserByPseudo(pseudo : String)->User?{
+        for(_,value) in getAll(){
+            if value.pseudo == pseudo {
+                return value
+            }
+        }
+        return nil
+    }
+    
     static func getAnswersByUser(user : User)->[Answer]{
         var answerArray : [Answer] = []
         for idAns in user.idAnswers {
             answerArray.append(purifyRequest(dictionary: AnswerModel.getAnswerById(idAns: idAns))[0] as! Answer)
         }
         return answerArray
+    }
+    
+    static func authenticate(pseudo : String, password : String)->String{
+        // Prepare URL
+        //guard let token = currentUser?.authToken else{return false}
+        
+        let stringurl = "https://mootee-api.herokuapp.com/users/authenticate"
+        let url = URL(string: stringurl)
+        
+        let body = [
+            "pseudo" : pseudo,
+            "password" : password
+        ]
+        
+        guard let requestUrl = url else { fatalError() }
+        // Prepare URL Request Object
+        var request = URLRequest(url: requestUrl)
+        request.httpMethod = "POST"
+        let semaphore = DispatchSemaphore(value :0)
+        // Set HTTP Request Body
+        guard let requestBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {return ""}
+        
+        request.httpBody = requestBody
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        print("json : " , String(data : request.httpBody!, encoding: .utf8)!)
+        
+        var res : String = ""
+        // Perform HTTP Request
+         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let error = error {
+                print("Error took place \(error)")
+                return
+            } else {
+                let resp = response as? HTTPURLResponse
+                print("code d'erreur")
+                if (resp?.statusCode == 200) {
+                    print(resp?.statusCode)
+                    if let data = data{
+                        print(data)
+                        if let token = String(data: data, encoding: .utf8){
+                            res = token
+                            print(token)
+                        }
+                    }
+                }
+            }
+                
+            
+            semaphore.signal()
+        }
+        task.resume()
+        semaphore.wait()
+        return res
+    }
+    
+    static func checkAuthenticate(pseudo : String, password : String)->[Any]{
+        let token = authenticate(pseudo: pseudo, password: password)
+        if token != "" {
+            return [token, getUserByPseudo(pseudo: pseudo)!]
+        } else {
+            return []
+        }
     }
 }
