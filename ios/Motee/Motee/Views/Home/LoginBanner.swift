@@ -12,14 +12,18 @@ struct LoginBanner: View {
     @EnvironmentObject var fk : FilterKit
     var body: some View {
         VStack{
-            if(fk.currentUSer == nil){
+            if(self.fk.currentUSer == nil){
                 HStack(){
                     Spacer()
+                    Button(action : {
+                        self.fk.currentPage = "login"
+                    }){
                     Text("Connectez-vous pour profiter de toutes les fonctionnalités !")
                         .bold()
                         .foregroundColor(Color.white)
                         .multilineTextAlignment(.center)
                         .padding(.all, 0.0)
+                    }
                     Spacer()
                 }.background(Color.pink)
                     
