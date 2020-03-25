@@ -10,7 +10,7 @@ import SwiftUI
 struct Root : View {
     var currentPage : String
     var body: some View {
-        ZStack{
+        VStack{
             if(currentPage == "Accueil"){
                 Accueil()
             }else if currentPage == "Login" {
@@ -29,6 +29,6 @@ struct Root_Previews: PreviewProvider {
     @State static var page = "login"
     @State static var filter = "all"
     static var previews: some View {
-        Root(currentPage: page)
+        Root(currentPage: page).environmentObject(FilterKit())
     }
 }

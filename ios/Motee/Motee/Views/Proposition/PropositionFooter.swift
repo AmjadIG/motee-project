@@ -10,6 +10,7 @@ import SwiftUI
 
 struct PropositionFooter : View {
     var currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser
+    @EnvironmentObject var fk : FilterKit
     @Binding var proposition : Proposition
     @State var isNotHide :Bool = false
     @State var comment = ""
@@ -20,16 +21,25 @@ struct PropositionFooter : View {
                 HStack {
                     PropositionLiked(proposition: $proposition)
                     Spacer()
-                    Button(action:{
-                        self.isNotHide.toggle()
-                    }){
-                        HStack{
-                            Text("Contribuer")
-                            Image(systemName: "message.fill")
+                    if(fk.currentUSer != nil){
+                        Button(action:{
+                            self.isNotHide.toggle()
+                        }){
+                            HStack{
+                                Text("Contribuer")
+                                Image(systemName: "message.fill")
+                            }
+                            .padding(7)
+                            .foregroundColor(.white)
+                            .background(Color.blue).cornerRadius(20)
                         }
-                        .padding(7)
+                    }else{
+                        HStack{
+                            Text("Connexion requise")
+                            Image(systemName: "message.fill")
+                        }.padding(7)
                         .foregroundColor(.white)
-                        .background(Color.blue).cornerRadius(20)
+                        .background(Color.gray).cornerRadius(20)
                     }
                     Spacer()
                     Report()
@@ -53,6 +63,6 @@ struct PropositionFooter : View {
 struct PropositionFooter_Previews: PreviewProvider {
     @State static var proposition = PropositionModel.getAllProps()[2]
     static var previews: some View {
-        PropositionFooter(proposition: $proposition)
+        PropositionFooter(proposition: $proposition).environmentObject(FilterKit())
     }
 }

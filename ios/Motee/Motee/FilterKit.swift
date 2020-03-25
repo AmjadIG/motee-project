@@ -13,4 +13,5 @@ class FilterKit: ObservableObject, Identifiable{
     @Published var showFilters : Bool = false
     @Published var tags : [Tag] = []
     @Published var currentUSer : User? = nil
+    @Published var token : String = ""
 }

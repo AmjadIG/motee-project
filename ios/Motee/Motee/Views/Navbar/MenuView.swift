@@ -18,7 +18,7 @@ struct MenuView: View {
                 self.currentPage = "Accueil"
                 self.showMenu.toggle()
             }){
-                SingleLinkNavBar(title: "Accueil", symbol: "house", topPadding: 100)
+                SingleLinkNavBar(title: "Accueil", symbol: "house", topPadding: 175)
             }
             Button(action : {
                 self.currentPage = "Nouveau propos"

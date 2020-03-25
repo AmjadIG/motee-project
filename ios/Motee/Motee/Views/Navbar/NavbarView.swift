@@ -36,6 +36,8 @@ struct NavbarView: View {
                             .transition(.move(edge: .leading))
                     }
                 }.gesture(drag)
+                
+                .edgesIgnoringSafeArea(.all)
             }
             .navigationBarTitle(Text(currentPage), displayMode: .inline)
             .navigationBarItems(leading: (
@@ -50,6 +52,7 @@ struct NavbarView: View {
                 , trailing :
                 TrailingNavbar(currentPage: self.$currentPage)
             )
+            
         }
     }
 }
