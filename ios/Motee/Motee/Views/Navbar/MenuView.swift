@@ -21,7 +21,7 @@ struct MenuView: View {
                 SingleLinkNavBar(title: "Accueil", symbol: "house", topPadding: 175)
             }
             Button(action : {
-                self.fk.currentPage = "addProp"
+                self.fk.currentPage = "Ajouter propos"
                 self.showMenu.toggle()
             }){
                 SingleLinkNavBar(title: "Ajouter un propos", symbol: "plus.square", topPadding: 30)

@@ -9,13 +9,15 @@
 import SwiftUI
 
 struct PropositionView : View {
-    var currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser
+    @EnvironmentObject var fk : FilterKit
     @Binding var proposition : Proposition
     @State var showBestAnswer = false
     @State var showAllAnswers = false
     @State var colorIfClicked = generateColor(name: "white")
     @State var colorIfClicked2 = generateColor(name: "black")
-    
+    @State var editing = false
+    @State var editProposition = ""
+    @State var editAnonymous = false
     var body: some View {
         VStack{
             VStack{
@@ -27,9 +29,12 @@ struct PropositionView : View {
                         .foregroundColor(colorIfClicked2)
                 }.padding().background(colorIfClicked)
                 
-                Text(proposition.contentPub).padding(.top, 30.0).padding(.horizontal)
-                
-                PropositionFooter(proposition: $proposition).padding()
+                if editing {
+                    FieldGenerator.plain(label: "",field: "Ecrivez votre propos", text: $editProposition)
+                }else{
+                    Text(proposition.contentPub).padding(.top, 30.0).padding(.horizontal)
+                }
+                PropositionFooter(proposition: $proposition, editing: $editing, editProposition: $editProposition, editAnonymous: $editAnonymous).padding()
                 
             }.frame(alignment: .leading)
                 .edgesIgnoringSafeArea(.all)
@@ -47,7 +52,8 @@ struct PropositionView : View {
  struct PropositionView_Previews: PreviewProvider {
     @State static var proposition = PropositionModel.getAllProps()[2]
  static var previews: some View {
-    PropositionView(proposition: $proposition)
+    PropositionView(proposition: $proposition).environmentObject(FilterKit())
+
  }
  }
  
