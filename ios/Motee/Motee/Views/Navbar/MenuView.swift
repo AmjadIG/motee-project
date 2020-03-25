@@ -10,42 +10,42 @@ import SwiftUI
 
 
 struct MenuView: View {
-    @Binding var currentPage : String
+    @EnvironmentObject var fk : FilterKit
     @Binding var showMenu : Bool
     var body: some View {
         VStack(alignment: .leading) {
             Button(action : {
-                self.currentPage = "Accueil"
+                self.fk.currentPage = "Accueil"
                 self.showMenu.toggle()
             }){
                 SingleLinkNavBar(title: "Accueil", symbol: "house", topPadding: 175)
             }
             Button(action : {
-                self.currentPage = "Nouveau propos"
+                self.fk.currentPage = "addProp"
                 self.showMenu.toggle()
             }){
                 SingleLinkNavBar(title: "Ajouter un propos", symbol: "plus.square", topPadding: 30)
             }
             Button(action : {
-                self.currentPage = "MyProps"
+                self.fk.currentPage = "MyProps"
                 self.showMenu.toggle()
             }){
                 SingleLinkNavBar(title: "Mes propos", symbol: "quote.bubble", topPadding: 30)
             }
             Button(action : {
-                self.currentPage = "MyAnswers"
+                self.fk.currentPage = "MyAnswers"
                 self.showMenu.toggle()
             }){
                 SingleLinkNavBar(title: "Mes réponse", symbol: "lightbulb", topPadding: 30)
             }
             Button(action : {
-                self.currentPage = "Compte"
+                self.fk.currentPage = "Compte"
                 self.showMenu.toggle()
             }){
                 SingleLinkNavBar(title: "Profil", symbol: "person", topPadding: 30)
             }
             Button(action : {
-                self.currentPage = "Compte"
+                self.fk.currentPage = "Compte"
                 self.showMenu.toggle()
             }){
                 SingleLinkNavBar(title: "Settings", symbol: "gear", topPadding: 30)
@@ -60,9 +60,8 @@ struct MenuView: View {
 }
 
 struct MenuView_Previews: PreviewProvider {
-    @State static var currentPage = "Accueil"
     @State static var showMenu = false
     static var previews: some View {
-        MenuView(currentPage : $currentPage, showMenu: $showMenu)
+        MenuView(showMenu: $showMenu).environmentObject(FilterKit())
     }
 }

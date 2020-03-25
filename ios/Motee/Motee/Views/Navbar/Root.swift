@@ -21,6 +21,9 @@ struct Root : View {
             }else if fk.currentPage == "register"{
                 RegisterForm()
             }
+            else if fk.currentPage == "addProp"{
+                AddProposition()
+            }
             else{
                 Accueil()
             }

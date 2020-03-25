@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AddProposition: View {
     var currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser
+    @EnvironmentObject var fk : FilterKit
     @State var newProposition : String = ""
         @State var newAnswer : String = ""
         @State var newTag : String = ""
@@ -55,9 +56,10 @@ struct AddProposition: View {
                     }
                     Divider().padding()
                     Button(action:{
-                        ////////////////////////////////////// ///
-                        /// REQUETE A ENVOYER ///
-                        /// ////////////////////////////// ///
+                        var noError = PropositionModel.addProposition(contentPub: self.newProposition, isAnonymous: self.anonymousProposition, tagsProp: self.tagList, token: self.fk.token)
+                        if noError {
+                            self.fk.currentPage = "home"
+                        }
                     }){
                         Text("Envoyer").bold().padding(15)
                         
@@ -75,10 +77,10 @@ struct AddProposition: View {
         }
         return false
     }
-/*
+
     struct AddProposition_Previews: PreviewProvider {
         static var previews: some View {
-            AddProposition()
+            AddProposition().environmentObject(FilterKit())
         }
     }
-*/
+
