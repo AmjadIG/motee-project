@@ -102,8 +102,8 @@ class Proposition : Publication, Identifiable, Codable {
             return false
         }
         var isLiked : Bool = false
-        for it in 0..<idLikesProp.count {
-            if idLikesProp[it] == utilisateur!.id {
+        for id in idLikesProp {
+            if id == utilisateur!.id {
                 isLiked = true
             }
         }

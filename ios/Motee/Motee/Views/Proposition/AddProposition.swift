@@ -59,11 +59,8 @@ struct AddProposition: View {
                     }
                     Divider().padding()
                     Button(action:{
-                        let noError = PropositionModel.addProposition(titleProp : self.titleProposition, contentPub: self.newProposition, isAnonymous: self.anonymousProposition, tagsProp: self.tagList, token: self.fk.token)
-
-                        if noError {
-                            self.fk.currentPage = "Accueil"
-                        }
+                        PropositionModel.addProposition(titleProp : self.titleProposition, contentPub: self.newProposition, isAnonymous: self.anonymousProposition, tagsProp: self.tagList, token: self.fk.token)
+                        self.fk.currentPage = "Accueil"
                     }){
                         Text("Envoyer").bold().padding(15)
                         

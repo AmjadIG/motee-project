@@ -57,9 +57,9 @@ class TagModel {
     
     static func getTop9Tags()->[Tag]{
         // Prepare URL
-        let stringURL = "https://mootee-api.herokuapp.com/tags/bestTags"
+        let stringURL = "https://mootee-api.herokuapp.com/tags/best"
         let url = URL(string: stringURL)
-        print("in getAll")
+        print("in get Best")
         guard let requestUrl = url else { fatalError() }
         // Prepare URL Request Object (GET)
         var request = URLRequest(url: requestUrl)

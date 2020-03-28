@@ -24,6 +24,7 @@ struct PropositionFiltred : View {
 
     var body: some View {
         VStack{
+            //SearchBar()
             ForEach(props.indices){ index in
                 PropositionView(proposition: self.$props[index])
             }

@@ -107,7 +107,7 @@ class UserModel {
         return getAnswersByUser(user: getUserById(idUser: idUser))
     }
     
-    static func getPropositionsByUser(user : User)->[Proposition]{
+    static func getPropsByUser(user : User)->[Proposition]{
         var propositionArray : [Proposition] = []
         for idProp in user.idPropositions {
             for prop in PropositionModel.getAll() {
@@ -120,7 +120,7 @@ class UserModel {
     }
     
     static func getPropsByUserId(idUser : String)->[Proposition]{
-        return getPropositionsByUser(user: getUserById(idUser: idUser))
+        return getPropsByUser(user: getUserById(idUser: idUser))
     }
     
     static func getUserByPseudo(pseudo : String)->User?{
@@ -297,12 +297,11 @@ class UserModel {
         var request = URLRequest(url: requestUrl)
         request.httpMethod = "PUT"
         let semaphore = DispatchSemaphore(value :0)
-        
+        print(getFullToken(token: token))
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue(getFullToken(token: token), forHTTPHeaderField: "Authorization")
-        print("json : " , String(data : request.httpBody!, encoding: .utf8)!)
         
-        var res : Bool = false
+        var res : Bool = true
         // Perform HTTP Request
          let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let error = error {

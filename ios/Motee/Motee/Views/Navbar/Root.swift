@@ -14,11 +14,11 @@ struct Root : View {
         VStack{
             if(fk.currentPage == "Accueil"){
                 Accueil()
-            }else if fk.currentPage == "login" {
+            }else if fk.currentPage == "Sign in" {
                 LoginForm()
             }else if fk.currentPage == "Compte"{
                 Account()
-            }else if fk.currentPage == "register"{
+            }else if fk.currentPage == "Sign up"{
                 RegisterForm()
             }
             else if fk.currentPage == "Ajouter propos"{
@@ -32,7 +32,7 @@ struct Root : View {
 }
 
 struct Root_Previews: PreviewProvider {
-    @State static var page = "login"
+    @State static var page = "Sign in"
     static var previews: some View {
         Root(currentPage: page).environmentObject(FilterKit())
     }

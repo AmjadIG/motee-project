@@ -61,6 +61,7 @@
 		F0336FF224290F3100753620 /* TagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0336FF124290F3100753620 /* TagModel.swift */; };
 		F034AE302428D64E0053F4E2 /* PropositionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F034AE2F2428D64E0053F4E2 /* PropositionModel.swift */; };
 		F034AE322429085C0053F4E2 /* AnswerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F034AE312429085C0053F4E2 /* AnswerModel.swift */; };
+		F0A2C823242FDC95008D2858 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A2C822242FDC95008D2858 /* SearchBar.swift */; };
 		F0A77C962418EB8000C5F3AA /* AnswerLiked.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A77C952418EB8000C5F3AA /* AnswerLiked.swift */; };
 		F0C203E72417EC8000189E6A /* AnswerFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C203E62417EC8000189E6A /* AnswerFooter.swift */; };
 /* End PBXBuildFile section */
@@ -143,6 +144,7 @@
 		F0336FF124290F3100753620 /* TagModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagModel.swift; sourceTree = "<group>"; };
 		F034AE2F2428D64E0053F4E2 /* PropositionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropositionModel.swift; sourceTree = "<group>"; };
 		F034AE312429085C0053F4E2 /* AnswerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerModel.swift; sourceTree = "<group>"; };
+		F0A2C822242FDC95008D2858 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		F0A77C952418EB8000C5F3AA /* AnswerLiked.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerLiked.swift; sourceTree = "<group>"; };
 		F0C203E62417EC8000189E6A /* AnswerFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerFooter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -179,6 +181,7 @@
 				A1B5EAE224100D00001824C6 /* Filter.swift */,
 				A601A42B242EC3BC00978E3D /* FilterTitle.swift */,
 				A6FB8290242AD27B00D0424D /* LoginBanner.swift */,
+				F0A2C822242FDC95008D2858 /* SearchBar.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -512,6 +515,7 @@
 				8E5F72742429108800B89172 /* ShowTagsProposition.swift in Sources */,
 				A1A5A33B240D41900015CBBE /* FieldGenerator.swift in Sources */,
 				A14296CF2412BB73005E73B5 /* Report.swift in Sources */,
+				F0A2C823242FDC95008D2858 /* SearchBar.swift in Sources */,
 				A1A5A33F240D42890015CBBE /* LoginButton.swift in Sources */,
 				8E18B31D241A7B4F00F495BF /* FilterKit.swift in Sources */,
 				A1A5A339240D41200015CBBE /* LoginForm.swift in Sources */,
