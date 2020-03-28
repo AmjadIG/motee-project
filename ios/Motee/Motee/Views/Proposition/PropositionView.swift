@@ -28,7 +28,7 @@ struct PropositionView : View {
                         .bold()
                         .foregroundColor(colorIfClicked2)
                 }.padding().background(colorIfClicked)
-                
+                PropositionTagsView(proposition: $proposition)
                 if editing {
                     FieldGenerator.plain(label: "",field: "Ecrivez votre propos", text: $editProposition)
                 }else{
@@ -38,10 +38,9 @@ struct PropositionView : View {
                 PropositionFooter(proposition: $proposition, editing: $editing, editProposition: $editProposition, editAnonymous: $editAnonymous).padding()
                 
             }.frame(alignment: .leading)
-                .edgesIgnoringSafeArea(.all)
                 .background(lightGreyColor)
                 .cornerRadius(20).shadow(radius: 20)
-                .padding()
+                .padding([.leading, .bottom, .trailing])
             
             AnswersPropsView(proposition: $proposition, showBestAnswer: $showBestAnswer, showAllAnswers: $showAllAnswers, colorIfClicked: $colorIfClicked, colorIfClicked2: $colorIfClicked2)
         }
@@ -55,4 +54,4 @@ struct PropositionView_Previews: PreviewProvider {
         
     }
 }
- 
+
