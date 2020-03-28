@@ -9,15 +9,14 @@
 import SwiftUI
 
 struct AnswersPropsView : View {
-    var currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser
     @Binding var proposition : Proposition
     @Binding var showBestAnswer : Bool
     @Binding var showAllAnswers : Bool
     @Binding var colorIfClicked : Color
     @Binding var colorIfClicked2 : Color
     @State var bestAnswer : Answer?
+    
     var body: some View {
-        bestAnswer = PropositionModel.getBestAnswer(proposition: proposition)
         let drag = DragGesture()
             .onEnded {
                 if $0.translation.width < -100 {
@@ -28,7 +27,7 @@ struct AnswersPropsView : View {
                     }
                 }
         }
-        guard let bestAnswer = bestAnswer else {
+        guard let bestAnswer = PropositionModel.getBestAnswer(proposition: proposition) else {
             return AnyView(VStack {
                 Text("il n'existe pas encore de réponse à afficher")
             })
@@ -70,7 +69,7 @@ struct AnswersPropsView : View {
     
     func toggleColor(){
         if showBestAnswer{
-            colorIfClicked =  Color.blue.opacity(0.7)
+            colorIfClicked =  Color.blue.opacity(0.5)
             colorIfClicked2 = generateColor(name: "white")
         }else{
             colorIfClicked = generateColor(name: "white")
@@ -79,3 +78,17 @@ struct AnswersPropsView : View {
         }
     }
 }
+
+/*struct AnswersPropsView_Previews: PreviewProvider {
+    @State static var proposition = PropositionModel.getAllProps()[0]
+    @State static var showBestAnswer = false
+    @State static var showAllAnswers = false
+    @State static var colorIfCliked = Color.black
+    @State static var colorIfClicked2 = Color.white
+    @State static var bestAnswer : Answer?  = nil
+    static var previews: some View {
+        AnswersPropsView(proposition: $proposition, showBestAnswer: $showBestAnswer, showAllAnswers: $showAllAnswers, colorIfClicked: $colorIfCliked, colorIfClicked2: $colorIfClicked2, bestAnswer: bestAnswer).environmentObject(FilterKit())
+        
+    }
+}
+*/

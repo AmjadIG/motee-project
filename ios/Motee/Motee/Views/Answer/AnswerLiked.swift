@@ -17,14 +17,14 @@ struct AnswerLiked : View {
     
     var body: some View {
         Button(action:{
-            if self.answer.estLikee(utilisateur: self.fk.currentUSer){
-                self.answer.disliker(userDislike: self.fk.currentUSer!)
+            if self.answer.estLikee(utilisateur: self.fk.currentUser){
+                self.answer.disliker(userDislike: self.fk.currentUser!)
             }else{
-                self.answer.liker(userLike: self.fk.currentUSer!)
+                self.answer.liker(userLike: self.fk.currentUser!)
             }
         }){
             HStack{
-                if self.answer.estLikee(utilisateur: self.fk.currentUSer){
+                if self.answer.estLikee(utilisateur: self.fk.currentUser){
                     Image(systemName: "heart.fill").foregroundColor(Color.red)
                 } else {
                     Image(systemName: "heart").foregroundColor(Color.pink)

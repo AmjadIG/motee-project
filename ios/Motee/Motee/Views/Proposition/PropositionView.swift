@@ -47,13 +47,11 @@ struct PropositionView : View {
     }
 }
 
-
-
- struct PropositionView_Previews: PreviewProvider {
-    @State static var proposition = PropositionModel.getAllProps()[2]
- static var previews: some View {
-    PropositionView(proposition: $proposition).environmentObject(FilterKit())
-
- }
- }
+struct PropositionView_Previews: PreviewProvider {
+    @State static var proposition = PropositionModel.getAllProps()[1]
+    static var previews: some View {
+        PropositionView(proposition: $proposition).environmentObject(FilterKit())
+        
+    }
+}
  

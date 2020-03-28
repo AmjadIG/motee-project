@@ -168,7 +168,7 @@ class UserModel {
                     if let data = data{
                         print(data)
                         if let token = String(data: data, encoding: .utf8){
-                            res += token
+                            res = "Bearer \(token)"
                             print(token)
                         }
                     }
@@ -184,9 +184,8 @@ class UserModel {
     }
     
     static func checkAuthenticate(pseudo : String, password : String)->[Any]{
-        var token = authenticate(pseudo: pseudo, password: password)
+        let token = authenticate(pseudo: pseudo, password: password)
         if token != "" {
-            token = "Bearer \(token)"
             return [token, getUserByPseudo(pseudo: pseudo)!]
         } else {
             return []

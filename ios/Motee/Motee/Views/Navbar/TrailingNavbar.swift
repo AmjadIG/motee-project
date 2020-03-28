@@ -17,7 +17,9 @@ struct TrailingNavbar : View {
                     SymbolGenerator(mySymbol: "line.horizontal.3.decrease.circle.fill", myColor: "pink")
                 }
             }else{
+                 Button(action: { self.fk.currentPage = "Compte"}) {
                 SymbolGenerator(mySymbol: "person", myColor: "blue")
+                }
             }
         }
     }

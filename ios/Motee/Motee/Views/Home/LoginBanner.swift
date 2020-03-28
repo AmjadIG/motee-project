@@ -12,7 +12,7 @@ struct LoginBanner: View {
     @EnvironmentObject var fk : FilterKit
     var body: some View {
         VStack{
-            if(self.fk.currentUSer == nil){
+            if(self.fk.currentUser == nil){
                 HStack(){
                     Spacer()
                     Button(action : {

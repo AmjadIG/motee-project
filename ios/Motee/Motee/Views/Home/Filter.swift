@@ -21,12 +21,12 @@ struct Filter: View {
                     .background(Color.pink)
                     .foregroundColor(Color.white)
                 Spacer()
-                if !fk.filtered.elementsEqual("byLike"){
-                    Button(action: { self.fk.filtered = "byLike"; self.fk.showFilters = false}){
+                if !fk.filtered.elementsEqual("like"){
+                    Button(action: { self.fk.filtered = "like"; self.fk.showFilters = false}){
                         Text("Aucun filtre").bold().foregroundColor(Color.black)
                     }
                 }
-                Button(action: { self.fk.filtered = "byLike" ; self.fk.showFilters = false}){
+                Button(action: { self.fk.filtered = "like" ; self.fk.showFilters = false}){
                     Text("Les mieux notés").bold().foregroundColor(Color.black)
                 }
                 Button(action: { self.fk.filtered = "desc";self.fk.showFilters = false}){

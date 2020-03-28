@@ -17,14 +17,8 @@ struct Accueil: View {
                     LoginBanner()
                     TopTags()
                     VStack(){
-                        if(self.fk.filtered.elementsEqual("byLike")){
-                            Title(myTitle: "Les meilleurs propos")
-                        }else if self.fk.filtered.elementsEqual("desc"){
-                            Title(myTitle: "Propos les plus récents")
-                        }else if self.fk.filtered.elementsEqual("asc"){
-                            Title(myTitle: "Propos les plus anciens")
-                        }
-                        if(fk.currentUSer != nil){
+                        FilterTitle()
+                        if(fk.currentUser != nil){
                         HStack{
                             NavigationLink(destination : { AddProposition() }() ){
                                 SymbolGenerator(mySymbol :"plus.square.fill", myColor: "pink")

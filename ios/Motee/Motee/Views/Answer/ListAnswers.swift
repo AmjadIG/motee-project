@@ -12,11 +12,11 @@ import SwiftUI
 struct ListAnswersView: View {
     var currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser
     @Binding var proposition : Proposition
-    @State var filter : String = "all"
+    //@State var filter : String = "all"
     
     var body: some View {
         NavigationView{
-            VStack{
+            VStack{/*
                 if(filter.elementsEqual("all")){
                     Title(myTitle: "Toutes les réponses")
                 }else if filter.elementsEqual("like"){
@@ -26,7 +26,7 @@ struct ListAnswersView: View {
                 }else if filter.elementsEqual("dateAsc"){
                     Title(myTitle: "Les plus anciennes réponses")
                 }
-                
+                */
                 ForEach(PropositionModel.getAllAnswer(proposition: proposition)){ answr in
                     AnswerView(answer: answr)
                 }

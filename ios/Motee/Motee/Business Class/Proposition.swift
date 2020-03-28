@@ -19,11 +19,13 @@ class Proposition : Publication, Identifiable, Codable {
     @Published var owner : String = ""
     @Published var tags : [String] = []
     @Published var answers : [String] = []
+    @Published var title : String = ""
 
     var id : String {return idPublication}
     
     enum PropositionEncodingKeys : CodingKey {
         case _id
+        case titleProp
         case dateProp
         case contentProp
         case idLikesProp
@@ -42,6 +44,7 @@ class Proposition : Publication, Identifiable, Codable {
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: PropositionEncodingKeys.self)
         self.idPublication = try container.decode(String.self, forKey: ._id)
+        self.title = try container.decode(String.self, forKey: .titleProp)
         self.datePublication = try container.decode(String.self, forKey: .dateProp)
         self.contentPub = try container.decode(String.self, forKey: .contentProp)
         self.idLikesProp = try container.decode(Array.self, forKey: .idLikesProp)
@@ -49,6 +52,7 @@ class Proposition : Publication, Identifiable, Codable {
         self.owner = try container.decode(String.self, forKey: .ownerProp)
         self.tags = try container.decode(Array.self, forKey: .tagsProp)
         self.answers = try container.decode(Array.self, forKey: .idAnswers)
+        
     }
     
     func addAnswer(newAnswer: String)->Bool{

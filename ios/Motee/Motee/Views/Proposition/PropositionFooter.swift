@@ -22,7 +22,7 @@ struct PropositionFooter : View {
                 HStack {
                     PropositionLiked(proposition: $proposition)
                     Spacer()
-                    if(fk.currentUSer != nil && !editing){
+                    if(fk.currentUser != nil && !editing){
                         Button(action:{
                             self.isNotHide.toggle()
                         }){
@@ -36,7 +36,7 @@ struct PropositionFooter : View {
                         }
                     }else if self.editing{
                         Button(action: {
-                            PropositionModel.updateProp(idProp: self.proposition.idPublication, contentProp: self.editProposition, isAnonymous: self.proposition.anonymous, token: self.fk.token)
+                            PropositionModel.updateProp(idProp: self.proposition.idPublication, contentProp: self.editProposition, isAnonymous: self.proposition.anonymous, idUser: self.fk.currentUser!.idUser, token: self.fk.token)
                             self.editing.toggle()
                         }){
                             HStack{
@@ -57,13 +57,18 @@ struct PropositionFooter : View {
                     }
                     Spacer()
                     
-                    if (self.fk.currentUSer?.idUser == proposition.owner){
+                    if (self.fk.currentUser?.idUser == proposition.owner){
                         Button(action: {
                             self.editing.toggle()
                             self.editProposition = self.proposition.contentPub
                             self.editAnonymous = self.proposition.anonymous
                         }){
                             SymbolGenerator(mySymbol: "square.and.pencil", myColor: "gray")
+                        }
+                        Button( action :  {
+                            PropositionModel.deleteProposition(idProp: self.proposition.idPublication, token: self.fk.token)
+                        }){
+                            SymbolGenerator(mySymbol: "trash", myColor: "red")
                         }
                     }else{
                         Report()

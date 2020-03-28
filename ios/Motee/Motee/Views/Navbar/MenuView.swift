@@ -21,34 +21,44 @@ struct MenuView: View {
                 SingleLinkNavBar(title: "Accueil", symbol: "house", topPadding: 175)
             }
             Button(action : {
-                self.fk.currentPage = "Ajouter propos"
+                if self.fk.currentUser == nil {
+                    self.fk.currentPage = "login"
+                }else{
+                    self.fk.currentPage = "Ajouter propos"
+                }
                 self.showMenu.toggle()
             }){
                 SingleLinkNavBar(title: "Ajouter un propos", symbol: "plus.square", topPadding: 30)
             }
             Button(action : {
-                self.fk.currentPage = "MyProps"
+                if self.fk.currentUser == nil {
+                    self.fk.currentPage = "login"
+                }else{
+                    self.fk.currentPage = "MyProps"
+                }
                 self.showMenu.toggle()
             }){
                 SingleLinkNavBar(title: "Mes propos", symbol: "quote.bubble", topPadding: 30)
             }
             Button(action : {
-                self.fk.currentPage = "MyAnswers"
+                if self.fk.currentUser == nil {
+                    self.fk.currentPage = "login"
+                }else{
+                    self.fk.currentPage = "MyAnswers"
+                }
                 self.showMenu.toggle()
             }){
                 SingleLinkNavBar(title: "Mes réponse", symbol: "lightbulb", topPadding: 30)
             }
             Button(action : {
-                self.fk.currentPage = "Compte"
+                if self.fk.currentUser == nil {
+                    self.fk.currentPage = "login"
+                }else{
+                    self.fk.currentPage = "Compte"
+                }
                 self.showMenu.toggle()
             }){
                 SingleLinkNavBar(title: "Profil", symbol: "person", topPadding: 30)
-            }
-            Button(action : {
-                self.fk.currentPage = "Compte"
-                self.showMenu.toggle()
-            }){
-                SingleLinkNavBar(title: "Settings", symbol: "gear", topPadding: 30)
             }
             Spacer()
         }

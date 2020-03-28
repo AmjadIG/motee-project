@@ -27,7 +27,7 @@ struct LoginForm: View {
                     self.noError = UserModel.checkAuthenticate(pseudo: self.pseudo, password: self.mdp).count > 0
                     if self.noError {
                         self.fk.token = UserModel.checkAuthenticate(pseudo: self.pseudo, password: self.mdp)[0] as! String
-                        self.fk.currentUSer = (UserModel.checkAuthenticate(pseudo: self.pseudo, password: self.mdp)[1] as! User)
+                        self.fk.currentUser = (UserModel.checkAuthenticate(pseudo: self.pseudo, password: self.mdp)[1] as! User)
                         self.fk.currentPage = "Accueil"
                     }
                 }){
@@ -43,7 +43,7 @@ struct LoginForm: View {
     func findConnexion(pseudo : String, mdp : String) -> Bool {
         if UserModel.checkAuthenticate(pseudo: pseudo, password: mdp).count>0{
             fk.token = UserModel.checkAuthenticate(pseudo: pseudo, password: mdp)[0] as! String
-            fk.currentUSer = (UserModel.checkAuthenticate(pseudo: pseudo, password: mdp)[1] as! User)
+            fk.currentUser = (UserModel.checkAuthenticate(pseudo: pseudo, password: mdp)[1] as! User)
             return true
         }else{
             return false

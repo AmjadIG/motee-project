@@ -13,16 +13,16 @@ struct PropositionLiked : View {
     @EnvironmentObject var fk : FilterKit
     var body: some View {
         VStack{
-            if fk.currentUSer != nil {
+            if fk.currentUser != nil {
                 Button(action:{
-                    if self.proposition.estLikee(utilisateur: self.fk.currentUSer){
-                        self.proposition.disliker(userDislike: self.fk.currentUSer!)
+                    if self.proposition.estLikee(utilisateur: self.fk.currentUser){
+                        self.proposition.disliker(userDislike: self.fk.currentUser!)
                     }else{
-                        self.proposition.liker(userLike: self.fk.currentUSer!)
+                        self.proposition.liker(userLike: self.fk.currentUser!)
                     }
                 }){
                     HStack{
-                        if proposition.estLikee(utilisateur: fk.currentUSer){
+                        if proposition.estLikee(utilisateur: fk.currentUser){
                             Image(systemName: "heart.fill").foregroundColor(Color.red)
                         } else {
                             Image(systemName: "heart").foregroundColor(Color.black)
