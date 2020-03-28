@@ -32,6 +32,7 @@ struct PropositionView : View {
                 if editing {
                     FieldGenerator.plain(label: "",field: "Ecrivez votre propos", text: $editProposition)
                 }else{
+                    Text(proposition.title).bold().underline().padding(.top, 30.0).padding(.horizontal)
                     Text(proposition.contentPub).padding(.top, 30.0).padding(.horizontal)
                 }
                 PropositionFooter(proposition: $proposition, editing: $editing, editProposition: $editProposition, editAnonymous: $editAnonymous).padding()
