@@ -55,11 +55,9 @@ func paramTagsToLabel(tags: [Tag])->String {
 //Résultat : un string (représentant le token avec son en-tête "Bearer)
 func getFullToken(token : String)->String{
     var altS = token
-    print(altS)
     for _ in 0..<10 {
         altS.removeFirst()
     }
-    print(altS)
     altS.removeLast()
     altS.removeLast()
     return "Bearer \(altS)"

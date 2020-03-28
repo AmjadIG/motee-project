@@ -16,7 +16,7 @@ struct LoginBanner: View {
                 HStack(){
                     Spacer()
                     Button(action : {
-                        self.fk.currentPage = "login"
+                        self.fk.currentPage = "Sign in"
                     }){
                     Text("Connectez-vous pour profiter de toutes les fonctionnalités !")
                         .bold()

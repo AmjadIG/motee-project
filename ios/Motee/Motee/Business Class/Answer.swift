@@ -87,8 +87,8 @@ class Answer : Publication, Identifiable, Codable {
             return false
         }
         var isLiked : Bool = false
-        for it in 0..<idLikesAnswer.count {
-            if idLikesAnswer[it] == utilisateur!.id {
+        for id in idLikesAnswer {
+            if id == utilisateur!.id {
                 isLiked = true
             }
         }

@@ -22,7 +22,7 @@ struct MenuView: View {
             }
             Button(action : {
                 if self.fk.currentUser == nil {
-                    self.fk.currentPage = "login"
+                    self.fk.currentPage = "Sign in"
                 }else{
                     self.fk.currentPage = "Ajouter propos"
                 }
@@ -32,7 +32,7 @@ struct MenuView: View {
             }
             Button(action : {
                 if self.fk.currentUser == nil {
-                    self.fk.currentPage = "login"
+                    self.fk.currentPage = "Sign in"
                 }else{
                     self.fk.currentPage = "MyProps"
                 }
@@ -42,7 +42,7 @@ struct MenuView: View {
             }
             Button(action : {
                 if self.fk.currentUser == nil {
-                    self.fk.currentPage = "login"
+                    self.fk.currentPage = "Sign in"
                 }else{
                     self.fk.currentPage = "MyAnswers"
                 }
@@ -52,7 +52,7 @@ struct MenuView: View {
             }
             Button(action : {
                 if self.fk.currentUser == nil {
-                    self.fk.currentPage = "login"
+                    self.fk.currentPage = "Sign in"
                 }else{
                     self.fk.currentPage = "Compte"
                 }

@@ -209,7 +209,7 @@ class PropositionModel {
         var request = URLRequest(url: requestUrl)
         request.httpMethod = "POST"
         let semaphore = DispatchSemaphore(value :0)
-        var res : Bool = false
+        var res : Bool = true
         // Set HTTP Request Body
         guard let requestBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {return false}
         
@@ -393,6 +393,10 @@ class PropositionModel {
         task.resume()
         semaphore.wait()
         return res
+    }
+    
+    func fetch(matching: String) -> [Proposition] {
+        return []
     }
     
 }

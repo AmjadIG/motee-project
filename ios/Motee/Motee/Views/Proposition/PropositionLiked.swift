@@ -17,8 +17,10 @@ struct PropositionLiked : View {
                 Button(action:{
                     if self.proposition.estLikee(utilisateur: self.fk.currentUser){
                         self.proposition.disliker(userDislike: self.fk.currentUser!)
+                        PropositionModel.dislikeProp(idProposition: self.proposition.id, token: self.fk.token)
                     }else{
                         self.proposition.liker(userLike: self.fk.currentUser!)
+                        PropositionModel.likeProp(idProposition: self.proposition.id, token: self.fk.token)
                     }
                 }){
                     HStack{
