@@ -24,7 +24,7 @@ struct PropositionView : View {
                 HStack{
                     Text(UserModel.getUserById(idUser: proposition.owner).pseudo).bold().foregroundColor(colorIfClicked2)
                     Spacer()
-                    Text(proposition.datePublication)
+                    Text(getGoodDate(wrongD: proposition.datePublication))
                         .bold()
                         .foregroundColor(colorIfClicked2)
                 }.padding().background(colorIfClicked)

@@ -54,5 +54,59 @@ func paramTagsToLabel(tags: [Tag])->String {
 //Donnée : un string (représentant le token)
 //Résultat : un string (représentant le token avec son en-tête "Bearer)
 func getFullToken(token : String)->String{
-    return "Bearer \(token)"
+    var altS = token
+    print(altS)
+    for _ in 0..<10 {
+        altS.removeFirst()
+    }
+    print(altS)
+    altS.removeLast()
+    altS.removeLast()
+    return "Bearer \(altS)"
+}
+
+//Donnée : un string (représentant une date, pas au bon format)
+//Résultat : un string (représentant une date au bon format)
+func getGoodDate(wrongD : String)->String{
+    var bufferDate = wrongD
+    
+    
+    
+    var year = ""
+    var month = ""
+    var day = ""
+    
+    var hour = ""
+    var minute = ""
+
+    year.append(bufferDate.first!);bufferDate.removeFirst()
+    year.append(bufferDate.first!);bufferDate.removeFirst()
+    year.append(bufferDate.first!);bufferDate.removeFirst()
+    year.append(bufferDate.first!);bufferDate.removeFirst()
+    
+    bufferDate.removeFirst()
+    
+    month.append(bufferDate.first!);bufferDate.removeFirst()
+    month.append(bufferDate.first!);bufferDate.removeFirst()
+    
+    bufferDate.removeFirst()
+    
+    day.append(bufferDate.first!);bufferDate.removeFirst()
+    day.append(bufferDate.first!);bufferDate.removeFirst()
+
+    bufferDate.removeFirst() //T
+    
+    hour.append(bufferDate.first!);bufferDate.removeFirst()
+    hour.append(bufferDate.first!);bufferDate.removeFirst()
+    
+    bufferDate.removeFirst() //T
+
+    minute.append(bufferDate.first!);bufferDate.removeFirst()
+    minute.append(bufferDate.first!);bufferDate.removeFirst()
+    
+    let dateExactDay : String = "\(day)/\(month)/\(year)"
+    let dateHour : String = "\(hour)h\(minute)"
+    
+    return "le \(dateExactDay) à \(dateHour)"
+
 }

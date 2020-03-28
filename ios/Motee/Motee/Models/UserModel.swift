@@ -15,7 +15,8 @@ class UserModel {
     //Get All : https://mootee-api.herokuapp.com/users => 200
     //Get by id : https://mootee-api.herokuapp.com/users/id => 200
     //authenticate : https://mootee-api.herokuapp.com/users/authenticate => 200
-    //register : https://mootee-api.herokuapp.com/users/register
+    //register : https://mootee-api.herokuapp.com/users/register => 200
+    //ban a user : https://mootee-api.herokuapp.com/users/admin/ban => ?
     
     static func getAll()->[User]{
         // Prepare URL
@@ -237,7 +238,90 @@ class UserModel {
             task.resume()
             semaphore.wait()
         return res
-            
+    }
+    
+    static func banUser(idUser : String, token : String)->Bool{
+        // Prepare URL
         
+        let stringurl = "https://mootee-api.herokuapp.com/users/admin/ban"
+        let url = URL(string: stringurl)
+        
+        let body = [
+            "id" : idUser
+        ]
+        
+        guard let requestUrl = url else { fatalError() }
+        // Prepare URL Request Object
+        var request = URLRequest(url: requestUrl)
+        request.httpMethod = "POST"
+        let semaphore = DispatchSemaphore(value :0)
+        // Set HTTP Request Body
+        guard let requestBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {return false}
+        
+        request.httpBody = requestBody
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue(getFullToken(token: token), forHTTPHeaderField: "Authorization")
+        print("json : " , String(data : request.httpBody!, encoding: .utf8)!)
+        
+        var res : Bool = false
+        // Perform HTTP Request
+         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let error = error {
+                print("Error took place \(error)")
+                return
+            }
+            let resp = response as? HTTPURLResponse
+            print("code d'erreur")
+            res = (resp?.statusCode == 200)
+                        
+            if let data = data{
+                if let jsonString = String(data: data, encoding: .utf8){
+                    print(jsonString)
+                    }
+                }
+                semaphore.signal()
+            }
+            task.resume()
+            semaphore.wait()
+        return res
+    }
+    
+    static func logout(token : String)->Bool{
+        // Prepare URL
+        
+        let stringurl = "https://mootee-api.herokuapp.com/users/logout"
+        let url = URL(string: stringurl)
+        
+        guard let requestUrl = url else { fatalError() }
+        // Prepare URL Request Object
+        var request = URLRequest(url: requestUrl)
+        request.httpMethod = "PUT"
+        let semaphore = DispatchSemaphore(value :0)
+        
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue(getFullToken(token: token), forHTTPHeaderField: "Authorization")
+        print("json : " , String(data : request.httpBody!, encoding: .utf8)!)
+        
+        var res : Bool = false
+        // Perform HTTP Request
+         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let error = error {
+                print("Error took place \(error)")
+                return
+            }
+            let resp = response as? HTTPURLResponse
+            print("code d'erreur")
+            res = (resp?.statusCode == 200)
+                        
+            if let data = data{
+                if let jsonString = String(data: data, encoding: .utf8){
+                    print(jsonString)
+                    }
+                }
+                semaphore.signal()
+            }
+            task.resume()
+            semaphore.wait()
+        return res
     }
 }

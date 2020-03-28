@@ -193,7 +193,7 @@ class PropositionModel {
     static func addProposition(titleProp : String, contentPub: String, isAnonymous: Bool, tagsProp: [Tag], token: String) -> Bool{
         // Prepare URL
         
-        let stringurl = "https://mootee-api.herokuapp.com/propositions/newProposition"
+        let stringurl = "https://mootee-api.herokuapp.com/propositions/"
         let url = URL(string: stringurl)//ICI
         
         let tagsProp : String = paramTagsToLabel(tags: tagsProp)
@@ -214,6 +214,7 @@ class PropositionModel {
         guard let requestBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {return false}
         
         request.httpBody = requestBody
+        print(getFullToken(token: token))
         request.setValue(getFullToken(token: token), forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         print("json : " , String(data : request.httpBody!, encoding: .utf8)!)
@@ -225,9 +226,9 @@ class PropositionModel {
             }
                 
                 let resp = response as? HTTPURLResponse
-            print("code d'erreur")
-                res = (resp?.statusCode == 200)
-                print(res)
+            print("Test code status")
+            res = (resp?.statusCode == 200)
+            print(res)
             if let data = data{
                 print(data)
                 if let jsonString = String(data: data, encoding: .utf8){
@@ -244,17 +245,17 @@ class PropositionModel {
     //Résultat : Supprime une proposition, renvoie true si c'est bon, false sinon
     static func deleteProposition(idProp: String, token: String)->Bool{
         // Prepare URL
-        let stringurl = "https://mootee-api.herokuapp.com/propositions/delete"
+        let stringurl = "https://mootee-api.herokuapp.com/propositions/"
         let url = URL(string: stringurl)
         guard let requestUrl = url else { fatalError() }
         // Prepare URL Request Object
         var request = URLRequest(url: requestUrl)
-        request.httpMethod = "POST"
+        request.httpMethod = "DELETE"
         var res : Bool = false
         
         // HTTP Request Parameters which will be sent in HTTP Request Body
         let body = [
-            "id_proposition": idProp
+            "id": idProp
         ]
         
         // Set HTTP Request Body
@@ -271,12 +272,10 @@ class PropositionModel {
                     print("Error took place \(error)")
                     return
                 }
-         
                 // Convert HTTP Response Data to a String
                     let resp = response as? HTTPURLResponse
                     print(resp?.statusCode)
                     res = (resp?.statusCode == 200)
-                
         }
         task.resume()
         return res
@@ -291,7 +290,7 @@ class PropositionModel {
         let url = URL(string: stringurl)//ICI
         
         let body = [
-            "_id" : idProposition
+            "id" : idProposition
         ]
         
         guard let requestUrl = url else { fatalError() }
@@ -349,11 +348,11 @@ class PropositionModel {
     static func updateProp(idProp : String, contentProp : String, isAnonymous : Bool, idUser : String, token : String)->Bool {
         // Prepare URL
         
-        let stringurl = "https://mootee-api.herokuapp.com/propositions/update"
+        let stringurl = "https://mootee-api.herokuapp.com/propositions/"
         let url = URL(string: stringurl)//ICI
         
         let body = [
-            "_id" : idProp,
+            "id" : idProp,
             "contentProp" : contentProp,
             "isAnonymous" : "\(isAnonymous)",
             "ownerProp" : idUser

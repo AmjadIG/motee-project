@@ -22,7 +22,7 @@ struct AnswerView: View {
                 HStack{
                     Text(UserModel.getUserById(idUser: answer.owner ).pseudo).bold().foregroundColor(.white)
                     Spacer()
-                    Text(answer.datePublication).bold().foregroundColor(.white)
+                    Text(getGoodDate(wrongD: answer.datePublication)).bold().foregroundColor(.white)
                 }.padding()
                     .padding(.horizontal)
             Spacer()
