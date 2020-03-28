@@ -42,7 +42,7 @@ struct PropositionLiked : View {
 }
 
 struct PropositionLiked_Previews: PreviewProvider {
-    @State static var proposition = PropositionModel.getAllProps()[2]
+    @State static var proposition = PropositionModel.getAll()[2]
     static var previews: some View {
         PropositionLiked(proposition : $proposition).environmentObject(FilterKit())
     }

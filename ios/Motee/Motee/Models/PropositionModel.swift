@@ -21,7 +21,7 @@ class PropositionModel {
     //Put : https://mootee-api.herokuapp.com/propositions/update => Pas encore testé
     
     //Resultat : Renvoie un dictionnaire [ clé : id des propositions | valeur : Toutes les Propositions ]
-    static func getAll()->[String:Proposition]{
+    static func getAll()->[Proposition]{
         // Prepare URL
         let stringURL = "https://mootee-api.herokuapp.com/propositions"
         let url = URL(string: stringURL)
@@ -57,12 +57,7 @@ class PropositionModel {
         
         semaphore.wait()
         
-        return res
-    }
-    
-    //Resultat : Renvoie un tableau contenant toute les propositions contenues dans la base
-    static func getAllProps()->[Proposition]{
-        return (purifyRequest(dictionary: getAll()) as! [Proposition])
+        return (purifyRequest(dictionary: res) as! [Proposition])
     }
     
     //Données : idProp (id Proposition) => String
@@ -110,11 +105,16 @@ class PropositionModel {
     //Résultat : Renvoie un tableau des réponses rattachées au propos associé
     static func getAllAnswer(proposition : Proposition)->[Answer]{
         var result : [Answer] = []
+        let getAll : [Answer] = AnswerModel.getAll()
+        var keys : [String] = []
+        for ans in getAll {
+            keys.append(ans.idPublication)
+        }
         
-        for (key,value) in AnswerModel.getAll() {
+        for it in 0..<getAll.count {
             for answer in proposition.answers {
-                if answer == key {
-                    result.append(value)
+                if answer == keys[it] {
+                    result.append(getAll[it])
                 }//arrêt : on a parcouru chaque id de réponse contenues dans notre propositions
             }
         }//arrêt :
@@ -192,7 +192,6 @@ class PropositionModel {
     //Résultat : ajoute une proposition à la base de donnée en passant par une requête http de type POST
     static func addProposition(titleProp : String, contentPub: String, isAnonymous: Bool, tagsProp: [Tag], token: String) -> Bool{
         // Prepare URL
-        //guard let token = currentUser?.authToken else{return false}
         
         let stringurl = "https://mootee-api.herokuapp.com/propositions/newProposition"
         let url = URL(string: stringurl)//ICI
@@ -215,7 +214,7 @@ class PropositionModel {
         guard let requestBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {return false}
         
         request.httpBody = requestBody
-        request.setValue(token, forHTTPHeaderField: "Authorization")
+        request.setValue(getFullToken(token: token), forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         print("json : " , String(data : request.httpBody!, encoding: .utf8)!)
         // Perform HTTP Request
@@ -245,7 +244,6 @@ class PropositionModel {
     //Résultat : Supprime une proposition, renvoie true si c'est bon, false sinon
     static func deleteProposition(idProp: String, token: String)->Bool{
         // Prepare URL
-        //guard let token = currentUser?.authToken else{return false}
         let stringurl = "https://mootee-api.herokuapp.com/propositions/delete"
         let url = URL(string: stringurl)
         guard let requestUrl = url else { fatalError() }
@@ -262,7 +260,7 @@ class PropositionModel {
         // Set HTTP Request Body
         guard let requestBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {return false}
         request.httpBody = requestBody
-        request.setValue(token, forHTTPHeaderField: "Authorization")
+        request.setValue(getFullToken(token: token), forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         print("body ok + auth ok")
         // Perform HTTP Request
@@ -288,7 +286,6 @@ class PropositionModel {
     //Résultat : renvoie true si la requête a bien été effectuée, false sinon
     static func propositionLD(url : String, idProposition : String, token : String)->Bool{
         // Prepare URL
-        //guard let token = currentUser?.authToken else{return false}
         
         let stringurl = url
         let url = URL(string: stringurl)//ICI
@@ -307,7 +304,7 @@ class PropositionModel {
         guard let requestBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {return false}
         
         request.httpBody = requestBody
-        request.setValue(token, forHTTPHeaderField: "Authorization")
+        request.setValue(getFullToken(token: token), forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         print("json : " , String(data : request.httpBody!, encoding: .utf8)!)
         // Perform HTTP Request
@@ -351,7 +348,6 @@ class PropositionModel {
     //Résultat : renvoie true si la proposition a bien été modifiée (requête envoyée et validée), false sinon
     static func updateProp(idProp : String, contentProp : String, isAnonymous : Bool, idUser : String, token : String)->Bool {
         // Prepare URL
-        //guard let token = currentUser?.authToken else{return false}
         
         let stringurl = "https://mootee-api.herokuapp.com/propositions/update"
         let url = URL(string: stringurl)//ICI
@@ -373,7 +369,7 @@ class PropositionModel {
         guard let requestBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {return false}
         
         request.httpBody = requestBody
-        request.setValue(token, forHTTPHeaderField: "Authorization")
+        request.setValue(getFullToken(token: token), forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         print("json : " , String(data : request.httpBody!, encoding: .utf8)!)
         // Perform HTTP Request

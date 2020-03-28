@@ -37,8 +37,8 @@ struct RegisterButton: View {
     }
     
     func isAvailablePseudo(pseudo : String) -> Bool{
-        for (_,value) in UserModel.getAll() {
-            if value.pseudo == pseudo {
+        for user in UserModel.getAll() {
+            if user.pseudo == pseudo {
                 return false
             }
         }
@@ -53,8 +53,8 @@ struct RegisterButton: View {
     }
     
     func isAvailableMail(mail : String) -> Bool {
-        for (_,value) in UserModel.getAll() {
-            if value.email == mail {
+        for user in UserModel.getAll() {
+            if user.email == mail {
                 return false
             }
         }

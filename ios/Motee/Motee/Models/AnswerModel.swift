@@ -20,7 +20,7 @@ class AnswerModel {
     //Put : https://mootee-api.herokuapp.com/answers/dislike => 200
     //Put : https://mootee-api.herokuapp.com/answers/update => Pas encore testé
 
-    static func getAll()->[String:Answer]{
+    static func getAll()->[Answer]{
         // Prepare URL
         let stringURL = "https://mootee-api.herokuapp.com/answers"
         let url = URL(string: stringURL)
@@ -56,10 +56,10 @@ class AnswerModel {
         
         semaphore.wait()
         
-        return res
+        return (purifyRequest(dictionary: res) as! [Answer])
     }
     
-    static func getAnswerById(idAns : String)->[String:Answer]{
+    static func getAnswerById(idAns : String)->Answer{
         // Prepare URL
         let stringURL = "https://mootee-api.herokuapp.com/answers/"+idAns
         let url = URL(string: stringURL)
@@ -95,7 +95,7 @@ class AnswerModel {
         
         semaphore.wait()
         
-        return res
+        return (purifyRequest(dictionary: res)[0] as! Answer)
     }
     
     static func getPropOfAnswer(answer : Answer)->Proposition{
@@ -108,8 +108,6 @@ class AnswerModel {
     
     static func addAnswer (contentPub: String, isAnonymous: Bool, tagsAns: [Tag], idProposition : String, token: String) -> Bool{
         // Prepare URL
-        //guard let token = currentUser?.authToken else{return false}
-        
         let stringurl = "https://mootee-api.herokuapp.com/answers/newAnswer"
         let url = URL(string: stringurl)//ICI
         
@@ -131,7 +129,7 @@ class AnswerModel {
         guard let requestBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {return false}
         
         request.httpBody = requestBody
-        request.setValue(token, forHTTPHeaderField: "Authorization")
+        request.setValue(getFullToken(token: token), forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         print("json : " , String(data : request.httpBody!, encoding: .utf8)!)
         // Perform HTTP Request
@@ -162,7 +160,6 @@ class AnswerModel {
     //Résultat : renvoie true si la réponse a été supprimée, false sinon
     static func deleteAnswer(idAns: String, token: String)->Bool{
         // Prepare URL
-        //guard let token = currentUser?.authToken else{return false}
         let stringurl = "https://mootee-api.herokuapp.com/answers/delete"
         let url = URL(string: stringurl)
         guard let requestUrl = url else { fatalError() }
@@ -179,7 +176,7 @@ class AnswerModel {
         // Set HTTP Request Body
         guard let requestBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {return false}
         request.httpBody = requestBody
-        request.setValue(token, forHTTPHeaderField: "Authorization")
+        request.setValue(getFullToken(token: token), forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         print("body ok + auth ok")
         // Perform HTTP Request
@@ -193,8 +190,7 @@ class AnswerModel {
          
                 // Convert HTTP Response Data to a String
                     let resp = response as? HTTPURLResponse
-                    print(resp?.statusCode)
-                    res = (resp?.statusCode == 200)                
+                    res = (resp?.statusCode == 200)
         }
         task.resume()
         return res
@@ -204,7 +200,6 @@ class AnswerModel {
     //Résultat : renvoie true si la requête a bien été effectuée, false sinon
     static func answerLD(url : String, idAnswer : String, token : String)->Bool{
         // Prepare URL
-        //guard let token = currentUser?.authToken else{return false}
         
         let stringurl = url
         let url = URL(string: stringurl)//ICI
@@ -223,7 +218,7 @@ class AnswerModel {
         guard let requestBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {return false}
         
         request.httpBody = requestBody
-        request.setValue(token, forHTTPHeaderField: "Authorization")
+        request.setValue(getFullToken(token: token), forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         print("json : " , String(data : request.httpBody!, encoding: .utf8)!)
         // Perform HTTP Request
@@ -289,7 +284,7 @@ class AnswerModel {
         guard let requestBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {return false}
         
         request.httpBody = requestBody
-        request.setValue(token, forHTTPHeaderField: "Authorization")
+        request.setValue(getFullToken(token: token), forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         print("json : " , String(data : request.httpBody!, encoding: .utf8)!)
         // Perform HTTP Request

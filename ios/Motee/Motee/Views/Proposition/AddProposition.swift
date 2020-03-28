@@ -56,7 +56,7 @@ struct AddProposition: View {
                     }
                     Divider().padding()
                     Button(action:{
-                        let noError = PropositionModel.addProposition(contentPub: self.newProposition, isAnonymous: self.anonymousProposition, tagsProp: self.tagList, token: self.fk.token)
+                        let noError = PropositionModel.addProposition(titleProp:"", contentPub: self.newProposition, isAnonymous: self.anonymousProposition, tagsProp: self.tagList, token: self.fk.token)
                         if noError {
                             self.fk.currentPage = "home"
                         }
