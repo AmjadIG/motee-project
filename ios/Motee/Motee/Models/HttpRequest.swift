@@ -50,3 +50,9 @@ func paramTagsToLabel(tags: [Tag])->String {
     }
     return string
 }
+
+//Donnée : un string (représentant le token)
+//Résultat : un string (représentant le token avec son en-tête "Bearer)
+func getFullToken(token : String)->String{
+    return "Bearer \(token)"
+}

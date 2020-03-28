@@ -17,7 +17,7 @@ class UserModel {
     //authenticate : https://mootee-api.herokuapp.com/users/authenticate => 200
     //register : https://mootee-api.herokuapp.com/users/register
     
-    static func getAll()->[String:User]{
+    static func getAll()->[User]{
         // Prepare URL
         let stringURL = "https://mootee-api.herokuapp.com/users"
         let url = URL(string: stringURL)
@@ -53,7 +53,7 @@ class UserModel {
         
         semaphore.wait()
         
-        return res
+        return (purifyRequest(dictionary: res) as! [User])
     }
     
     static func getUserById(idUser : String)->User{
@@ -97,7 +97,7 @@ class UserModel {
     static func getAnswersByUser(user : User)->[Answer]{
         var answerArray : [Answer] = []
         for idAns in user.idAnswers {
-            answerArray.append(purifyRequest(dictionary: AnswerModel.getAnswerById(idAns: idAns))[0] as! Answer)
+            answerArray.append(AnswerModel.getAnswerById(idAns: idAns))
         }
         return answerArray
     }
@@ -109,7 +109,7 @@ class UserModel {
     static func getPropositionsByUser(user : User)->[Proposition]{
         var propositionArray : [Proposition] = []
         for idProp in user.idPropositions {
-            for prop in PropositionModel.getAllProps() {
+            for prop in PropositionModel.getAll() {
                 if prop.id == idProp {
                     propositionArray.append(prop)
                 }
@@ -123,9 +123,9 @@ class UserModel {
     }
     
     static func getUserByPseudo(pseudo : String)->User?{
-        for(_,value) in getAll(){
-            if value.pseudo == pseudo {
-                return value
+        for user in getAll(){
+            if user.pseudo == pseudo {
+                return user
             }
         }
         return nil
@@ -133,7 +133,6 @@ class UserModel {
     
     static func authenticate(pseudo : String, password : String)->String{
         // Prepare URL
-        //guard let token = currentUser?.authToken else{return false}
         
         let stringurl = "https://mootee-api.herokuapp.com/users/authenticate"
         let url = URL(string: stringurl)
@@ -168,7 +167,7 @@ class UserModel {
                     if let data = data{
                         print(data)
                         if let token = String(data: data, encoding: .utf8){
-                            res = "Bearer \(token)"
+                            res = token
                             print(token)
                         }
                     }
@@ -186,6 +185,7 @@ class UserModel {
     static func checkAuthenticate(pseudo : String, password : String)->[Any]{
         let token = authenticate(pseudo: pseudo, password: password)
         if token != "" {
+            print([token, getUserByPseudo(pseudo: pseudo)!])
             return [token, getUserByPseudo(pseudo: pseudo)!]
         } else {
             return []
@@ -194,7 +194,6 @@ class UserModel {
     
     static func register(pseudo: String, password: String, mail: String)->Bool{
         // Prepare URL
-        //guard let token = currentUser?.authToken else{return false}
         
         let stringurl = "https://mootee-api.herokuapp.com/users/register"
         let url = URL(string: stringurl)

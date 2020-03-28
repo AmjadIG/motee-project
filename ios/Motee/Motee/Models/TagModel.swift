@@ -16,7 +16,7 @@ class TagModel {
     //Get best tags : https://mootee-api.herokuapp.com/tags/bestTags => 200
     //Get by id : https://mootee-api.herokuapp.com/tags/id => 200
 
-    static func getAll()->[String:Tag]{
+    static func getAll()->[Tag]{
         // Prepare URL
         let stringURL = "https://mootee-api.herokuapp.com/tags/"
         let url = URL(string: stringURL)
@@ -52,10 +52,10 @@ class TagModel {
         
         semaphore.wait()
         
-        return res
+        return (purifyRequest(dictionary: res) as! [Tag])
     }
     
-    static func getTop9Tags()->[String:Tag]{
+    static func getTop9Tags()->[Tag]{
         // Prepare URL
         let stringURL = "https://mootee-api.herokuapp.com/tags/bestTags"
         let url = URL(string: stringURL)
@@ -91,7 +91,7 @@ class TagModel {
         
         semaphore.wait()
         
-        return res
+        return (purifyRequest(dictionary: res) as! [Tag])
     }
     
     static func getTagById(idTag : String)->Tag{
@@ -136,7 +136,6 @@ class TagModel {
     //Résultat : renvoie true si le tag a bien été détruit, false sinon
     static func deleteTag(idTag: String, token: String)->Bool{
         // Prepare URL
-        //guard let token = currentUser?.authToken else{return false}
         let stringurl = "https://mootee-api.herokuapp.com/tags/delete"
         let url = URL(string: stringurl)
         guard let requestUrl = url else { fatalError() }
@@ -153,7 +152,7 @@ class TagModel {
         // Set HTTP Request Body
         guard let requestBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {return false}
         request.httpBody = requestBody
-        request.setValue(token, forHTTPHeaderField: "Authorization")
+        request.setValue(getFullToken(token: token), forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         // Perform HTTP Request

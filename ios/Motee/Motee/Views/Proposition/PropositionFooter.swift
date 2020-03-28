@@ -91,7 +91,7 @@ struct PropositionFooter : View {
 }
 
 struct PropositionFooter_Previews: PreviewProvider {
-    @State static var proposition = PropositionModel.getAllProps()[2]
+    @State static var proposition = PropositionModel.getAll()[2]
     @State static var editing = false
     @State static var editProposition = ""
     @State static var editAnonymous = false

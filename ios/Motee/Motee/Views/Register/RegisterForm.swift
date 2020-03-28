@@ -57,22 +57,22 @@ struct RegisterForm: View {
     }
     
     func isAvailablePseudo(pseudo : String) -> Bool{
-        if pseudo.count == 0 {
+        if let user = UserModel.getUserByPseudo(pseudo: pseudo)?.pseudo {
             return false
         }
-        for (_,value) in UserModel.getAll() {
-            if value.pseudo == pseudo {
-                return false
-            }
+        switch pseudo {
+        case "":
+            return false
+        default:
+            return true
         }
-        return true
     }
     func isAvailableMail(mail : String) -> Bool {
         if mail.count == 0 {
             return false
         }
-        for (_,value) in UserModel.getAll() {
-            if value.email == mail {
+        for user in UserModel.getAll() {
+            if user.email == mail {
                 return false
             }
         }
