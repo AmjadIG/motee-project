@@ -190,7 +190,7 @@ class PropositionModel {
     }
     
     //Résultat : ajoute une proposition à la base de donnée en passant par une requête http de type POST
-    static func addProposition(contentPub: String, isAnonymous: Bool, tagsProp: [Tag], token: String) -> Bool{
+    static func addProposition(titleProp : String, contentPub: String, isAnonymous: Bool, tagsProp: [Tag], token: String) -> Bool{
         // Prepare URL
         //guard let token = currentUser?.authToken else{return false}
         
@@ -199,6 +199,7 @@ class PropositionModel {
         
         let tagsProp : String = paramTagsToLabel(tags: tagsProp)
         let body = [
+            "titleProp" : titleProp,
             "contentProp" : contentPub,
             "isAnonymous" : "\(isAnonymous)",
             "tagsProp" : tagsProp
