@@ -13,7 +13,7 @@ struct TagListView: View {
     @Binding var tagList : [Tag]
     var body: some View {
         HStack{
-            ForEach(tagList,id: \.id){oneTag in
+            ForEach(tagList,id: \.label){oneTag in
                 Text(" #\(oneTag.label) ").bold().background(Color.blue).cornerRadius(5).foregroundColor(Color.white)
             }
             Button(action: {
@@ -28,7 +28,7 @@ struct TagListView: View {
 }
 
 struct TagListView_Previews: PreviewProvider {
-     @State static var listTag : [Tag] = [Tag(label: "tag1"),Tag(label: "tag2"),Tag(label: "tag3"),]
+     @State static var listTag : [Tag] = [Tag(label: "tag1"),Tag(label: "tag2"),Tag(label: "tag3")]
     static var previews: some View {
         TagListView(tagList: $listTag)
     }

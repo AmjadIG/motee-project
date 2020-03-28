@@ -12,7 +12,7 @@ struct TopTags : View {
     @State var topTags = getTopTags()
     var body : some View {
         VStack{
-            Title(myTitle: "Les meilleurs tags :")
+            Title(myTitle: "Les tags les plus utilisés :")
             HStack{
                 TagView(tag: $topTags[0], color: "red")
                 TagView(tag: $topTags[1], color: "green")

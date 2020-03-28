@@ -23,16 +23,16 @@ struct PropositionLiked : View {
                 }){
                     HStack{
                         if proposition.estLikee(utilisateur: fk.currentUser){
-                            Image(systemName: "heart.fill").foregroundColor(Color.red)
+                            Image(systemName: "ear").foregroundColor(Color.red)
                         } else {
-                            Image(systemName: "heart").foregroundColor(Color.black)
+                            Image(systemName: "ear").foregroundColor(Color.black)
                         }
                         Text(String(proposition.idLikesProp.count))
                     }
                 }
             }else{
                 HStack{
-                    Image(systemName: "heart").foregroundColor(Color.black)
+                    Image(systemName: "ear").foregroundColor(Color.black)
                     Text(String(proposition.idLikesProp.count))
                 }
             }

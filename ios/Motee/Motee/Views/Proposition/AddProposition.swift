@@ -17,13 +17,14 @@ struct AddProposition: View {
         @State var anonymousProposition : Bool = false
         @State var answerAdding : Bool = false
         @State var anonymousAnswer : Bool = false
+        @State var titleProposition : String = ""
         
         var body: some View {
             VStack{
                 Title(myTitle: "Ajouter un propos")
                 Divider()
                 ScrollView{
-                    //Text("Votre Propos").font(.system(size: 18)).bold().foregroundColor(.blue).padding()
+                    FieldGenerator.plain(label: "Titre du propos :",field: "Ecrivez votre titre", text: $titleProposition)
                     FieldGenerator.plain(label: "Propos :",field: "Ecrivez votre propos", text: $newProposition)
                     HStack{
                         FieldGenerator.plain(label: "Ajouter un nouveau tag :",field: "Votre tag", text: $newTag)
@@ -32,6 +33,8 @@ struct AddProposition: View {
                             if self.newTag.count>0 && !(containsLabel(tags: self.tagList, label: self.newTag)){
                                 self.tagList.append(Tag(label: self.newTag))
                                 self.newTag = ""
+                            }else if containsLabel(tags: self.tagList, label: self.newTag) {
+                            self.newTag = ""
                             }
                         }){
                             SymbolGenerator(mySymbol: "arrowtriangle.right.circle.fill", myColor: "blue")
@@ -56,7 +59,7 @@ struct AddProposition: View {
                     }
                     Divider().padding()
                     Button(action:{
-                        let noError = PropositionModel.addProposition(contentPub: self.newProposition, isAnonymous: self.anonymousProposition, tagsProp: self.tagList, token: self.fk.token)
+                        let noError = PropositionModel.addProposition(titleProp : self.titleProposition, contentPub: self.newProposition, isAnonymous: self.anonymousProposition, tagsProp: self.tagList, token: self.fk.token)
                         if noError {
                             self.fk.currentPage = "home"
                         }
