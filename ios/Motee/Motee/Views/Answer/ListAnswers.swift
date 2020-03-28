@@ -10,9 +10,7 @@ import Combine
 import SwiftUI
 
 struct ListAnswersView: View {
-    var currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser
     @Binding var proposition : Proposition
-    //@State var filter : String = "all"
     
     var body: some View {
         NavigationView{
@@ -30,9 +28,14 @@ struct ListAnswersView: View {
                 ForEach(PropositionModel.getAllAnswer(proposition: proposition)){ answr in
                     AnswerView(answer: answr)
                 }
-
-                Spacer()
             }
         }
+    }
+}
+
+struct ListAnswersView_Previews: PreviewProvider {
+    @State static var proposition = PropositionModel.getAll()[1]
+    static var previews: some View {
+        ListAnswersView(proposition: $proposition).environmentObject(FilterKit())
     }
 }

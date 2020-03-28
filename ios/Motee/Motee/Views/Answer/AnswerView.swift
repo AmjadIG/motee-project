@@ -11,10 +11,9 @@ import SwiftUI
 import UserNotifications
 
 struct AnswerView: View {
-    
+    @EnvironmentObject var fk : FilterKit
     var answer : Answer
     let dateFormatter = DateFormatter()
-    var currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser
         
     var body: some View {
         VStack{
@@ -24,15 +23,9 @@ struct AnswerView: View {
                     Spacer()
                     Text(getGoodDate(wrongD: answer.datePublication)).bold().foregroundColor(.white)
                 }.padding()
-                    .padding(.horizontal)
-            Spacer()
-                Text(answer.contentPub).foregroundColor(.white)
-                    .padding(.horizontal)
-            Spacer()
-                
-                if (currentUser != nil){
+                Text(answer.contentPub).foregroundColor(.white).padding()
+                if (fk.currentUser != nil){
                     AnswerFooter(answer: answer)
-                    Spacer()
                 }
                 
                 }.frame(alignment: .leading).edgesIgnoringSafeArea(.all)
@@ -43,11 +36,10 @@ struct AnswerView: View {
         }
     }
 }
-/*
+
 struct AnswerView_Previews: PreviewProvider {
-    @State static var answer = AnswerModel.getAll()[]
+    @State static var answer = AnswerModel.getAll()[0]
     static var previews: some View {
-        AnswerView(answer: $answer)
+        AnswerView(answer: answer).environmentObject(FilterKit())
     }
 }
- */

@@ -10,13 +10,7 @@ import SwiftUI
 
 struct AnswerFooter: View {
     @State var isNotHide :Bool = false
-    var currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser
-    
     var answer : Answer
-    
-    init(answer : Answer){
-        self.answer = answer
-    }
     
     var body: some View {
         VStack{
