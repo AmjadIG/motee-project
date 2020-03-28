@@ -10,6 +10,13 @@ import SwiftUI
 
 
 struct Account: View {
+    
+    @State var passToChange : Bool = false
+    @State var oldPwd : String = ""
+    @State var newPwd : String = ""
+    
+    @State var pwdChanged : Bool = false
+
     @EnvironmentObject var fk : FilterKit
     let dateFormatter = DateFormatter()
     
@@ -54,7 +61,49 @@ struct Account: View {
                 }else{
                     Text("\(currentUser.pseudo)! Vous n'avez pas encore contribué à l'application.. et si c'était le moment de nous partager votre expérience?").padding(.all)
                 }
-                NavigationLink(destination: Accueil()){
+                if !pwdChanged {
+                    Button(action:{
+                        if self.passToChange {
+                            self.passToChange = false
+                        }else {
+                            self.passToChange = true
+                        }
+                    }){
+                        Text("Modifier son mot de passe")
+                    }
+                }
+                if self.passToChange{
+                    FieldGenerator.secure(label:"",field: "Ancien Mot de Passe", text: $oldPwd)
+                    FieldGenerator.secure(label:"",field: "Nouveau Mot de Passe", text: $newPwd)
+                    Button(action:{
+                        //Modifier le user
+                        self.pwdChanged = true
+                        self.passToChange = false
+                        
+                    }){
+                        Text("Changer de mot de passe")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding(.vertical)
+                        .frame(width: 320, height: 60)
+                        .background(generateColor(name: "blue"))
+                        .cornerRadius(40)
+                    }
+                    Divider()
+                    Spacer()
+                }
+                if pwdChanged {
+                    HStack {
+                        Text("Mot de passe changé avec succès !")
+                        .bold()
+                        .foregroundColor(Color.green)
+                        .multilineTextAlignment(.center)
+                        .padding(.all, 0.0)
+                        .padding()
+                        .transition(.scale)
+                    }
+                }
+                NavigationLink(destination: AddProposition()){
                     Text("Je contribue tout de suite!")
                         .font(.headline)
                         .foregroundColor(.white)

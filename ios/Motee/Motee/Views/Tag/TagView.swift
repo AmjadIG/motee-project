@@ -21,7 +21,7 @@ struct TagView: View {
                 .background(generateColor(name: color))
                 .cornerRadius(5)
                 .foregroundColor(Color.white)
-        }
+        }.lineLimit(1)
     }
 }
 
