@@ -39,7 +39,7 @@ struct PropositionView : View {
                 
             }.frame(alignment: .leading)
                 .background(lightGreyColor)
-                .cornerRadius(20).shadow(radius: 20)
+                .cornerRadius(20).shadow(radius: 5)
                 .padding([.leading, .bottom, .trailing])
             
             AnswersPropsView(proposition: $proposition, showBestAnswer: $showBestAnswer, showAllAnswers: $showAllAnswers, colorIfClicked: $colorIfClicked, colorIfClicked2: $colorIfClicked2)

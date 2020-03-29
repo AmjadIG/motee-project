@@ -71,7 +71,7 @@ struct PropositionFooter : View {
                             SymbolGenerator(mySymbol: "trash", myColor: "red")
                         }
                     }else{
-                        Report()
+                        Report(proposition: $proposition)
                     }
                 }
             }

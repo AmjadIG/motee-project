@@ -26,6 +26,9 @@ struct NavbarView: View {
             if self.fk.showFilters {
                 Filter()
             }
+            if self.fk.showFilters {
+                ReportView()
+            }
             GeometryReader { geometry in
                 ZStack(alignment: .leading) {
                     Root(currentPage: self.fk.currentPage)
