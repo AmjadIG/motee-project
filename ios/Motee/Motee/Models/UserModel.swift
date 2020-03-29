@@ -324,16 +324,16 @@ class UserModel {
         return res
     }
     
-    static func updateUser(idUser : String, oldPwd: String, newPwd:String, token : String)->Bool {
+    static func updateUser(oldPwd: String, newPwd:String, confirmPwd: String, token : String)->Bool {
         // Prepare URL
         
-        let stringurl = "https://mootee-api.herokuapp.com/users/"
+        let stringurl = "https://mootee-api.herokuapp.com/users/password/change"
         let url = URL(string: stringurl)//ICI
         
         let body = [
-            "id" : idUser,
             "oldPassword" : oldPwd,
-            "newPassword" : newPwd
+            "newPassword" : newPwd,
+            "confirmPassword" : confirmPwd
         ]
         
         guard let requestUrl = url else { fatalError() }
