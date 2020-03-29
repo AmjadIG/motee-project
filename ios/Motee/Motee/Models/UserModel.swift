@@ -323,4 +323,53 @@ class UserModel {
             semaphore.wait()
         return res
     }
+    
+    static func updateUser(idUser : String, oldPwd: String, newPwd:String, token : String)->Bool {
+        // Prepare URL
+        
+        let stringurl = "https://mootee-api.herokuapp.com/users/"
+        let url = URL(string: stringurl)//ICI
+        
+        let body = [
+            "id" : idUser,
+            "oldPassword" : oldPwd,
+            "newPassword" : newPwd
+        ]
+        
+        guard let requestUrl = url else { fatalError() }
+        // Prepare URL Request Object
+        var request = URLRequest(url: requestUrl)
+        request.httpMethod = "PUT"
+        let semaphore = DispatchSemaphore(value :0)
+        var res : Bool = true
+        // Set HTTP Request Body
+        guard let requestBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {return false}
+        
+        request.httpBody = requestBody
+        request.setValue(getFullToken(token: token), forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        print("json : " , String(data : request.httpBody!, encoding: .utf8)!)
+        // Perform HTTP Request
+         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let error = error {
+                print("Error took place \(error)")
+                return
+            }
+                
+                let resp = response as? HTTPURLResponse
+            print("code d'erreur")
+                res = (resp?.statusCode == 200)
+                print(res)
+            if let data = data{
+                print(data)
+                if let jsonString = String(data: data, encoding: .utf8){
+                    print(jsonString)
+                }
+            }
+            semaphore.signal()
+        }
+        task.resume()
+        semaphore.wait()
+        return res
+    }
 }

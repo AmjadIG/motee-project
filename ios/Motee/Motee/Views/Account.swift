@@ -16,6 +16,11 @@ struct Account: View {
     @State var newPwd : String = ""
     
     @State var pwdChanged : Bool = false
+    
+    let samePwd = "Le nouveau mot de passe doit être différent de l'ancien!"
+    let alUPwd = "Mot de passe déjà utilisé... Réessayez plus tard"
+    let coPb = "Problème de connexion... Réessayez plus tard"
+    let okPwd = "Mot de passe changé avec succès !"
 
     @EnvironmentObject var fk : FilterKit
     let dateFormatter = DateFormatter()
@@ -93,15 +98,52 @@ struct Account: View {
                     Spacer()
                 }
                 if pwdChanged {
-                    HStack {
-                        Text("Mot de passe changé avec succès !")
-                        .bold()
-                        .foregroundColor(Color.green)
-                        .multilineTextAlignment(.center)
-                        .padding(.all, 0.0)
-                        .padding()
-                        .transition(.scale)
+                    if oldPwd != newPwd {
+                        if newPwd != currentUser.passwordProperties {
+                            if UserModel.updateUser(idUser: currentUser.idUser , oldPwd: oldPwd, newPwd: newPwd, token: fk.token){
+                                HStack {
+                                    Text(okPwd)
+                                    .bold()
+                                    .foregroundColor(Color.red)
+                                    .multilineTextAlignment(.center)
+                                    .padding(.all, 0.0)
+                                    .padding()
+                                    .transition(.scale)
+                                }
+                            }else {
+                                HStack {
+                                    Text(coPb)
+                                    .bold()
+                                    .foregroundColor(Color.red)
+                                    .multilineTextAlignment(.center)
+                                    .padding(.all, 0.0)
+                                    .padding()
+                                    .transition(.scale)
+                                }
+                            }
+                        } else {
+                            HStack {
+                                Text(alUPwd)
+                                .bold()
+                                .foregroundColor(Color.red)
+                                .multilineTextAlignment(.center)
+                                .padding(.all, 0.0)
+                                .padding()
+                                .transition(.scale)
+                            }
+                        }
+                    } else {
+                        HStack {
+                            Text(samePwd)
+                            .bold()
+                            .foregroundColor(Color.red)
+                            .multilineTextAlignment(.center)
+                            .padding(.all, 0.0)
+                            .padding()
+                            .transition(.scale)
+                        }
                     }
+                    
                 }
                 NavigationLink(destination: AddProposition()){
                     Text("Je contribue tout de suite!")

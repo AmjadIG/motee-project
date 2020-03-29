@@ -27,10 +27,11 @@ func paramTags(tags: [Tag])->String {
     
     for tag in tags {
         if tag.equals(otherTag : tags[0]) {
-            postString += "?"
+            postString += "?tag=\(tag.id)"
+        } else {
+            postString += "tag" + String(iterator) + "=" + tag.id
+            iterator += 1
         }
-        postString += "tag" + String(iterator) + "=" + tag.id
-        iterator += 1
         if !tag.equals(otherTag : tags[tags.count-1]) {
             postString += "&"
         }

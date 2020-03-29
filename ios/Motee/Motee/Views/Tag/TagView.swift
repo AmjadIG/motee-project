@@ -15,12 +15,16 @@ struct TagView: View {
     var body : some View {
         
         VStack{
-            Text(" #\(tag.label) ")
+            Button(action:{
+                self.fk.tags.append(self.tag)
+            }){
+                Text(" #\(tag.label) ")
                 .bold()
                 .padding()
                 .background(generateColor(name: color))
                 .cornerRadius(5)
                 .foregroundColor(Color.white)
+            }
         }.lineLimit(1)
     }
 }
