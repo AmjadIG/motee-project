@@ -42,15 +42,16 @@ struct AnswersPropsView : View {
                 if(!showAllAnswers && !showBestAnswer){
                     Text("Afficher la meilleure réponse").padding([.leading, .bottom, .trailing])
                 }
-            }
+            }.foregroundColor(Color.pink)
                 if (showBestAnswer){
                     AnswerView(answer: bestAnswer)
                     Button(action : {
                         self.showBestAnswer = false
                         self.showAllAnswers.toggle()
                     }){
-                        Text("Afficher toutes les réponses").padding([.leading, .bottom, .trailing])
+                        Text("Afficher toutes les réponses").padding([.leading, .bottom, .trailing]).foregroundColor(Color.pink)
                     }
+
                 }
                 if (showAllAnswers){
                     ListAnswersView(proposition: $proposition)
@@ -58,7 +59,7 @@ struct AnswersPropsView : View {
                         self.showAllAnswers.toggle()
                         self.toggleColor()
                     }){
-                        Text("Cacher toutes les réponses").padding([.leading, .bottom, .trailing])
+                        Text("Cacher toutes les réponses").padding([.leading, .bottom, .trailing]).foregroundColor(Color.pink)
                     }
                 }
             }.onTapGesture { }

@@ -66,7 +66,9 @@ struct PropositionFooter : View {
                             SymbolGenerator(mySymbol: "square.and.pencil", myColor: "gray")
                         }
                         Button( action :  {
-                            PropositionModel.deleteProposition(idProp: self.proposition.idPublication, token: self.fk.token)
+                            if PropositionModel.deleteProposition(idProp: self.proposition.idPublication, token: self.fk.token){
+                                print("Message supprimé : \(self.proposition.contentPub)")
+                            }
                         }){
                             SymbolGenerator(mySymbol: "trash", myColor: "red")
                         }
@@ -79,8 +81,8 @@ struct PropositionFooter : View {
                 HStack{
                     TextField("Commentaire...", text: $comment).cornerRadius(20)
                     Button(action:{
-                        // TODO
-                        //Envoyer le commentaire
+                        AnswerModel.addAnswer(contentPub: self.comment, isAnonymous: false, tagsAns: PropositionModel.getAllTags(proposition: self.proposition), idProposition: self.proposition.id, token: self.fk.token)
+                        self.comment = ""
                     }){
                         Image(systemName: "arrowtriangle.right.circle.fill").padding(5)
                     }

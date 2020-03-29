@@ -108,7 +108,7 @@ class AnswerModel {
     
     static func addAnswer (contentPub: String, isAnonymous: Bool, tagsAns: [Tag], idProposition : String, token: String) -> Bool{
         // Prepare URL
-        let stringurl = "https://mootee-api.herokuapp.com/answers/newAnswer"
+        let stringurl = "https://mootee-api.herokuapp.com/answers"
         let url = URL(string: stringurl)//ICI
         
         let tagsAnswer : String = paramTagsToLabel(tags: tagsAns)
@@ -124,7 +124,7 @@ class AnswerModel {
         var request = URLRequest(url: requestUrl)
         request.httpMethod = "POST"
         let semaphore = DispatchSemaphore(value :0)
-        var res : Bool = false
+        var res : Bool = true
         // Set HTTP Request Body
         guard let requestBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {return false}
         

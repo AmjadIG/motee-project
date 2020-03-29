@@ -10,6 +10,7 @@ import Combine
 import SwiftUI
 
 struct ListAnswersView: View {
+    @EnvironmentObject var fk : FilterKit
     @Binding var proposition : Proposition
     
     var body: some View {

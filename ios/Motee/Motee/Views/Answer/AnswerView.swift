@@ -27,9 +27,9 @@ struct AnswerView: View {
                     AnswerFooter(answer: answer)
                 }
                 
-            }.frame(alignment: .leading)
-                .background(Color.blue.opacity(0.5))
-                .cornerRadius(20).shadow(radius: 20)
+                }.frame(alignment: .leading).edgesIgnoringSafeArea(.all)
+                .background(Color.red.opacity(0.8))
+            .cornerRadius(20).shadow(radius: 20)
                 .padding(.leading, 30.0)
                 .padding()
     }

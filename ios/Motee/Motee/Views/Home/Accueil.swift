@@ -24,7 +24,7 @@ struct Accueil: View {
                                     SymbolGenerator(mySymbol :"plus.square.fill", myColor: "pink")
                                     Text("Ajouter").foregroundColor(.black).bold()
                                 }
-                            }
+                            }.padding()
                         }
                         PropositionFiltred(filtre: fk.filtered, tags: fk.tags)
                     }
