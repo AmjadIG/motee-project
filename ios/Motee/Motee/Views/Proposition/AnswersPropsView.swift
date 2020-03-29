@@ -14,7 +14,6 @@ struct AnswersPropsView : View {
     @Binding var showAllAnswers : Bool
     @Binding var colorIfClicked : Color
     @Binding var colorIfClicked2 : Color
-    @State var bestAnswer : Answer?
     
     var body: some View {
         let drag = DragGesture()
@@ -38,10 +37,10 @@ struct AnswersPropsView : View {
                 self.toggleColor()
             }){
                 if (showBestAnswer){
-                    Text("Cacher la meilleure réponse")
+                    Text("Cacher la meilleure réponse").padding()
                 }
                 if(!showAllAnswers && !showBestAnswer){
-                    Text("Afficher la meilleure réponse")
+                    Text("Afficher la meilleure réponse").padding()
                 }
             }
                 if (showBestAnswer){
@@ -50,7 +49,7 @@ struct AnswersPropsView : View {
                         self.showBestAnswer = false
                         self.showAllAnswers.toggle()
                     }){
-                        Text("Afficher toutes les réponses")
+                        Text("Afficher toutes les réponses").padding()
                     }
                 }
                 if (showAllAnswers){
@@ -59,7 +58,7 @@ struct AnswersPropsView : View {
                         self.showAllAnswers.toggle()
                         self.toggleColor()
                     }){
-                        Text("Cacher toutes les réponses")
+                        Text("Cacher toutes les réponses").padding()
                     }
                 }
             }.onTapGesture { }
@@ -79,16 +78,14 @@ struct AnswersPropsView : View {
     }
 }
 
-/*struct AnswersPropsView_Previews: PreviewProvider {
-    @State static var proposition = PropositionModel.getAllProps()[0]
+struct AnswersPropsView_Previews: PreviewProvider {
+    @State static var proposition = PropositionModel.getPropositionById(idProp: "5e7b5c4c7cbb262ef84ab040")
     @State static var showBestAnswer = false
     @State static var showAllAnswers = false
     @State static var colorIfCliked = Color.black
     @State static var colorIfClicked2 = Color.white
-    @State static var bestAnswer : Answer?  = nil
     static var previews: some View {
-        AnswersPropsView(proposition: $proposition, showBestAnswer: $showBestAnswer, showAllAnswers: $showAllAnswers, colorIfClicked: $colorIfCliked, colorIfClicked2: $colorIfClicked2, bestAnswer: bestAnswer).environmentObject(FilterKit())
+        AnswersPropsView(proposition: $proposition, showBestAnswer: $showBestAnswer, showAllAnswers: $showAllAnswers, colorIfClicked: $colorIfCliked, colorIfClicked2: $colorIfClicked2).environmentObject(FilterKit())
         
     }
 }
-*/

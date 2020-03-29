@@ -20,6 +20,6 @@ struct PropositionTagsView : View {
                     .cornerRadius(5)
                     .foregroundColor(Color.white)
             }
-        }
+        }.padding(.horizontal)
     }
 }

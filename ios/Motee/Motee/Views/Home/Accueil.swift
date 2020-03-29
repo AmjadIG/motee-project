@@ -19,18 +19,17 @@ struct Accueil: View {
                     VStack(){
                         FilterTitle()
                         if(fk.currentUser != nil){
-                        HStack{
-                            NavigationLink(destination : { AddProposition() }() ){
-                                SymbolGenerator(mySymbol :"plus.square.fill", myColor: "pink")
-                                Text("Ajouter").foregroundColor(.black).bold()
+                            HStack{
+                                NavigationLink(destination : { AddProposition() }() ){
+                                    SymbolGenerator(mySymbol :"plus.square.fill", myColor: "pink")
+                                    Text("Ajouter").foregroundColor(.black).bold()
+                                }
                             }
                         }
-                        }
                         PropositionFiltred(filtre: fk.filtered, tags: fk.tags)
-                        Spacer()
                     }
                     Spacer()
-                    }
+                }
             }
         }
     }

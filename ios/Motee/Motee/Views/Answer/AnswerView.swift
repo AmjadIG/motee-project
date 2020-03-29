@@ -14,31 +14,29 @@ struct AnswerView: View {
     @EnvironmentObject var fk : FilterKit
     var answer : Answer
     let dateFormatter = DateFormatter()
-        
+    
     var body: some View {
-        VStack{
             VStack{
                 HStack{
                     Text(UserModel.getUserById(idUser: answer.owner ).pseudo).bold().foregroundColor(.white)
                     Spacer()
                     Text(getGoodDate(wrongD: answer.datePublication)).bold().foregroundColor(.white)
                 }.padding()
-                Text(answer.contentPub).foregroundColor(.white).padding()
+                Text(answer.contentPub).foregroundColor(.white).padding(.vertical)
                 if (fk.currentUser != nil){
                     AnswerFooter(answer: answer)
                 }
                 
-                }.frame(alignment: .leading).edgesIgnoringSafeArea(.all)
+            }.frame(alignment: .leading)
                 .background(Color.blue.opacity(0.5))
-            .cornerRadius(20).shadow(radius: 20)
+                .cornerRadius(20).shadow(radius: 20)
                 .padding(.leading, 30.0)
-            .padding()
-        }
+                .padding()
     }
 }
 
 struct AnswerView_Previews: PreviewProvider {
-    @State static var answer = AnswerModel.getAll()[0]
+    @State static var answer = AnswerModel.getAll()[2]
     static var previews: some View {
         AnswerView(answer: answer).environmentObject(FilterKit())
     }

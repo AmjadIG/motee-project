@@ -14,22 +14,20 @@ struct AnswerFooter: View {
     
     var body: some View {
         VStack{
-            VStack{
-                HStack {
-                    Spacer()
-                    AnswerLiked(answer: answer)
-                    Spacer()
-                    Report()
-                    Spacer()
-                }
+            HStack {
+                Spacer()
+                AnswerLiked(answer: answer)
+                Spacer()
+                Report()
+                Spacer()
             }
-        }.padding()
+        }
     }
 }
 /*
-struct AnswerFooter_Previews: PreviewProvider {
-    static var previews: some View {
-        AnswerFooter()
-    }
-}
-*/
+ struct AnswerFooter_Previews: PreviewProvider {
+ static var previews: some View {
+ AnswerFooter()
+ }
+ }
+ */
