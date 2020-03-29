@@ -28,7 +28,7 @@ struct LoginBanner: View {
                 }.background(Color.pink)
                     
             }
-        }.padding(.top,80)
+        }.padding(.top,30)
     }
 }
 

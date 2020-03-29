@@ -9,10 +9,12 @@
 import SwiftUI
 
 struct Report: View {
-    
+    @EnvironmentObject var fk : FilterKit
+    @Binding var proposition : Proposition
     var body: some View {
         Button(action:{
-            //signaler
+            self.fk.showReport = true
+            self.fk.propositionReported = self.proposition
         }){
             Image(systemName: "exclamationmark.triangle.fill").padding(7)
                 .foregroundColor(.white)

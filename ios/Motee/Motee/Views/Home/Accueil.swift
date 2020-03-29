@@ -28,7 +28,6 @@ struct Accueil: View {
                         }
                         PropositionFiltred(filtre: fk.filtered, tags: fk.tags)
                     }
-                    Spacer()
                 }
             }
         }

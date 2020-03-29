@@ -18,7 +18,7 @@ struct AnswerFooter: View {
                 Spacer()
                 AnswerLiked(answer: answer)
                 Spacer()
-                Report()
+                //Report()
                 Spacer()
             }
         }

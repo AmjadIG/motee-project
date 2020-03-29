@@ -37,10 +37,10 @@ struct AnswersPropsView : View {
                 self.toggleColor()
             }){
                 if (showBestAnswer){
-                    Text("Cacher la meilleure réponse").padding()
+                    Text("Cacher la meilleure réponse").padding([.leading, .bottom, .trailing])
                 }
                 if(!showAllAnswers && !showBestAnswer){
-                    Text("Afficher la meilleure réponse").padding()
+                    Text("Afficher la meilleure réponse").padding([.leading, .bottom, .trailing])
                 }
             }.foregroundColor(Color.pink)
                 if (showBestAnswer){
@@ -49,8 +49,9 @@ struct AnswersPropsView : View {
                         self.showBestAnswer = false
                         self.showAllAnswers.toggle()
                     }){
-                        Text("Afficher toutes les réponses")
-                    }.foregroundColor(Color.pink)
+                        Text("Afficher toutes les réponses").padding([.leading, .bottom, .trailing]).foregroundColor(Color.pink)
+                    }
+
                 }
                 if (showAllAnswers){
                     ListAnswersView(proposition: $proposition)
@@ -58,8 +59,8 @@ struct AnswersPropsView : View {
                         self.showAllAnswers.toggle()
                         self.toggleColor()
                     }){
-                        Text("Cacher toutes les réponses")
-                    }.foregroundColor(Color.pink)
+                        Text("Cacher toutes les réponses").padding([.leading, .bottom, .trailing]).foregroundColor(Color.pink)
+                    }
                 }
             }.onTapGesture { }
                 .gesture(drag)

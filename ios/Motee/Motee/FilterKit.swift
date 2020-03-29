@@ -11,6 +11,8 @@ import Foundation
 class FilterKit: ObservableObject, Identifiable{
     @Published var filtered : String = "like"
     @Published var showFilters : Bool = false
+    @Published var showReport : Bool = false
+    @Published var propositionReported : Proposition? = PropositionModel.getAll()[0]
     @Published var tags : [Tag] = []
     @Published var currentUser : User? = nil
     @Published var token : String = ""
