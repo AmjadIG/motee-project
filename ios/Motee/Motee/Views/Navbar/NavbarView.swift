@@ -26,7 +26,7 @@ struct NavbarView: View {
             if self.fk.showFilters {
                 Filter()
             }
-            if self.fk.showFilters {
+            if self.fk.showReport {
                 ReportView()
             }
             GeometryReader { geometry in
