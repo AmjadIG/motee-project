@@ -27,10 +27,9 @@ struct Accueil: View {
                             }.padding()
                         }
                         PropositionFiltred(filtre: fk.filtered, tags: fk.tags)
-                        Spacer()
                     }
                     Spacer()
-                    }
+                }
             }
         }
     }
