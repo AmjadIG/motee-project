@@ -15,6 +15,7 @@ struct PropositionView : View {
     @State var showAllAnswers = false
     @State var colorIfClicked = generateColor(name: "white")
     @State var colorIfClicked2 = generateColor(name: "black")
+    @State var colorIfClicked3 = generateColor(name: "orange")
     @State var editing = false
     @State var editProposition = ""
     @State var editAnonymous = false
@@ -27,7 +28,7 @@ struct PropositionView : View {
                     Text(getGoodDate(wrongD: proposition.datePublication))
                         .bold()
                         .foregroundColor(colorIfClicked2)
-                }.padding().background(colorIfClicked)
+                }.padding().background(colorIfClicked3)
                 PropositionTagsView(proposition: $proposition)
                 if editing {
                     FieldGenerator.plain(label: "",field: "Ecrivez votre propos", text: $editProposition)
@@ -42,7 +43,7 @@ struct PropositionView : View {
                 .cornerRadius(20).shadow(radius: 20)
                 .padding([.leading, .bottom, .trailing])
             
-            AnswersPropsView(proposition: $proposition, showBestAnswer: $showBestAnswer, showAllAnswers: $showAllAnswers, colorIfClicked: $colorIfClicked, colorIfClicked2: $colorIfClicked2)
+            AnswersPropsView(proposition: $proposition, showBestAnswer: $showBestAnswer, showAllAnswers: $showAllAnswers, colorIfClicked: $colorIfClicked, colorIfClicked2: $colorIfClicked2).padding()
         }
     }
 }

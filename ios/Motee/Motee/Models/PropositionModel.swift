@@ -274,7 +274,6 @@ class PropositionModel {
                 }
                 // Convert HTTP Response Data to a String
                     let resp = response as? HTTPURLResponse
-                    print(resp?.statusCode)
                     res = (resp?.statusCode == 200)
         }
         task.resume()

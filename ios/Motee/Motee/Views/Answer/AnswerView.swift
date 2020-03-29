@@ -29,7 +29,7 @@ struct AnswerView: View {
                 }
                 
                 }.frame(alignment: .leading).edgesIgnoringSafeArea(.all)
-                .background(Color.blue.opacity(0.5))
+                .background(Color.red.opacity(0.8))
             .cornerRadius(20).shadow(radius: 20)
                 .padding(.leading, 30.0)
             .padding()
