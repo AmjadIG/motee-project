@@ -22,7 +22,7 @@ class UserModel {
         // Prepare URL
         let stringURL = "https://mootee-api.herokuapp.com/users"
         let url = URL(string: stringURL)
-        print("in getAll")
+        print("in getAll Users")
         guard let requestUrl = url else { fatalError() }
         // Prepare URL Request Object (GET)
         var request = URLRequest(url: requestUrl)
@@ -61,7 +61,7 @@ class UserModel {
         // Prepare URL
         let stringURL = "https://mootee-api.herokuapp.com/users/"+idUser
         let url = URL(string: stringURL)
-        print("in getAll")
+        print("in get User by id")
         guard let requestUrl = url else { fatalError() }
         // Prepare URL Request Object (GET)
         var request = URLRequest(url: requestUrl)

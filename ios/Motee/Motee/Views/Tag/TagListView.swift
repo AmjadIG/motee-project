@@ -14,14 +14,14 @@ struct TagListView: View {
     var body: some View {
         HStack{
             ForEach(tagList,id: \.label){oneTag in
-                Text(" #\(oneTag.label) ").bold().background(Color.blue).cornerRadius(5).foregroundColor(Color.white)
+                Text(" #\(oneTag.label) ").bold().background(Color.pink).cornerRadius(5).foregroundColor(Color.white)
             }
             Button(action: {
                 self.tagList.removeAll()
             }){
                 Image(systemName: "trash")
                     .font(.title)
-                    .foregroundColor(Color.gray)
+                    .foregroundColor(Color.white)
             }
         }
     }

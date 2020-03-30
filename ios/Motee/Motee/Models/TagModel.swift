@@ -20,7 +20,7 @@ class TagModel {
         // Prepare URL
         let stringURL = "https://mootee-api.herokuapp.com/tags/"
         let url = URL(string: stringURL)
-        print("in getAll")
+        print("in getAll Tags")
         guard let requestUrl = url else { fatalError() }
         // Prepare URL Request Object (GET)
         var request = URLRequest(url: requestUrl)
@@ -59,7 +59,7 @@ class TagModel {
         // Prepare URL
         let stringURL = "https://mootee-api.herokuapp.com/tags/best"
         let url = URL(string: stringURL)
-        print("in get Best")
+        print("in get Best Tags")
         guard let requestUrl = url else { fatalError() }
         // Prepare URL Request Object (GET)
         var request = URLRequest(url: requestUrl)
@@ -98,7 +98,7 @@ class TagModel {
         // Prepare URL
         let stringURL = "https://mootee-api.herokuapp.com/tags/"+idTag
         let url = URL(string: stringURL)
-        print("in get by id")
+        print("in get Tag by id")
         guard let requestUrl = url else { fatalError() }
         // Prepare URL Request Object (GET)
         var request = URLRequest(url: requestUrl)

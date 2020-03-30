@@ -25,12 +25,6 @@ struct Account: View {
     let noSameNewPwd = "Les mots de passe ne correspondent pas..."
 
     @EnvironmentObject var fk : FilterKit
-    let dateFormatter = DateFormatter()
-    
-    init(){
-        dateFormatter.dateStyle = .short
-        dateFormatter.timeStyle = .short
-    }
     
     var body: some View {
         
@@ -45,29 +39,29 @@ struct Account: View {
                 })
             }
             return AnyView(NavigationView{
-            ScrollView{
+                ScrollView(.vertical){
                 VStack{
                     Title(myTitle: "Mes informations").padding(.vertical)
                     VStack(alignment: .leading){
                         HStack(alignment: .center){
-                            SymbolGenerator(mySymbol: "person", myColor: "black")
-                            Text(""+currentUser.pseudo).padding(.vertical)
+                            SymbolGenerator(mySymbol: "person", myColor: "pink")
+                            Text(""+currentUser.pseudo).bold().padding(.vertical).foregroundColor(.black)
                         }
                         HStack{
-                            SymbolGenerator(mySymbol: "envelope", myColor: "black")
-                            Text(currentUser.email).padding(.vertical)
+                            SymbolGenerator(mySymbol: "envelope", myColor: "pink")
+                            Text(currentUser.email).bold().padding(.vertical).foregroundColor(.black)
                         }
                         /*HStack{
                             SymbolGenerator(mySymbol: "location", myColor: "black")
                             Text(currentUser!.city).padding(.vertical)
                         }*/
                     }
-                    Title(myTitle: "Mes contributions").padding(.vertical)
+                    Title(myTitle: "Mes contributions").padding(.vertical).foregroundColor(.black)
                     
                     if (currentUser.idPropositions.count>0 || currentUser.idAnswers.count>0){
-                        Text("\(currentUser.pseudo), merci pour vos \(currentUser.idPropositions.count+currentUser.idAnswers.count) réponses !").padding(.vertical)
+                        Text("\(currentUser.pseudo), merci pour vos \(currentUser.idPropositions.count+currentUser.idAnswers.count) réponses !").padding(.vertical).foregroundColor(.black)
                     }else{
-                        Text("\(currentUser.pseudo)! Vous n'avez pas encore contribué à l'application.. et si c'était le moment de nous partager votre expérience?").padding(.all)
+                        Text("\(currentUser.pseudo)! Vous n'avez pas encore contribué à l'application.. et si c'était le moment de nous partager votre expérience?").padding(.all).foregroundColor(.black)
                     }
                     if !pwdChanged {
                         Button(action:{
@@ -93,10 +87,10 @@ struct Account: View {
                         }){
                             Text("Changer de mot de passe")
                             .font(.headline)
-                            .foregroundColor(.white)
+                            .foregroundColor(.pink)
                             .padding(.vertical)
                             .frame(width: 320, height: 60)
-                            .background(generateColor(name: "orange"))
+                                .background(LinearGradient(gradient: Gradient(colors: [.yellow, .pink]), startPoint: .leading, endPoint: .trailing))
                             .cornerRadius(40)
                         }
                     }
@@ -108,7 +102,7 @@ struct Account: View {
                                         HStack {
                                             Text(okPwd)
                                             .bold()
-                                            .foregroundColor(Color.red)
+                                            .foregroundColor(Color.green)
                                             .multilineTextAlignment(.center)
                                             .padding(.all, 0.0)
                                             .padding()
@@ -167,7 +161,7 @@ struct Account: View {
                             .foregroundColor(.white)
                             .padding(.vertical)
                             .frame(width: 320, height: 60)
-                            .background(generateColor(name: "pink"))
+                            .background(generateColor(name: "orange"))
                             .cornerRadius(40)
                     }.padding()
                     Button(action:{
@@ -185,7 +179,6 @@ struct Account: View {
                         .background(generateColor(name: "red"))
                         .cornerRadius(40)
                     }
-                    Spacer()
                 }
             }
         })

@@ -13,7 +13,6 @@ import UserNotifications
 struct AnswerView: View {
     @EnvironmentObject var fk : FilterKit
     var answer : Answer
-    let dateFormatter = DateFormatter()
     
     var body: some View {
             VStack{
@@ -24,9 +23,8 @@ struct AnswerView: View {
                 }.padding()
                 Text(answer.contentPub).foregroundColor(.white).padding()
                     AnswerFooter(answer: answer)
-                
-                }.frame(alignment: .leading)
-                .background(Color.red.opacity(0.8))
+                }.frame(alignment: .leading).edgesIgnoringSafeArea(.all)
+                .background(LinearGradient(gradient: Gradient(colors: [.orange, .pink]), startPoint: .leading, endPoint: .trailing).opacity(0.8))
             .cornerRadius(20).shadow(radius: 20)
                 .padding(.leading, 30.0)
                 .padding([.top, .trailing])

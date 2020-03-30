@@ -32,7 +32,7 @@ struct PropositionFooter : View {
                             }
                             .padding(7)
                             .foregroundColor(.white)
-                            .background(Color.blue).cornerRadius(20)
+                            .background(LinearGradient(gradient: Gradient(colors: [.yellow, .pink]), startPoint: .leading, endPoint: .trailing)).cornerRadius(20)
                         }
                     }else if self.editing{
                         Button(action: {
@@ -40,7 +40,7 @@ struct PropositionFooter : View {
                             self.editing.toggle()
                         }){
                             HStack{
-                                Text("éditer")
+                                Text("Editer")
                                 Image(systemName: "message.fill")
                             }.padding(7)
                                 .foregroundColor(.white)
