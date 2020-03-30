@@ -39,8 +39,8 @@ func paramTags(tags: [Tag])->String {
     return postString
 }
 
-//Donnée : Tableau T de Tags
-//Résultat : Renvoie un string composé pour le corps d'une requête
+//Donnée : Tableau T de Tags ex: ["EnSoiree","Sceptique","Enervée"]
+//Résultat : Renvoie un string composé pour le corps d'une requête, ex: "EnSoiree Sceptique Enervée"
 func paramTagsToLabel(tags: [Tag])->String {
     var string = ""
     for tag in tags {

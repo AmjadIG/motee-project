@@ -16,7 +16,8 @@ struct LoginForm: View {
     var body: some View {
         NavigationView{
             VStack{
-                Title(myTitle: "Connexion")
+                Spacer()
+                Title(myTitle: "MoTee").foregroundColor(.white)
                 LoginPicture()
                 if !noError {
                     Text("Pseudo ou mot de passe incorrect").foregroundColor(Color.red)
@@ -31,13 +32,28 @@ struct LoginForm: View {
                         self.fk.currentPage = "Accueil"
                     }
                 }){
-                    ButtonGenerator(myText: "Se connecter", myColor: "green").padding()
+                    Text("Se connecter")
+                    .font(.headline)
+                    .foregroundColor(.pink)
+                    .padding()
+                    .frame(width: 220, height: 60)
+                        .background(Color.white)
+                    .cornerRadius(40)
+                    .padding()
                 }
                 //LoginButton(pseudo: $pseudo,mdp: $mdp)
                 Button(action: { self.fk.currentPage = "register"}){
-                    ButtonGenerator(myText: "S'inscrire", myColor: "blue")
+                    Text("S'inscrire")
+                    .font(.headline)
+                    .foregroundColor(.pink)
+                    .padding()
+                    .frame(width: 220, height: 60)
+                        .background(Color.white)
+                    .cornerRadius(40)
+                    .padding()
                 }
-            }
+                Spacer()
+            }.background(LinearGradient(gradient: Gradient(colors: [.yellow, .pink]), startPoint: .leading, endPoint: .trailing)).edgesIgnoringSafeArea(.top)
         }
     }
     func findConnexion(pseudo : String, mdp : String) -> Bool {

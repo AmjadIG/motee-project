@@ -24,7 +24,7 @@ class AnswerModel {
         // Prepare URL
         let stringURL = "https://mootee-api.herokuapp.com/answers"
         let url = URL(string: stringURL)
-        print("in getAll")
+        print("in getAll Answers")
         guard let requestUrl = url else { fatalError() }
         // Prepare URL Request Object (GET)
         var request = URLRequest(url: requestUrl)

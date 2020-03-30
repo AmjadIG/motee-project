@@ -12,9 +12,8 @@ struct Accueil: View {
     @EnvironmentObject var fk : FilterKit
     var body: some View {
         NavigationView{
-            ScrollView{
+            ScrollView(.vertical){
                 VStack{
-                    LoginBanner()
                     TopTags()
                     VStack(){
                         FilterTitle()
@@ -24,7 +23,7 @@ struct Accueil: View {
                                     SymbolGenerator(mySymbol :"plus.square.fill", myColor: "pink")
                                     Text("Ajouter").foregroundColor(.black).bold()
                                 }
-                            }.padding()
+                            }
                         }
                         PropositionFiltred(filtre: fk.filtered, tags: fk.tags)
                     }

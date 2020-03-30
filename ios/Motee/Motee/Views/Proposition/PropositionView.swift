@@ -15,7 +15,6 @@ struct PropositionView : View {
     @State var showAllAnswers = false
     @State var colorIfClicked = generateColor(name: "white")
     @State var colorIfClicked2 = generateColor(name: "black")
-    @State var colorIfClicked3 = generateColor(name: "orange")
     @State var editing = false
     @State var editProposition = ""
     @State var editAnonymous = false
@@ -28,7 +27,7 @@ struct PropositionView : View {
                     Text(getGoodDate(wrongD: proposition.datePublication))
                         .bold()
                         .foregroundColor(colorIfClicked2)
-                }.padding().background(colorIfClicked3)
+                }.padding().background(LinearGradient(gradient: Gradient(colors: [.yellow, .pink]), startPoint: .leading, endPoint: .trailing))
                 PropositionTagsView(proposition: $proposition)
                 if editing {
                     FieldGenerator.plain(label: "",field: "Ecrivez votre propos", text: $editProposition)

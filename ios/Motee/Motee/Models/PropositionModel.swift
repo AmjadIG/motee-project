@@ -25,7 +25,7 @@ class PropositionModel {
         // Prepare URL
         let stringURL = "https://mootee-api.herokuapp.com/propositions"
         let url = URL(string: stringURL)
-        print("in getAll")
+        print("in getAll Props")
         guard let requestUrl = url else { fatalError() }
         // Prepare URL Request Object (GET)
         var request = URLRequest(url: requestUrl)
@@ -66,7 +66,7 @@ class PropositionModel {
         // Prepare URL
         let stringURL = "https://mootee-api.herokuapp.com/propositions/"+idProp
         let url = URL(string: stringURL)
-        print("in get by id")
+        print("in get Props by id")
         guard let requestUrl = url else { fatalError() }
         // Prepare URL Request Object (GET)
         var request = URLRequest(url: requestUrl)
