@@ -11,9 +11,6 @@ import SwiftUI
 struct AnswerLiked : View {
     var answer : Answer
     @EnvironmentObject var fk : FilterKit
-    init(answer : Answer){
-        self.answer = answer
-    }
     
     var body: some View {
         Button(action:{
@@ -34,10 +31,10 @@ struct AnswerLiked : View {
         }
     }
 }
-/*
+
 struct AnswerLiked_Previews: PreviewProvider {
+    static var answer = AnswerModel.getAnswerById(idAns: "5e7b696b7cbb262ef84ab053")
     static var previews: some View {
-        AnswerLiked()
+        AnswerLiked(answer: answer).environmentObject(FilterKit())
     }
 }
-*/

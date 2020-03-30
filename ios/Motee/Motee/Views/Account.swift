@@ -99,8 +99,6 @@ struct Account: View {
                             .background(generateColor(name: "orange"))
                             .cornerRadius(40)
                         }
-                        Divider()
-                        Spacer()
                     }
                     if pwdChanged {
                         if oldPwd != newPwd {

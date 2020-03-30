@@ -14,7 +14,7 @@ struct ReportView: View {
     var body : some View {
         guard let propReported = fk.propositionReported else {
             return AnyView(ZStack {
-                Color.black.opacity(0.4) .edgesIgnoringSafeArea(.vertical)
+                Color.black.opacity(0.1).edgesIgnoringSafeArea(.vertical)
                 VStack(spacing: 20) {
                     Text("Signalement")
                         .bold()
@@ -42,7 +42,7 @@ struct ReportView: View {
                 Text("Rappel de ses propos : ")
                 Text("'' \(propReported.contentPub) ''").padding()
                 HStack{
-                    Button(action: {self.fk.showReport = false }) {
+                    Button(action: {self.fk.showReport = false ; self.fk.propositionReported = nil}) {
                         Text("Annuler")
                             .bold()
                             .padding(.vertical)

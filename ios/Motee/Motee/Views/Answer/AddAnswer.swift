@@ -65,11 +65,9 @@ struct AddAnswerView: View {
     }
 }
 
-/*
 struct AddAnswerView_Previews: PreviewProvider {
-
+    @State static var proposition = PropositionModel.getAll()[0]
     static var previews: some View {
-        AddAnswerView()
+        AddAnswerView(propos: $proposition)
     }
 }
-*/

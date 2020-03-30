@@ -22,16 +22,14 @@ struct AnswerView: View {
                     Spacer()
                     Text(getGoodDate(wrongD: answer.datePublication)).bold().foregroundColor(.white)
                 }.padding()
-                Text(answer.contentPub).foregroundColor(.white).padding(.vertical)
-                if (fk.currentUser != nil){
+                Text(answer.contentPub).foregroundColor(.white).padding()
                     AnswerFooter(answer: answer)
-                }
                 
-                }.frame(alignment: .leading).edgesIgnoringSafeArea(.all)
+                }.frame(alignment: .leading)
                 .background(Color.red.opacity(0.8))
             .cornerRadius(20).shadow(radius: 20)
                 .padding(.leading, 30.0)
-                .padding()
+                .padding([.top, .trailing])
     }
 }
 
