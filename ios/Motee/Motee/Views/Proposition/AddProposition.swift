@@ -66,7 +66,7 @@ struct AddProposition: View {
                         
                     }.foregroundColor(Color.white).background(Color.blue).cornerRadius(40)
                 }.padding(20)
-            }
+            }.padding(.top,80)
         }
     }
 

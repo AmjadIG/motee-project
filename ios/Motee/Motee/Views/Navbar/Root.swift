@@ -20,7 +20,11 @@ struct Root : View {
                 Account()
             }else if fk.currentPage == "Sign up"{
                 RegisterForm()
-            }
+            }else if fk.currentPage == "Mes propositions"{
+                MyProps(props: UserModel.getPropsByUser(user: fk.currentUser!))
+            }else if fk.currentPage == "Mes réponses"{
+                MyAnswers(answers: UserModel.getAnswersByUser(user: fk.currentUser!))
+                }
             else if fk.currentPage == "Ajouter propos"{
                 AddProposition()
             }

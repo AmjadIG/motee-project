@@ -26,8 +26,11 @@ struct NavbarView: View {
             if self.fk.showFilters {
                 Filter()
             }
-            if self.fk.showReport {
-                ReportView()
+            if self.fk.showPropositionReport {
+                ReportPropositionView()
+            }
+            if self.fk.showAnswerReport {
+                ReportAnswerView()
             }
             GeometryReader { geometry in
                 ZStack(alignment: .leading) {
@@ -38,7 +41,6 @@ struct NavbarView: View {
                             .transition(.move(edge: .leading))
                     }
                 }.gesture(drag)
-                
                 .edgesIgnoringSafeArea(.all)
             }
             .navigationBarTitle(Text(self.fk.currentPage), displayMode: .inline)

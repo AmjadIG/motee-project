@@ -14,6 +14,7 @@ struct Accueil: View {
         NavigationView{
             ScrollView(.vertical){
                 VStack{
+                    LoginBanner()
                     TopTags()
                     VStack(){
                         FilterTitle()

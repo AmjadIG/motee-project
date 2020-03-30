@@ -18,7 +18,7 @@ struct MenuView: View {
                 self.fk.currentPage = "Accueil"
                 self.showMenu.toggle()
             }){
-                SingleLinkNavBar(title: "Accueil", symbol: "house", topPadding: 160)
+                SingleLinkNavBar(title: "Accueil", symbol: "house", topPadding: 170)
             }
             Button(action : {
                 if self.fk.currentUser == nil {
@@ -34,7 +34,7 @@ struct MenuView: View {
                 if self.fk.currentUser == nil {
                     self.fk.currentPage = "Sign in"
                 }else{
-                    self.fk.currentPage = "MyProps"
+                    self.fk.currentPage = "Mes propositions"
                 }
                 self.showMenu.toggle()
             }){
@@ -44,11 +44,11 @@ struct MenuView: View {
                 if self.fk.currentUser == nil {
                     self.fk.currentPage = "Sign in"
                 }else{
-                    self.fk.currentPage = "MyAnswers"
+                    self.fk.currentPage = "Mes réponses"
                 }
                 self.showMenu.toggle()
             }){
-                SingleLinkNavBar(title: "Mes réponse", symbol: "lightbulb", topPadding: 30)
+                SingleLinkNavBar(title: "Mes réponses", symbol: "lightbulb", topPadding: 30)
             }
             Button(action : {
                 if self.fk.currentUser == nil {

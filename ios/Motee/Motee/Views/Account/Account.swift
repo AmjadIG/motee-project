@@ -155,6 +155,18 @@ struct Account: View {
                         }
                         
                     }
+                    Button( action : {
+                        self.fk.currentPage = "Ajouter propos"
+                    }){
+                        Text("Je contribue tout de suite!")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding(.vertical)
+                        .frame(width: 320, height: 60)
+                        .background(generateColor(name: "orange"))
+                        .cornerRadius(40)
+                    }.padding()
+                    /*
                     NavigationLink(destination: AddProposition()){
                         Text("Je contribue tout de suite!")
                             .font(.headline)
@@ -164,6 +176,7 @@ struct Account: View {
                             .background(generateColor(name: "orange"))
                             .cornerRadius(40)
                     }.padding()
+                     */
                     Button(action:{
                         if UserModel.logout(token: self.fk.token){
                             self.fk.currentUser = nil
@@ -179,7 +192,7 @@ struct Account: View {
                         .background(generateColor(name: "red"))
                         .cornerRadius(40)
                     }
-                }
+                }.padding(.top,80)
             }
         })
     }

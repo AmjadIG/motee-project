@@ -10,7 +10,7 @@ import SwiftUI
 
 struct AnswerFooter: View {
     @State var isNotHide :Bool = false
-    var answer : Answer
+    @State var answer : Answer
     
     var body: some View {
         VStack{
@@ -18,7 +18,7 @@ struct AnswerFooter: View {
                 Spacer()
                 AnswerLiked(answer: answer)
                 Spacer()
-                //Report()
+                ReportAnswer(answer: $answer)
                 Spacer()
             }
         }

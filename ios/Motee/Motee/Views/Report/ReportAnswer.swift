@@ -1,20 +1,20 @@
 //
-//  Report.swift
+//  ReportAnswer.swift
 //  Motee
 //
-//  Created by Rayan Bahroun on 06/03/2020.
+//  Created by user164568 on 3/30/20.
 //  Copyright © 2020 groupe3. All rights reserved.
 //
 
 import SwiftUI
 
-struct Report: View {
+struct ReportAnswer: View {
     @EnvironmentObject var fk : FilterKit
-    @Binding var proposition : Proposition
+    @Binding var answer : Answer
     var body: some View {
         Button(action:{
-            self.fk.showReport = true
-            self.fk.propositionReported = self.proposition
+            self.fk.showAnswerReport = true
+            self.fk.answerReported = self.answer
         }){
             Image(systemName: "exclamationmark.triangle.fill").padding(7)
                 .foregroundColor(.white)
@@ -22,4 +22,3 @@ struct Report: View {
         }
     }
 }
-

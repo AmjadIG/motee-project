@@ -1,18 +1,17 @@
 //
-//  ReportView.swift
+//  ReportAnswerView.swift
 //  Motee
 //
-//  Created by user164568 on 3/29/20.
+//  Created by user164568 on 3/30/20.
 //  Copyright © 2020 groupe3. All rights reserved.
 //
 
-
 import SwiftUI
 
-struct ReportView: View {
+struct ReportAnswerView: View {
     @EnvironmentObject var fk : FilterKit
     var body : some View {
-        guard let propReported = fk.propositionReported else {
+        guard let ansReported = fk.answerReported else {
             return AnyView(ZStack {
                 Color.black.opacity(0.1).edgesIgnoringSafeArea(.vertical)
                 VStack(spacing: 20) {
@@ -38,11 +37,11 @@ struct ReportView: View {
                     .frame(maxWidth: .infinity)
                     .background(Color.red)
                     .foregroundColor(Color.white)
-                Text("Vous signalez actuellement : \(UserModel.getUserById(idUser: propReported.owner).pseudo)")
+                Text("Vous signalez actuellement : \(UserModel.getUserById(idUser: ansReported.owner).pseudo)")
                 Text("Rappel de ses propos : ")
-                Text("'' \(propReported.contentPub) ''").padding()
+                Text("'' \(ansReported.contentPub) ''").padding()
                 HStack{
-                    Button(action: {self.fk.showReport = false ; self.fk.propositionReported = nil}) {
+                    Button(action: {self.fk.showAnswerReport = false ; self.fk.answerReported = nil}) {
                         Text("Annuler")
                             .bold()
                             .padding(.vertical)
@@ -50,10 +49,7 @@ struct ReportView: View {
                             .background(lightGreyColor)
                             .foregroundColor(Color.black)
                     }
-                    Button(action: {
-                        self.fk.showFilters = false
-                        
-                    }) {
+                    Button(action: { self.fk.showAnswerReport = false}) {
                         Text("Envoyer")
                             .bold()
                             .padding(.vertical)
@@ -72,9 +68,10 @@ struct ReportView: View {
 }
 
 
-struct ReportView_Previews: PreviewProvider {
+struct ReportAnswerView_Previews: PreviewProvider {
     static var previews: some View {
-        ReportView().environmentObject(FilterKit())
+        ReportPropositionView().environmentObject(FilterKit())
     }
 }
+
 
