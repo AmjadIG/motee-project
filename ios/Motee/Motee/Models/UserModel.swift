@@ -97,8 +97,12 @@ class UserModel {
     
     static func getAnswersByUser(user : User)->[Answer]{
         var answerArray : [Answer] = []
-        for idAns in user.idAnswers {
-            answerArray.append(AnswerModel.getAnswerById(idAns: idAns))
+        if !user.idAnswers.isEmpty {
+            for idAns in user.idAnswers {
+                if let ans = AnswerModel.getAnswerById(idAns: idAns) {
+                    answerArray.append(ans)
+                }
+            }
         }
         return answerArray
     }

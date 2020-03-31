@@ -36,15 +36,17 @@ struct PropositionFooter : View {
                         }
                     }else if self.editing{
                         Button(action: {
-                            PropositionModel.updateProp(idProp: self.proposition.idPublication, contentProp: self.editProposition, isAnonymous: self.proposition.anonymous, idUser: self.fk.currentUser!.idUser, token: self.fk.token)
+                            if PropositionModel.updateProp(idProp: self.proposition.idPublication, contentProp: self.editProposition, isAnonymous: self.proposition.anonymous, idUser: self.fk.currentUser!.idUser, token: self.fk.token) {
+                                print("Proposition updated")
+                            }
                             self.editing.toggle()
                         }){
                             HStack{
                                 Text("Editer")
                                 Image(systemName: "message.fill")
                             }.padding(7)
-                                .foregroundColor(.white)
-                                .background(Color.green).cornerRadius(20)
+                                .foregroundColor(.green)
+                                .background(Color.white).cornerRadius(20)
                         }
                     }
                     else{
@@ -81,10 +83,12 @@ struct PropositionFooter : View {
                 HStack{
                     TextField("Commentaire...", text: $comment).cornerRadius(20)
                     Button(action:{
-                        AnswerModel.addAnswer(contentPub: self.comment, isAnonymous: false, tagsAns: PropositionModel.getAllTags(proposition: self.proposition), idProposition: self.proposition.id, token: self.fk.token)
+                        if AnswerModel.addAnswer(contentPub: self.comment, isAnonymous: false, tagsAns: PropositionModel.getAllTags(proposition: self.proposition), idProposition: self.proposition.id, token: self.fk.token){
+                            print("Answer added")
+                        }
                         self.comment = ""
                     }){
-                        Image(systemName: "arrowtriangle.right.circle.fill").padding(5)
+                        Image(systemName: "arrowtriangle.right.circle.fill").padding(5).foregroundColor(Color.pink)
                     }
                 }.padding()
             }

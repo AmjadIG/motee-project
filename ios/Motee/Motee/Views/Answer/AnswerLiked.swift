@@ -22,11 +22,11 @@ struct AnswerLiked : View {
         }){
             HStack{
                 if self.answer.estLikee(utilisateur: self.fk.currentUser){
-                    Image(systemName: "heart.fill").foregroundColor(Color.red)
+                    Image(systemName: "heart.fill").foregroundColor(Color.white)
                 } else {
-                    Image(systemName: "heart").foregroundColor(Color.pink)
+                    Image(systemName: "heart").foregroundColor(Color.white)
                 }
-                Text(String(answer.idLikesAnswer.count)).foregroundColor(.pink)
+                Text(String(answer.idLikesAnswer.count)).foregroundColor(.white)
             }
         }
     }
@@ -35,6 +35,6 @@ struct AnswerLiked : View {
 struct AnswerLiked_Previews: PreviewProvider {
     static var answer = AnswerModel.getAnswerById(idAns: "5e7b696b7cbb262ef84ab053")
     static var previews: some View {
-        AnswerLiked(answer: answer).environmentObject(FilterKit())
+        AnswerLiked(answer: answer!).environmentObject(FilterKit())
     }
 }

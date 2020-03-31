@@ -22,7 +22,7 @@ struct AnswerView: View {
                     Text(getGoodDate(wrongD: answer.datePublication)).bold().foregroundColor(.white)
                 }.padding()
                 Text(answer.contentPub).foregroundColor(.white).padding()
-                    AnswerFooter(answer: answer)
+                AnswerFooter(answer: answer).padding()
                 }.frame(alignment: .leading).edgesIgnoringSafeArea(.all)
                 .background(LinearGradient(gradient: Gradient(colors: [.orange, .pink]), startPoint: .leading, endPoint: .trailing).opacity(0.8))
             .cornerRadius(20).shadow(radius: 20)

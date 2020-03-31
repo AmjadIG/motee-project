@@ -59,9 +59,9 @@ class AnswerModel {
         return (purifyRequest(dictionary: res) as! [Answer])
     }
     
-    static func getAnswerById(idAns : String)->Answer{
+    static func getAnswerById(idAns : String)->Answer?{
         // Prepare URL
-        let stringURL = "https://mootee-api.herokuapp.com/answers/"+idAns
+        let stringURL = "https://mootee-api.herokuapp.com/answers/\(idAns)"
         let url = URL(string: stringURL)
         print("in getAnsById")
         guard let requestUrl = url else { fatalError() }
@@ -69,6 +69,7 @@ class AnswerModel {
         var request = URLRequest(url: requestUrl)
         request.httpMethod = "GET"
         let semaphore = DispatchSemaphore(value :0)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         print("request ok")
         // Perform HTTP Request
         var res : [String:Answer] = [:]
@@ -83,7 +84,9 @@ class AnswerModel {
             // Convert HTTP Response Data to a String
             if let data = data{
                 do{
+                    print("avant le try JSONDecoder")
                     res = try JSONDecoder().decode([String:Answer].self, from: data)
+                    print(res)
                     print("decoder ok!")
                 }catch let error {
                     print(error)
@@ -95,7 +98,7 @@ class AnswerModel {
         
         semaphore.wait()
         
-        return (purifyRequest(dictionary: res)[0] as! Answer)
+        return (purifyRequest(dictionary: res).first as? Answer)
     }
     
     static func getPropOfAnswer(answer : Answer)->Proposition{

@@ -17,10 +17,15 @@ struct PropositionLiked : View {
                 Button(action:{
                     if self.proposition.estLikee(utilisateur: self.fk.currentUser){
                         self.proposition.disliker(userDislike: self.fk.currentUser!)
-                        PropositionModel.dislikeProp(idProposition: self.proposition.id, token: self.fk.token)
+                        if PropositionModel.dislikeProp(idProposition: self.proposition.id, token: self.fk.token){
+                            print("Proposition disliked")
+                        }
                     }else{
                         self.proposition.liker(userLike: self.fk.currentUser!)
-                        PropositionModel.likeProp(idProposition: self.proposition.id, token: self.fk.token)
+                        if PropositionModel.likeProp(idProposition: self.proposition.id, token: self.fk.token){
+                            print("Proposition liked")
+
+                        }
                     }
                 }){
                     HStack{
@@ -36,7 +41,7 @@ struct PropositionLiked : View {
             }else{
                 HStack{
                     Text(String(proposition.idLikesProp.count))
-                    Image(systemName: "ear").foregroundColor(Color.black)
+                    Image(systemName: "ear").foregroundColor(Color.gray)
                     
                 }
             }
