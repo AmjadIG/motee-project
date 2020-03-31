@@ -20,6 +20,7 @@ class Proposition : Publication, Identifiable, Codable {
     @Published var tags : [String] = []
     @Published var answers : [String] = []
     @Published var title : String = ""
+    @Published var idReport : [String] = []
 
     var id : String {return idPublication}
     

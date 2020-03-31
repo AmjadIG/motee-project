@@ -17,6 +17,7 @@ class Answer : Publication, Identifiable, Codable {
     @Published var idLikesAnswer : [String] = [] //Array d'object ID de User
     @Published var anonymous : Bool = false
     @Published var owner : String
+    @Published var idReport : [String] = []
     var idProposition : String
         
     var id : String {return idPublication}

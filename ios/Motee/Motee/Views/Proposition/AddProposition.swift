@@ -59,9 +59,15 @@ struct AddProposition: View {
                     }
                     Divider().padding()
                     Button(action:{
+                        // proposition + réponse
                         if self.answerAdding {
                             if PropositionModel.addProposition(titleProp : self.titleProposition, contentPub: self.newProposition, isAnonymous: self.anonymousProposition, tagsProp: self.tagList, token: self.fk.token) {
                                 print("Proposition added")
+                            }
+                        // proposition
+                        }else{
+                            if PropositionModel.addProposition(titleProp : self.titleProposition, contentPub: self.newProposition, isAnonymous: self.anonymousProposition, tagsProp: self.tagList, token: self.fk.token) {
+                            print("Proposition added")
                             }
                         }
                         
