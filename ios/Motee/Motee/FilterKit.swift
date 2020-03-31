@@ -17,7 +17,7 @@ class FilterKit: ObservableObject, Identifiable{
     @Published var answerReported : Answer? = nil
     @Published var tags : [Tag] = []
     @Published var textSearch : String = ""
-    @Published var currentUser : User? = nil //UserModel.getUserById(idUser: "5e68ec5c1ffcde50a4ef65a9")
+    @Published var currentUser : User? = nil
     @Published var token : String = ""
     @Published var currentPage = "Accueil"
 }

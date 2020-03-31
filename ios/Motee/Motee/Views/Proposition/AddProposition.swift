@@ -59,12 +59,17 @@ struct AddProposition: View {
                     }
                     Divider().padding()
                     Button(action:{
-                        PropositionModel.addProposition(titleProp : self.titleProposition, contentPub: self.newProposition, isAnonymous: self.anonymousProposition, tagsProp: self.tagList, token: self.fk.token)
+                        if self.answerAdding {
+                            if PropositionModel.addProposition(titleProp : self.titleProposition, contentPub: self.newProposition, isAnonymous: self.anonymousProposition, tagsProp: self.tagList, token: self.fk.token) {
+                                print("Proposition added")
+                            }
+                        }
+                        
                         self.fk.currentPage = "Accueil"
                     }){
                         Text("Envoyer").bold().padding(15)
                         
-                    }.foregroundColor(Color.white).background(Color.blue).cornerRadius(40)
+                    }.foregroundColor(Color.white).background(LinearGradient(gradient: Gradient(colors: [.yellow, .pink]), startPoint: .leading, endPoint: .trailing)).cornerRadius(40)
                 }.padding(20)
             }.padding(.top,80)
         }
