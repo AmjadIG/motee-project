@@ -15,19 +15,19 @@ struct AnswerView: View {
     var answer : Answer
     
     var body: some View {
-            VStack{
-                HStack{
-                    Text(UserModel.getUserById(idUser: answer.owner ).pseudo).bold().foregroundColor(.white)
-                    Spacer()
-                    Text(getGoodDate(wrongD: answer.datePublication)).bold().foregroundColor(.white)
-                }.padding()
-                Text(answer.contentPub).foregroundColor(.white).padding()
-                    AnswerFooter(answer: answer)
-                }.frame(alignment: .leading).edgesIgnoringSafeArea(.all)
-                .background(LinearGradient(gradient: Gradient(colors: [.orange, .pink]), startPoint: .leading, endPoint: .trailing).opacity(0.8))
+        VStack{
+            HStack{
+                Text(UserModel.getUserById(idUser: answer.owner ).pseudo).bold().foregroundColor(.white)
+                Spacer()
+                Text(getGoodDate(wrongD: answer.datePublication)).bold().foregroundColor(.white)
+            }.padding()
+            Text(answer.contentPub).foregroundColor(.white).padding([.leading, .bottom, .trailing])
+            AnswerFooter(answer: answer)
+        }.frame(alignment: .leading)
+            .background(LinearGradient(gradient: Gradient(colors: [.orange, .pink]), startPoint: .leading, endPoint: .trailing).opacity(0.8))
             .cornerRadius(20).shadow(radius: 20)
-                .padding(.leading, 30.0)
-                .padding([.top, .trailing])
+            .padding(.leading, 30.0)
+            .padding([.top, .trailing])
     }
 }
 

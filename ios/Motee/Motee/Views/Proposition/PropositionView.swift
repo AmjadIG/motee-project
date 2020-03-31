@@ -20,22 +20,22 @@ struct PropositionView : View {
     @State var editAnonymous = false
     var body: some View {
         VStack{
-            VStack{
+            VStack(alignment: .center){
                 HStack{
                     Text(UserModel.getUserById(idUser: proposition.owner).pseudo).bold().foregroundColor(colorIfClicked2)
                     Spacer()
                     Text(getGoodDate(wrongD: proposition.datePublication))
                         .bold()
                         .foregroundColor(colorIfClicked2)
-                }.padding().background(LinearGradient(gradient: Gradient(colors: [.yellow, .pink]), startPoint: .leading, endPoint: .trailing))
-                PropositionTagsView(proposition: $proposition)
+                }.padding(.all, 10.0).background(LinearGradient(gradient: Gradient(colors: [.yellow, .pink]), startPoint: .leading, endPoint: .trailing))
+                PropositionTagsView(proposition: $proposition).padding(.vertical,1)
                 if editing {
                     FieldGenerator.plain(label: "",field: "Ecrivez votre propos", text: $editProposition)
                 }else{
-                    Text(proposition.title).bold().underline().padding(.top, 30.0).padding(.horizontal)
-                    Text(proposition.contentPub).padding(.top, 30.0).padding(.horizontal)
+                    Text(proposition.title).bold().underline().padding(.horizontal).padding(.top,5)
+                    Text(proposition.contentPub).padding(.top, 10).padding(.horizontal)
                 }
-                PropositionFooter(proposition: $proposition, editing: $editing, editProposition: $editProposition, editAnonymous: $editAnonymous).padding()
+                PropositionFooter(proposition: $proposition, editing: $editing, editProposition: $editProposition, editAnonymous: $editAnonymous).padding(.horizontal)
                 
             }.frame(alignment: .leading)
                 .background(lightGreyColor)

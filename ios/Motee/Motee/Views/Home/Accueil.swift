@@ -26,7 +26,9 @@ struct Accueil: View {
                                 }
                             }
                         }
-                        PropositionFiltred(filtre: fk.filtered, tags: fk.tags)
+                        SearchBar()
+                        PropositionFiltred(props : PropositionModel.getFilteredProps(filter: fk.filtered, tags: fk.tags)
+                        )
                     }
                 }
             }

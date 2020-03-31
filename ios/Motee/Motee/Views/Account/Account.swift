@@ -87,7 +87,7 @@ struct Account: View {
                         }){
                             Text("Changer de mot de passe")
                             .font(.headline)
-                            .foregroundColor(.pink)
+                            .foregroundColor(.white)
                             .padding(.vertical)
                             .frame(width: 320, height: 60)
                                 .background(LinearGradient(gradient: Gradient(colors: [.yellow, .pink]), startPoint: .leading, endPoint: .trailing))

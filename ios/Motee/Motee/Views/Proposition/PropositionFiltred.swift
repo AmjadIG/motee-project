@@ -9,30 +9,26 @@
 import SwiftUI
 
 struct PropositionFiltred : View {
-    var currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser
     @EnvironmentObject var fk : FilterKit
-    var filtre : String
-    var tags : [Tag]
-    @State var props : [Proposition] = []
-    
-    init(filtre : String, tags : [Tag]){
-        self.filtre = filtre
-        self.tags = tags
-        _props = State(wrappedValue: PropositionModel.getFilteredProps(filter: filtre, tags: tags))
-    }
-    
-
+    @State var props : [Proposition]
     var body: some View {
         VStack{
-            //SearchBar()
             ForEach(props.indices){ index in
-                PropositionView(proposition: self.$props[index])
+                if self.fk.textSearch.isEmpty  {
+                    PropositionView(proposition: self.$props[index])
+                }else{
+                    if self.props[index].contentPub.contains(self.fk.textSearch) {
+                        PropositionView(proposition: self.$props[index])
+                    }
+                }
             }
         }
     }
 }
 struct PropositionFiltred_Previews: PreviewProvider {
+    @State static var props = PropositionModel.getFilteredProps(filter: "asc", tags: [])
+    @State static var textSearch = "fille"
     static var previews: some View {
-        PropositionFiltred(filtre: "asc",tags: []).environmentObject(FilterKit())
+        PropositionFiltred(props: props).environmentObject(FilterKit())
     }
 }

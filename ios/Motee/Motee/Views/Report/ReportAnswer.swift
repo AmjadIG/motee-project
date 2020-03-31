@@ -16,8 +16,9 @@ struct ReportAnswer: View {
             self.fk.showAnswerReport = true
             self.fk.answerReported = self.answer
         }){
-            Image(systemName: "exclamationmark.triangle.fill").padding(7)
+            Image(systemName: "exclamationmark.triangle").padding(7)
                 .foregroundColor(.white)
+                .shadow(radius: 0.5)
                 .background(Color.red).cornerRadius(40)
         }
     }

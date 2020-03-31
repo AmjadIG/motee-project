@@ -15,8 +15,23 @@ struct MyProps: View {
         NavigationView{
             ScrollView(.vertical){
                 VStack{
-                    ForEach(props.indices){ index in
-                        PropositionView(proposition: self.$props[index])
+                    if props.count == 0 {
+                        Text("Aucune contribution pour le moment").padding()
+                        Button( action : {
+                            self.fk.currentPage = "Ajouter propos"
+                        }){
+                            Text("Je contribue tout de suite!")
+                                .font(.headline)
+                                .foregroundColor(.white)
+                                .padding(.vertical)
+                                .frame(width: 320, height: 60)
+                                .background(generateColor(name: "orange"))
+                                .cornerRadius(40)
+                        }.padding()
+                    }else{
+                        ForEach(props.indices){ index in
+                            PropositionView(proposition: self.$props[index])
+                        }
                     }
                 }.padding(.top, 80)
             }
