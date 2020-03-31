@@ -14,13 +14,16 @@ struct Accueil: View {
         NavigationView{
             ScrollView(.vertical){
                 VStack{
+                    Spacer()
                     LoginBanner()
                     TopTags()
                     VStack(){
                         FilterTitle()
                         if(fk.currentUser != nil){
                             HStack{
-                                NavigationLink(destination : { AddProposition() }() ){
+                                Button( action: {
+                                    self.fk.currentPage = "Ajouter propos"
+                                }){
                                     SymbolGenerator(mySymbol :"plus.square.fill", myColor: "pink")
                                     Text("Ajouter").foregroundColor(.black).bold()
                                 }

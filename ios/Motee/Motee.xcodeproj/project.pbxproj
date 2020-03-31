@@ -47,6 +47,7 @@
 		A601A42C242EC3BC00978E3D /* FilterTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A601A42B242EC3BC00978E3D /* FilterTitle.swift */; };
 		A611C4C8242FF3CE00295DC5 /* PropositionTagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A611C4C7242FF3CE00295DC5 /* PropositionTagsView.swift */; };
 		A6B3250D2430D9D7002FABDA /* ReportPropositionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B3250C2430D9D7002FABDA /* ReportPropositionView.swift */; };
+		A6C7DFFF2433D487007EC2BA /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C7DFFE2433D487007EC2BA /* Keyboard.swift */; };
 		A6E9C46C24329ABF00B7C70B /* ReportAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E9C46B24329ABF00B7C70B /* ReportAnswer.swift */; };
 		A6E9C46E24329EFC00B7C70B /* ReportAnswerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E9C46D24329EFC00B7C70B /* ReportAnswerView.swift */; };
 		A6E9C4712432B3A400B7C70B /* MyProps.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E9C4702432B3A400B7C70B /* MyProps.swift */; };
@@ -136,6 +137,7 @@
 		A601A42B242EC3BC00978E3D /* FilterTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTitle.swift; sourceTree = "<group>"; };
 		A611C4C7242FF3CE00295DC5 /* PropositionTagsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropositionTagsView.swift; sourceTree = "<group>"; };
 		A6B3250C2430D9D7002FABDA /* ReportPropositionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportPropositionView.swift; sourceTree = "<group>"; };
+		A6C7DFFE2433D487007EC2BA /* Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
 		A6E9C46B24329ABF00B7C70B /* ReportAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportAnswer.swift; sourceTree = "<group>"; };
 		A6E9C46D24329EFC00B7C70B /* ReportAnswerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportAnswerView.swift; sourceTree = "<group>"; };
 		A6E9C4702432B3A400B7C70B /* MyProps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProps.swift; sourceTree = "<group>"; };
@@ -299,6 +301,7 @@
 			isa = PBXGroup;
 			children = (
 				A1A5A349240D452F0015CBBE /* ButtonGenerator.swift */,
+				A6C7DFFE2433D487007EC2BA /* Keyboard.swift */,
 				A1B5EAE0240ED06D001824C6 /* SymbolGenerator.swift */,
 				A1A5A33C240D41CE0015CBBE /* Title.swift */,
 				A1A5A33A240D41900015CBBE /* FieldGenerator.swift */,
@@ -576,6 +579,7 @@
 				F0336FF224290F3100753620 /* TagModel.swift in Sources */,
 				A6E9C4712432B3A400B7C70B /* MyProps.swift in Sources */,
 				A14A254D241474650030039B /* Account.swift in Sources */,
+				A6C7DFFF2433D487007EC2BA /* Keyboard.swift in Sources */,
 				8E5F727224290F4B00B89172 /* TopTags.swift in Sources */,
 				A6E9C4732432B90D00B7C70B /* MyAnswers.swift in Sources */,
 				A14296D32412C3D7005E73B5 /* PropositionLiked.swift in Sources */,

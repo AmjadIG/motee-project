@@ -13,6 +13,7 @@ struct LoginForm: View {
     @State var pseudo : String = ""
     @State var mdp : String = ""
     @State var noError : Bool = true
+    @State private var offsetValue: CGFloat = 0.0
     var body: some View {
         NavigationView{
             VStack{
@@ -33,27 +34,28 @@ struct LoginForm: View {
                     }
                 }){
                     Text("Se connecter")
-                    .font(.headline)
-                    .foregroundColor(.pink)
-                    .padding()
-                    .frame(width: 220, height: 60)
+                        .font(.headline)
+                        .foregroundColor(.pink)
+                        .padding()
+                        .frame(width: 220, height: 60)
                         .background(Color.white)
-                    .cornerRadius(40)
-                    .padding()
+                        .cornerRadius(40)
+                        .padding()
                 }
                 //LoginButton(pseudo: $pseudo,mdp: $mdp)
-                Button(action: { self.fk.currentPage = "register"}){
+                Button(action: { self.fk.currentPage = "S'inscrire"}){
                     Text("S'inscrire")
-                    .font(.headline)
-                    .foregroundColor(.pink)
-                    .padding()
-                    .frame(width: 220, height: 60)
+                        .font(.headline)
+                        .foregroundColor(.pink)
+                        .padding()
+                        .frame(width: 220, height: 60)
                         .background(Color.white)
-                    .cornerRadius(40)
-                    .padding()
+                        .cornerRadius(40)
+                        .padding()
                 }
                 Spacer()
-            }.background(LinearGradient(gradient: Gradient(colors: [.yellow, .pink]), startPoint: .leading, endPoint: .trailing)).edgesIgnoringSafeArea(.top)
+            }.background(LinearGradient(gradient: Gradient(colors: [.yellow, .pink]), startPoint: .leading, endPoint: .trailing)).edgesIgnoringSafeArea(.all)
+            .keyboardSensible($offsetValue)
         }
     }
     func findConnexion(pseudo : String, mdp : String) -> Bool {

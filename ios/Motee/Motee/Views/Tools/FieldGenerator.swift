@@ -22,12 +22,11 @@ struct FieldGenerator<FieldView>: View where FieldView : View {
                 }
             }
             fieldView
-            .padding()
-            .background(lightGreyColor)
-            .cornerRadius(5.0)
-            .padding(.bottom, 20)
+                .padding()
+                .background(lightGreyColor)
+                .cornerRadius(5.0)
+                .padding(.bottom, 20)
         }.padding(.horizontal,10)
-        
     }
     
     fileprivate init(label: String, field : String , fieldView: FieldView) {

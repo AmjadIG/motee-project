@@ -14,11 +14,11 @@ struct Root : View {
         VStack{
             if(fk.currentPage == "Accueil"){
                 Accueil()
-            }else if fk.currentPage == "Sign in" {
+            }else if fk.currentPage == "Se connecter" {
                 LoginForm()
             }else if fk.currentPage == "Compte"{
                 Account()
-            }else if fk.currentPage == "Sign up"{
+            }else if fk.currentPage == "S'inscrire"{
                 RegisterForm()
             }else if fk.currentPage == "Mes propositions"{
                 MyProps(props: UserModel.getPropsByUser(user: fk.currentUser!))
@@ -36,7 +36,7 @@ struct Root : View {
 }
 
 struct Root_Previews: PreviewProvider {
-    @State static var page = "Sign in"
+    @State static var page = "Se connecter"
     static var previews: some View {
         Root(currentPage: page).environmentObject(FilterKit())
     }

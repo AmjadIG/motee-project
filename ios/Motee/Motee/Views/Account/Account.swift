@@ -31,7 +31,7 @@ struct Account: View {
         guard let currentUser = fk.currentUser else {
             return AnyView(VStack(alignment: .center) {
                     Button(action : {
-                        self.fk.currentPage = "Sign in"
+                        self.fk.currentPage = "Se connecter"
                     }){
                         Text("Connectez-vous")
                     }

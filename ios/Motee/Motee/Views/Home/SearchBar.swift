@@ -12,17 +12,18 @@ struct SearchBar: View {
     @State var textSearch : String = ""
     @EnvironmentObject var fk : FilterKit
     var body: some View {
-        HStack{
-            TextField("Recherche ...", text: $textSearch).padding([.top, .leading, .bottom], 10.0)
-            .background(lightGreyColor)
-            .cornerRadius(5.0)
-            Button(action:{
-                self.fk.textSearch = self.textSearch
-            }){
-                SymbolGenerator(mySymbol: "magnifyingglass.circle.fill", myColor: "orange").padding(5)
-            }
+        VStack{
+            HStack{
+                TextField("Recherche ...", text: $textSearch).padding([.top, .leading, .bottom], 10.0)
+                    .background(lightGreyColor)
+                    .cornerRadius(5.0)
+                Button(action:{
+                    self.fk.textSearch = self.textSearch
+                }){
+                    SymbolGenerator(mySymbol: "magnifyingglass.circle.fill", myColor: "orange").padding(5)
+                }
             }.padding()
-        
+        }
     }
 }
 
