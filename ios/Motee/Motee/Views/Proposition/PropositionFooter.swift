@@ -65,19 +65,19 @@ struct PropositionFooter : View {
                             self.editProposition = self.proposition.contentPub
                             self.editAnonymous = self.proposition.anonymous
                         }){
-                            SymbolGenerator(mySymbol: "square.and.pencil", myColor: "gray")
+                            Image(systemName: "square.and.pencil").foregroundColor(Color.gray).padding()
                         }
                         Button( action :  {
                             if PropositionModel.deleteProposition(idProp: self.proposition.idPublication, token: self.fk.token){
                                 print("Message supprimé : \(self.proposition.contentPub)")
                             }
                         }){
-                            SymbolGenerator(mySymbol: "trash", myColor: "red")
+                            Image(systemName: "trash.fill").foregroundColor(Color.red).padding()
                         }
                     }else{
                         ReportProposition(proposition: $proposition)
                     }
-                }
+                }.padding()
             }
             if isNotHide {
                 HStack{

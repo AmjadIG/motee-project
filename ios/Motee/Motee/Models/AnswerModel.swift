@@ -163,17 +163,17 @@ class AnswerModel {
     //Résultat : renvoie true si la réponse a été supprimée, false sinon
     static func deleteAnswer(idAns: String, token: String)->Bool{
         // Prepare URL
-        let stringurl = "https://mootee-api.herokuapp.com/answers/delete"
+        let stringurl = "https://mootee-api.herokuapp.com/answers"
         let url = URL(string: stringurl)
         guard let requestUrl = url else { fatalError() }
         // Prepare URL Request Object
         var request = URLRequest(url: requestUrl)
-        request.httpMethod = "POST"
-        var res : Bool = false
+        request.httpMethod = "DELETE"
+        var res : Bool = true
         
         // HTTP Request Parameters which will be sent in HTTP Request Body
         let body = [
-            "id_answer": idAns
+            "id": idAns
         ]
         
         // Set HTTP Request Body

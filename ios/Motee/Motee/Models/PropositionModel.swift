@@ -190,7 +190,7 @@ class PropositionModel {
     }
     
     //Résultat : ajoute une proposition à la base de donnée en passant par une requête http de type POST
-    static func addProposition(titleProp : String, contentPub: String, isAnonymous: Bool, tagsProp: [Tag], token: String) -> Bool{
+    static func addProposition(titleProp : String, contentPub: String, isAnonymous: Bool, tagsProp: [Tag], token: String) -> String{
         // Prepare URL
         
         let stringurl = "https://mootee-api.herokuapp.com/propositions/"
@@ -209,9 +209,9 @@ class PropositionModel {
         var request = URLRequest(url: requestUrl)
         request.httpMethod = "POST"
         let semaphore = DispatchSemaphore(value :0)
-        var res : Bool = true
+        var res : [String:String] = [:]
         // Set HTTP Request Body
-        guard let requestBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {return false}
+        guard let requestBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {return "noId"}
         
         request.httpBody = requestBody
         print(getFullToken(token: token))
@@ -224,13 +224,17 @@ class PropositionModel {
                 print("Error took place \(error)")
                 return
             }
-                
                 let resp = response as? HTTPURLResponse
             print("Test code status")
-            res = (resp?.statusCode == 200)
             print(res)
             if let data = data{
                 print(data)
+                do{
+                    res = try JSONDecoder().decode([String:String].self, from: data)
+                }
+                catch let error {
+                    print(error)
+                }
                 if let jsonString = String(data: data, encoding: .utf8){
                     print(jsonString)
                 }
@@ -239,7 +243,7 @@ class PropositionModel {
         }
         task.resume()
         semaphore.wait()
-        return res
+        return purifyRequest(dictionary: res)[0] as! String
     }
     
     //Résultat : Supprime une proposition, renvoie true si c'est bon, false sinon

@@ -10,27 +10,29 @@ import SwiftUI
 
 struct AnswerFooter: View {
     @State var isNotHide :Bool = false
-    @State var answer : Answer
+    @Binding var answer : Answer
     @EnvironmentObject var fk : FilterKit
     var body: some View {
         VStack{
             HStack {
                 Spacer()
-                AnswerLiked(answer: answer)
+                AnswerLiked(answer: $answer)
                 Spacer()
                 if (self.fk.currentUser?.idUser == answer.owner){
                     Button(action : {
                         if AnswerModel.deleteAnswer(idAns: self.answer.idPublication, token: self.fk.token){
                             print("Answer supprimé")
+                        }else{
+                            print("Answer pas supprimé")
                         }
                     }){
-                        SymbolGenerator(mySymbol: "trash", myColor: "red")
+                        Image( systemName: "trash").foregroundColor(Color.red)
                     }
                 }else{
                     ReportAnswer(answer: $answer)
                 }
                 Spacer()
-            }
+            }.padding()
         }
     }
 }

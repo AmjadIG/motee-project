@@ -62,15 +62,17 @@ class Proposition : Publication, Identifiable, Codable {
     }
     
     func liker(userLike : User){
-        self.idLikesProp.append(userLike.id)
+        self.idLikesProp.append(userLike.idUser)
+        print(idLikesProp)
     }
     
     func disliker(userDislike : User){
         for i in 0..<self.idLikesProp.count {
-            if self.idLikesProp[i] == userDislike.id {
+            if self.idLikesProp[i] == userDislike.idUser {
                 self.idLikesProp.remove(at: i)
             }
         }
+        print(idLikesProp)
     }
     
     func estProprietaire(utilisateur: User)->Bool{
@@ -97,18 +99,21 @@ class Proposition : Publication, Identifiable, Codable {
             return nil
         }
     }
-    
     func estLikee(utilisateur: User?)->Bool{
-        if utilisateur == nil {
+        guard let utilisateur = utilisateur else {
             return false
         }
         var isLiked : Bool = false
-        for id in idLikesProp {
-            if id == utilisateur!.id {
+        for idUser in self.idLikesProp{
+            if idUser == utilisateur.idUser {
                 isLiked = true
             }
         }
         return isLiked
+    }
+
+    func nbLike() -> Int {
+        return self.idLikesProp.count
     }
     
     func dateToString() -> String {

@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct AnswerLiked : View {
-    var answer : Answer
+    @Binding var answer : Answer
     @EnvironmentObject var fk : FilterKit
     
     var body: some View {
@@ -33,8 +33,8 @@ struct AnswerLiked : View {
 }
 
 struct AnswerLiked_Previews: PreviewProvider {
-    static var answer = AnswerModel.getAnswerById(idAns: "5e7b696b7cbb262ef84ab053")
+    @State static var answer = AnswerModel.getAnswerById(idAns: "5e7b696b7cbb262ef84ab053")!
     static var previews: some View {
-        AnswerLiked(answer: answer!).environmentObject(FilterKit())
+        AnswerLiked(answer: $answer).environmentObject(FilterKit())
     }
 }

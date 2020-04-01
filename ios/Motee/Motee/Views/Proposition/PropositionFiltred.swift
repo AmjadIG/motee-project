@@ -15,10 +15,10 @@ struct PropositionFiltred : View {
         VStack{
             ForEach(props.indices){ index in
                 if self.fk.textSearch.isEmpty  {
-                    PropositionView(proposition: self.$props[index])
+                    PropositionView(proposition: self.props[index])
                 }else{
                     if self.props[index].contentPub.contains(self.fk.textSearch) {
-                        PropositionView(proposition: self.$props[index])
+                        PropositionView(proposition: self.props[index])
                     }
                 }
             }

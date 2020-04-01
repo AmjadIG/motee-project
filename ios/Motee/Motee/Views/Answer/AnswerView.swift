@@ -12,7 +12,7 @@ import UserNotifications
 
 struct AnswerView: View {
     @EnvironmentObject var fk : FilterKit
-    var answer : Answer
+    @State var answer : Answer
     
     var body: some View {
         VStack{
@@ -22,7 +22,7 @@ struct AnswerView: View {
                 Text(getGoodDate(wrongD: answer.datePublication)).bold().foregroundColor(.white)
             }.padding()
             Text(answer.contentPub).foregroundColor(.white).padding([.leading, .bottom, .trailing])
-            AnswerFooter(answer: answer)
+            AnswerFooter(answer: $answer)
         }.frame(alignment: .leading)
             .background(LinearGradient(gradient: Gradient(colors: [.orange, .pink]), startPoint: .leading, endPoint: .trailing).opacity(0.8))
             .cornerRadius(20).shadow(radius: 20)

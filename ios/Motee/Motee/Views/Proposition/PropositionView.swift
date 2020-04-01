@@ -10,7 +10,7 @@ import SwiftUI
 
 struct PropositionView : View {
     @EnvironmentObject var fk : FilterKit
-    @Binding var proposition : Proposition
+    @State var proposition : Proposition
     @State var showBestAnswer = false
     @State var showAllAnswers = false
     @State var colorIfClicked = generateColor(name: "white")
@@ -50,7 +50,7 @@ struct PropositionView : View {
 struct PropositionView_Previews: PreviewProvider {
     @State static var proposition = PropositionModel.getAll()[1]
     static var previews: some View {
-        PropositionView(proposition: $proposition).environmentObject(FilterKit())
+        PropositionView(proposition: proposition).environmentObject(FilterKit())
         
     }
 }

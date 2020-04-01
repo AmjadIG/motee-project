@@ -97,11 +97,9 @@ class UserModel {
     
     static func getAnswersByUser(user : User)->[Answer]{
         var answerArray : [Answer] = []
-        if !user.idAnswers.isEmpty {
-            for idAns in user.idAnswers {
-                if let ans = AnswerModel.getAnswerById(idAns: idAns) {
-                    answerArray.append(ans)
-                }
+        for ans in AnswerModel.getAll() {
+            if ans.owner == user.idUser {
+                answerArray.append(ans)
             }
         }
         return answerArray
@@ -113,13 +111,12 @@ class UserModel {
     
     static func getPropsByUser(user : User)->[Proposition]{
         var propositionArray : [Proposition] = []
-        for idProp in user.idPropositions {
-            for prop in PropositionModel.getAll() {
-                if prop.id == idProp {
-                    propositionArray.append(prop)
-                }
+        for prop in PropositionModel.getAll() {
+            if prop.owner == user.idUser {
+                propositionArray.append(prop)
             }
         }
+        
         return propositionArray
     }
     

@@ -30,7 +30,7 @@ struct MyProps: View {
                         }.padding()
                     }else{
                         ForEach(props.indices){ index in
-                            PropositionView(proposition: self.$props[index])
+                            PropositionView(proposition: self.props[index])
                         }
                     }
                 }.padding(.top, 80)
