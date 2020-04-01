@@ -24,13 +24,11 @@ class AnswerModel {
         // Prepare URL
         let stringURL = "https://mootee-api.herokuapp.com/answers"
         let url = URL(string: stringURL)
-        print("in getAll Answers")
         guard let requestUrl = url else { fatalError() }
         // Prepare URL Request Object (GET)
         var request = URLRequest(url: requestUrl)
         request.httpMethod = "GET"
         let semaphore = DispatchSemaphore(value :0)
-        print("request ok")
         // Perform HTTP Request
         var res : [String:Answer] = [:]
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
@@ -45,7 +43,6 @@ class AnswerModel {
             if let data = data{
                 do{
                     res = try JSONDecoder().decode([String:Answer].self, from: data)
-                    print("decoder ok!")
                 }catch let error {
                     print(error)
                 }
@@ -55,7 +52,7 @@ class AnswerModel {
         task.resume()
         
         semaphore.wait()
-        
+        print("Get All Answers ... done")
         return (purifyRequest(dictionary: res) as! [Answer])
     }
     
@@ -97,15 +94,17 @@ class AnswerModel {
         task.resume()
         
         semaphore.wait()
-        
+        print("Get Answer[\(idAns)] ... done")
         return (purifyRequest(dictionary: res).first as? Answer)
     }
     
     static func getPropOfAnswer(answer : Answer)->Proposition{
+        print("Get Proposition of Answer[\(answer.id)]")
         return PropositionModel.getPropositionById(idProp: answer.idProposition)
     }
     
     static func getAllTags(answer:Answer)->[Tag]{
+        print("Get All Tags of Answer[\(answer.id)]")
         return PropositionModel.getAllTags(proposition: getPropOfAnswer(answer : answer))
     }
     
@@ -134,22 +133,18 @@ class AnswerModel {
         request.httpBody = requestBody
         request.setValue(getFullToken(token: token), forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        print("json : " , String(data : request.httpBody!, encoding: .utf8)!)
+        //print("json : " , String(data : request.httpBody!, encoding: .utf8)!)
         // Perform HTTP Request
          let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let error = error {
                 print("Error took place \(error)")
                 return
             }
-                
-                let resp = response as? HTTPURLResponse
-            print("code d'erreur")
-                res = (resp?.statusCode == 200)
-                print(res)
+            let resp = response as? HTTPURLResponse
+            res = (resp?.statusCode == 200)
             if let data = data{
-                print(data)
                 if let jsonString = String(data: data, encoding: .utf8){
-                    print(jsonString)
+                    print("Add Answer[\(jsonString)] ... done")
                 }
             }
             semaphore.signal()
@@ -181,7 +176,6 @@ class AnswerModel {
         request.httpBody = requestBody
         request.setValue(getFullToken(token: token), forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        print("body ok + auth ok")
         // Perform HTTP Request
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
                 
@@ -196,6 +190,7 @@ class AnswerModel {
                     res = (resp?.statusCode == 200)
         }
         task.resume()
+        print("Delete Answer[\(idAns)] ... done")
         return res
     }
     
@@ -223,7 +218,7 @@ class AnswerModel {
         request.httpBody = requestBody
         request.setValue(getFullToken(token: token), forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        print("json : " , String(data : request.httpBody!, encoding: .utf8)!)
+        //print("json : " , String(data : request.httpBody!, encoding: .utf8)!)
         // Perform HTTP Request
          let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let error = error {
@@ -231,12 +226,9 @@ class AnswerModel {
                 return
             }
                 
-                let resp = response as? HTTPURLResponse
-            print("code d'erreur")
-                res = (resp?.statusCode == 200)
-                print(res)
+            let resp = response as? HTTPURLResponse
+            res = (resp?.statusCode == 200)
             if let data = data{
-                print(data)
                 if let jsonString = String(data: data, encoding: .utf8){
                     print(jsonString)
                 }
@@ -251,14 +243,14 @@ class AnswerModel {
     //Données : un id de proposition (String) et un token pour l'autorisation (String)
     //Résultat : renvoie true si la proposition a bien été likée, false sinon
     static func likeAns(idAnswer : String, token : String)->Bool{
-        print("answer liké")
+        print("Like Answer[\(idAnswer)] ...")
         return answerLD(url: "https://mootee-api.herokuapp.com/answers/like", idAnswer: idAnswer, token: token)
     }
     
     //Données : un id de proposition (String) et un token pour l'autorisation (String)
     //Résultat : renvoie true si la proposition a bien été dislikée, false sinon
     static func dislikeAns(idAnswer : String, token : String)->Bool{
-        print("answer disliké")
+        print("Dislike Answer[\(idAnswer)] ...")
         return answerLD(url: "https://mootee-api.herokuapp.com/answers/dislike", idAnswer: idAnswer, token: token)
     }
     
@@ -288,7 +280,7 @@ class AnswerModel {
         request.httpBody = requestBody
         request.setValue(getFullToken(token: token), forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        print("json : " , String(data : request.httpBody!, encoding: .utf8)!)
+        //print("json : " , String(data : request.httpBody!, encoding: .utf8)!)
         // Perform HTTP Request
          let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let error = error {
@@ -297,13 +289,10 @@ class AnswerModel {
             }
                 
                 let resp = response as? HTTPURLResponse
-            print("code d'erreur")
                 res = (resp?.statusCode == 200)
-                print(res)
             if let data = data{
-                print(data)
                 if let jsonString = String(data: data, encoding: .utf8){
-                    print(jsonString)
+                    print("Update Answer[\(idAns)] => \(jsonString) ... done")
                 }
             }
             semaphore.signal()
@@ -334,7 +323,7 @@ class AnswerModel {
         request.httpBody = requestBody
         request.setValue(getFullToken(token: token), forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        print("json : " , String(data : request.httpBody!, encoding: .utf8)!)
+        //print("json : " , String(data : request.httpBody!, encoding: .utf8)!)
         // Perform HTTP Request
          let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let error = error {
@@ -343,13 +332,10 @@ class AnswerModel {
             }
                 
                 let resp = response as? HTTPURLResponse
-            print("code d'erreur")
                 res = (resp?.statusCode == 200)
-                print(res)
             if let data = data{
-                print(data)
                 if let jsonString = String(data: data, encoding: .utf8){
-                    print(jsonString)
+                    print("Report Answer[\(idAnswer)] => \(jsonString) ... done")
                 }
             }
             semaphore.signal()

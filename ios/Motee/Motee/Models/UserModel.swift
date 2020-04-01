@@ -22,13 +22,11 @@ class UserModel {
         // Prepare URL
         let stringURL = "https://mootee-api.herokuapp.com/users"
         let url = URL(string: stringURL)
-        print("in getAll Users")
         guard let requestUrl = url else { fatalError() }
         // Prepare URL Request Object (GET)
         var request = URLRequest(url: requestUrl)
         request.httpMethod = "GET"
         let semaphore = DispatchSemaphore(value :0)
-        print("request ok")
         // Perform HTTP Request
         var res : [String:User] = [:]
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
@@ -43,7 +41,6 @@ class UserModel {
             if let data = data{
                 do{
                     res = try JSONDecoder().decode([String:User].self, from: data)
-                    print("decoder ok!")
                 }catch let error {
                     print(error)
                 }
@@ -53,7 +50,7 @@ class UserModel {
         task.resume()
         
         semaphore.wait()
-        
+        print("Get All Users ... done")
         return (purifyRequest(dictionary: res) as! [User])
     }
     
@@ -61,13 +58,11 @@ class UserModel {
         // Prepare URL
         let stringURL = "https://mootee-api.herokuapp.com/users/"+idUser
         let url = URL(string: stringURL)
-        print("in get User by id")
         guard let requestUrl = url else { fatalError() }
         // Prepare URL Request Object (GET)
         var request = URLRequest(url: requestUrl)
         request.httpMethod = "GET"
         let semaphore = DispatchSemaphore(value :0)
-        print("request ok")
         // Perform HTTP Request
         var res : [String:User] = [:]
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
@@ -82,7 +77,6 @@ class UserModel {
             if let data = data{
                 do{
                     res = try JSONDecoder().decode([String:User].self, from: data)
-                    print("decoder ok!")
                 }catch let error {
                     print(error)
                 }
@@ -92,6 +86,7 @@ class UserModel {
         task.resume()
         
         semaphore.wait()
+        print("Get User[\(idUser)] ... done")
         return purifyRequest(dictionary: res)[0] as! User
     }
     
@@ -102,10 +97,12 @@ class UserModel {
                 answerArray.append(ans)
             }
         }
+        print("Get Answers of User[\(user.pseudo)] ... done")
         return answerArray
     }
     
     static func getAnswersByUserId(idUser : String)->[Answer]{
+        print("Get Answers of User[\(idUser)] ... done")
         return getAnswersByUser(user: getUserById(idUser: idUser))
     }
     
@@ -116,17 +113,19 @@ class UserModel {
                 propositionArray.append(prop)
             }
         }
-        
+        print("Get Propositions of User[\(user.pseudo)] ... done")
         return propositionArray
     }
     
     static func getPropsByUserId(idUser : String)->[Proposition]{
+        print("Get Propositions of User[\(idUser)] ... done")
         return getPropsByUser(user: getUserById(idUser: idUser))
     }
     
     static func getUserByPseudo(pseudo : String)->User?{
         for user in getAll(){
             if user.pseudo == pseudo {
+                print("Get User[\(pseudo)] ... done")
                 return user
             }
         }
@@ -154,7 +153,6 @@ class UserModel {
         
         request.httpBody = requestBody
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        print("json : " , String(data : request.httpBody!, encoding: .utf8)!)
         
         var res : String = ""
         // Perform HTTP Request
@@ -164,7 +162,6 @@ class UserModel {
                 return
             } else {
                 let resp = response as? HTTPURLResponse
-                print("code d'erreur?")
                 if (resp?.statusCode == 200) {
                     if let data = data{
                         print(data)
@@ -181,15 +178,17 @@ class UserModel {
         }
         task.resume()
         semaphore.wait()
+        print("Authentication['\(pseudo)','you will never get this password :D'] ... done")
         return res
     }
     
     static func checkAuthenticate(pseudo : String, password : String)->[Any]{
         let token = authenticate(pseudo: pseudo, password: password)
         if token != "" {
-            print([token, getUserByPseudo(pseudo: pseudo)!])
+            print("Checking authentication => OK ... done")
             return [token, getUserByPseudo(pseudo: pseudo)!]
         } else {
+            print("Checking authentication => WRONG PSEUDO/PASSWORD ... done")
             return []
         }
     }
@@ -216,7 +215,7 @@ class UserModel {
         
         request.httpBody = requestBody
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        print("json : " , String(data : request.httpBody!, encoding: .utf8)!)
+        //print("json : " , String(data : request.httpBody!, encoding: .utf8)!)
         
         var res : Bool = false
         // Perform HTTP Request
@@ -226,12 +225,11 @@ class UserModel {
                 return
             }
             let resp = response as? HTTPURLResponse
-            print("code d'erreur")
             res = (resp?.statusCode == 200)
                         
             if let data = data{
                 if let jsonString = String(data: data, encoding: .utf8){
-                    print(jsonString)
+                    print("Registering new User['\(pseudo)','...','\(mail)] => \(jsonString) ... done")
                     }
                 }
                 semaphore.signal()
@@ -262,7 +260,7 @@ class UserModel {
         request.httpBody = requestBody
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue(getFullToken(token: token), forHTTPHeaderField: "Authorization")
-        print("json : " , String(data : request.httpBody!, encoding: .utf8)!)
+        //print("json : " , String(data : request.httpBody!, encoding: .utf8)!)
         
         var res : Bool = false
         // Perform HTTP Request
@@ -272,7 +270,6 @@ class UserModel {
                 return
             }
             let resp = response as? HTTPURLResponse
-            print("code d'erreur")
             res = (resp?.statusCode == 200)
                         
             if let data = data{
@@ -284,6 +281,7 @@ class UserModel {
             }
             task.resume()
             semaphore.wait()
+        print("Ban the User[\(idUser)] ... done")
         return res
     }
     
@@ -298,7 +296,6 @@ class UserModel {
         var request = URLRequest(url: requestUrl)
         request.httpMethod = "PUT"
         let semaphore = DispatchSemaphore(value :0)
-        print(getFullToken(token: token))
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue(getFullToken(token: token), forHTTPHeaderField: "Authorization")
         
@@ -310,12 +307,11 @@ class UserModel {
                 return
             }
             let resp = response as? HTTPURLResponse
-            print("code d'erreur")
             res = (resp?.statusCode == 200)
                         
             if let data = data{
                 if let jsonString = String(data: data, encoding: .utf8){
-                    print(jsonString)
+                    print("Log out => \(jsonString) ... done")
                     }
                 }
                 semaphore.signal()
@@ -358,13 +354,10 @@ class UserModel {
             }
                 
                 let resp = response as? HTTPURLResponse
-            print("code d'erreur")
                 res = (resp?.statusCode == 200)
-                print(res)
             if let data = data{
-                print(data)
                 if let jsonString = String(data: data, encoding: .utf8){
-                    print(jsonString)
+                    print("Update the User['whith token in body'] => \(jsonString) ... done")
                 }
             }
             semaphore.signal()

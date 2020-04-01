@@ -25,13 +25,11 @@ class PropositionModel {
         // Prepare URL
         let stringURL = "https://mootee-api.herokuapp.com/propositions"
         let url = URL(string: stringURL)
-        print("in getAll Props")
         guard let requestUrl = url else { fatalError() }
         // Prepare URL Request Object (GET)
         var request = URLRequest(url: requestUrl)
         request.httpMethod = "GET"
         let semaphore = DispatchSemaphore(value :0)
-        print("request ok")
         // Perform HTTP Request
         var res : [String:Proposition] = [:]
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
@@ -46,7 +44,6 @@ class PropositionModel {
             if let data = data{
                 do{
                     res = try JSONDecoder().decode([String:Proposition].self, from: data)
-                    print("decoder ok!")
                 }catch let error {
                     print(error)
                 }
@@ -56,7 +53,7 @@ class PropositionModel {
         task.resume()
         
         semaphore.wait()
-        
+        print("Get All Propositions ... done")
         return (purifyRequest(dictionary: res) as! [Proposition])
     }
     
@@ -66,13 +63,11 @@ class PropositionModel {
         // Prepare URL
         let stringURL = "https://mootee-api.herokuapp.com/propositions/"+idProp
         let url = URL(string: stringURL)
-        print("in get Props by id")
         guard let requestUrl = url else { fatalError() }
         // Prepare URL Request Object (GET)
         var request = URLRequest(url: requestUrl)
         request.httpMethod = "GET"
         let semaphore = DispatchSemaphore(value :0)
-        print("request ok")
         // Perform HTTP Request
         var res : [String:Proposition] = [:]
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
@@ -87,7 +82,6 @@ class PropositionModel {
             if let data = data{
                 do{
                     res = try JSONDecoder().decode([String:Proposition].self, from: data)
-                    print("decoder ok!")
                 }catch let error {
                     print(error)
                 }
@@ -97,7 +91,7 @@ class PropositionModel {
         task.resume()
         
         semaphore.wait()
-        
+        print("Get Proposition by id[\(idProp)] ... done")
         return (purifyRequest(dictionary: res)[0] as! Proposition)
     }
     
@@ -118,6 +112,7 @@ class PropositionModel {
                 }//arrêt : on a parcouru chaque id de réponse contenues dans notre propositions
             }
         }//arrêt :
+        print("Get All Answer of Proposition[\(proposition.id)] ... done")
         return result
     }
     
@@ -134,6 +129,7 @@ class PropositionModel {
                     bestAnswer = answer
                 }
             }
+            print("Get Best Answer of Proposition[\(proposition.id)] ... done")
             return bestAnswer
         }
     }
@@ -145,6 +141,7 @@ class PropositionModel {
         for tag in proposition.tags {
             tagArray.append((TagModel.getTagById(idTag: tag)))
         }
+        print("Get All Tags of Proposition[\(proposition.id)] ... done")
         return tagArray
     }
     
@@ -154,13 +151,11 @@ class PropositionModel {
         // Prepare URL
         let stringURL = "https://mootee-api.herokuapp.com/propositions/sort/"+filter+paramTags(tags: tags)
         let url = URL(string: stringURL)
-        print(stringURL)
         guard let requestUrl = url else { fatalError() }
         // Prepare URL Request Object (GET)
         var request = URLRequest(url: requestUrl)
         request.httpMethod = "GET"
         let semaphore = DispatchSemaphore(value :0)
-        print("request ok")
         // Perform HTTP Request
         var res : [Proposition] = []
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
@@ -175,7 +170,6 @@ class PropositionModel {
             if let data = data{
                 do{
                     res = try JSONDecoder().decode([Proposition].self, from: data)
-                    print("decoder ok!")
                 }catch let error {
                     print(error)
                 }
@@ -185,7 +179,7 @@ class PropositionModel {
         task.resume()
         
         semaphore.wait()
-        
+        print("Get All Propositions filtered ... done")
         return res
     }
     
@@ -214,19 +208,14 @@ class PropositionModel {
         guard let requestBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {return "noId"}
         
         request.httpBody = requestBody
-        print(getFullToken(token: token))
         request.setValue(getFullToken(token: token), forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        print("json : " , String(data : request.httpBody!, encoding: .utf8)!)
         // Perform HTTP Request
          let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let error = error {
                 print("Error took place \(error)")
                 return
             }
-                let resp = response as? HTTPURLResponse
-            print("Test code status")
-            print(res)
             if let data = data{
                 print(data)
                 do{
@@ -236,7 +225,7 @@ class PropositionModel {
                     print(error)
                 }
                 if let jsonString = String(data: data, encoding: .utf8){
-                    print(jsonString)
+                    print("Add Proposition[\(jsonString)] ... done")
                 }
             }
             semaphore.signal()
@@ -267,7 +256,6 @@ class PropositionModel {
         request.httpBody = requestBody
         request.setValue(getFullToken(token: token), forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        print("body ok + auth ok")
         // Perform HTTP Request
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
                 
@@ -281,6 +269,7 @@ class PropositionModel {
                     res = (resp?.statusCode == 200)
         }
         task.resume()
+        print("Delete Proposition[\(idProp)] ... done")
         return res
     }
 
@@ -308,7 +297,7 @@ class PropositionModel {
         request.httpBody = requestBody
         request.setValue(getFullToken(token: token), forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        print("json : " , String(data : request.httpBody!, encoding: .utf8)!)
+        //print("json : " , String(data : request.httpBody!, encoding: .utf8)!)
         // Perform HTTP Request
          let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let error = error {
@@ -317,11 +306,8 @@ class PropositionModel {
             }
                 
                 let resp = response as? HTTPURLResponse
-            print("code d'erreur")
                 res = (resp?.statusCode == 200)
-                print(res)
             if let data = data{
-                print(data)
                 if let jsonString = String(data: data, encoding: .utf8){
                     print(jsonString)
                 }
@@ -330,20 +316,21 @@ class PropositionModel {
         }
         task.resume()
         semaphore.wait()
+        print(">> done")
         return res
     }
     
     //Données : un id de proposition (String) et un token pour l'autorisation (String)
     //Résultat : renvoie true si la proposition a bien été likée, false sinon
     static func likeProp(idProposition : String, token : String)->Bool{
-        print("propos liké")
+        print("Like Proposition[\(idProposition)] ...")
         return propositionLD(url: "https://mootee-api.herokuapp.com/propositions/like", idProposition: idProposition, token: token)
     }
     
     //Données : un id de proposition (String) et un token pour l'autorisation (String)
     //Résultat : renvoie true si la proposition a bien été dislikée, false sinon
     static func dislikeProp(idProposition : String, token : String)->Bool{
-        print("propos disliké")
+        print("Dislike Proposition[\(idProposition)] ...")
         return propositionLD(url: "https://mootee-api.herokuapp.com/propositions/dislike", idProposition: idProposition, token: token)
     }
     
@@ -372,7 +359,6 @@ class PropositionModel {
         request.httpBody = requestBody
         request.setValue(getFullToken(token: token), forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        print("json : " , String(data : request.httpBody!, encoding: .utf8)!)
         // Perform HTTP Request
          let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let error = error {
@@ -381,13 +367,10 @@ class PropositionModel {
             }
                 
                 let resp = response as? HTTPURLResponse
-            print("code d'erreur")
                 res = (resp?.statusCode == 200)
-                print(res)
             if let data = data{
-                print(data)
                 if let jsonString = String(data: data, encoding: .utf8){
-                    print(jsonString)
+                    print("Update Proposition[\(idProp)] => \(jsonString) ... done")
                 }
             }
             semaphore.signal()
@@ -418,7 +401,6 @@ class PropositionModel {
         request.httpBody = requestBody
         request.setValue(getFullToken(token: token), forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        print("json : " , String(data : request.httpBody!, encoding: .utf8)!)
         // Perform HTTP Request
          let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let error = error {
@@ -427,13 +409,11 @@ class PropositionModel {
             }
                 
                 let resp = response as? HTTPURLResponse
-            print("code d'erreur")
                 res = (resp?.statusCode == 200)
-                print(res)
             if let data = data{
-                print(data)
                 if let jsonString = String(data: data, encoding: .utf8){
-                    print(jsonString)
+                    print("Report Proposition[\(idProposition)] => \(jsonString) ... done")
+                    
                 }
             }
             semaphore.signal()

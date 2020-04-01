@@ -20,13 +20,11 @@ class TagModel {
         // Prepare URL
         let stringURL = "https://mootee-api.herokuapp.com/tags/"
         let url = URL(string: stringURL)
-        print("in getAll Tags")
         guard let requestUrl = url else { fatalError() }
         // Prepare URL Request Object (GET)
         var request = URLRequest(url: requestUrl)
         request.httpMethod = "GET"
         let semaphore = DispatchSemaphore(value :0)
-        print("request ok")
         // Perform HTTP Request
         var res : [String:Tag] = [:]
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
@@ -41,7 +39,6 @@ class TagModel {
             if let data = data{
                 do{
                     res = try JSONDecoder().decode([String:Tag].self, from: data)
-                    print("decoder ok!")
                 }catch let error {
                     print(error)
                 }
@@ -51,7 +48,7 @@ class TagModel {
         task.resume()
         
         semaphore.wait()
-        
+        print("Get All Tags ... done")
         return (purifyRequest(dictionary: res) as! [Tag])
     }
     
@@ -59,13 +56,11 @@ class TagModel {
         // Prepare URL
         let stringURL = "https://mootee-api.herokuapp.com/tags/best"
         let url = URL(string: stringURL)
-        print("in get Best Tags")
         guard let requestUrl = url else { fatalError() }
         // Prepare URL Request Object (GET)
         var request = URLRequest(url: requestUrl)
         request.httpMethod = "GET"
         let semaphore = DispatchSemaphore(value :0)
-        print("request ok")
         // Perform HTTP Request
         var res : [String:Tag] = [:]
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
@@ -80,7 +75,6 @@ class TagModel {
             if let data = data{
                 do{
                     res = try JSONDecoder().decode([String:Tag].self, from: data)
-                    print("decoder ok!")
                 }catch let error {
                     print(error)
                 }
@@ -90,7 +84,7 @@ class TagModel {
         task.resume()
         
         semaphore.wait()
-        
+        print("Get best Tags (9) ... done")
         return (purifyRequest(dictionary: res) as! [Tag])
     }
     
@@ -98,13 +92,11 @@ class TagModel {
         // Prepare URL
         let stringURL = "https://mootee-api.herokuapp.com/tags/"+idTag
         let url = URL(string: stringURL)
-        print("in get Tag by id")
         guard let requestUrl = url else { fatalError() }
         // Prepare URL Request Object (GET)
         var request = URLRequest(url: requestUrl)
         request.httpMethod = "GET"
         let semaphore = DispatchSemaphore(value :0)
-        print("request ok")
         // Perform HTTP Request
         var res : [String:Tag] = [:]
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
@@ -119,7 +111,6 @@ class TagModel {
             if let data = data{
                 do{
                     res = try JSONDecoder().decode([String:Tag].self, from: data)
-                    print("decoder ok!")
                 }catch let error {
                     print(error)
                 }
@@ -129,7 +120,7 @@ class TagModel {
         task.resume()
         
         semaphore.wait()
-        
+        print("Get Tag[\(idTag)] ... done")
         return (purifyRequest(dictionary: res)[0] as! Tag)
     }
     
@@ -169,6 +160,7 @@ class TagModel {
                     res = (resp?.statusCode == 200)
         }
         task.resume()
+        print("Delete Tag[\(idTag)] ... done")
         return res
     }
 }
