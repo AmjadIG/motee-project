@@ -9,7 +9,6 @@
 import SwiftUI
 
 struct TopTags : View {
-    //@State var topTags = getTopTags()
     @State var topTags = TagModel.getTop9Tags()
     var body : some View {
         VStack{

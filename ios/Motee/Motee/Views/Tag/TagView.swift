@@ -13,19 +13,51 @@ struct TagView: View {
     @Binding var tag : Tag
     var color : String
     var body : some View {
-        
         VStack{
             Button(action:{
-                self.fk.tags.append(self.tag)
+                if self.containsThisTag(){
+                    self.removeTag()
+                }else{
+                    self.fk.tags.append(self.tag)
+                }
+                self.fk.currentPage = "Accueil"
             }){
-                Text(" #\(tag.label) ")
-                .bold()
-                .padding()
-                .background(generateColor(name: color))
-                .cornerRadius(5)
-                .foregroundColor(Color.white)
+                if self.containsThisTag(){
+                    VStack{
+                        Text(" #\(tag.label) ")
+                        .bold()
+                        .padding()
+                        .background(generateColor(name: color))
+                        .cornerRadius(5)
+                        .foregroundColor(Color.white)
+                    }.frame(alignment : .center).padding(3).background(generateColor(name: color).colorInvert())
+                }else{
+                    Text(" #\(tag.label) ")
+                    .bold()
+                    .padding()
+                    .background(generateColor(name: color))
+                    .cornerRadius(5)
+                    .foregroundColor(Color.white)
+                }
             }
         }.lineLimit(1)
+    }
+    func containsThisTag()->Bool {
+        var res = false
+        for tag in fk.tags {
+            if tag.equals(otherTag: self.tag){
+                res = true
+            }
+        }
+        return res
+    }
+    
+    func removeTag(){
+        for i in 0..<self.fk.tags.count {
+            if self.fk.tags[i].equals(otherTag: self.tag) {
+                self.fk.tags.remove(at: i)
+            }
+        }
     }
 }
 

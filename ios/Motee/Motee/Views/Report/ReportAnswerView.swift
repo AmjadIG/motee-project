@@ -40,6 +40,9 @@ struct ReportAnswerView: View {
                 Text("Vous signalez actuellement : \(UserModel.getUserById(idUser: ansReported.owner).pseudo)")
                 Text("Rappel de ses propos : ")
                 Text("'' \(ansReported.contentPub) ''").padding()
+                if (self.fk.answerReported?.idReport.contains(self.fk.currentUser!.idUser))! {
+                    Text("Vous avez déjà signalé cette proposition")
+                }
                 HStack{
                     Button(action: {self.fk.showAnswerReport = false ; self.fk.answerReported = nil}) {
                         Text("Annuler")
@@ -49,13 +52,19 @@ struct ReportAnswerView: View {
                             .background(lightGreyColor)
                             .foregroundColor(Color.black)
                     }
-                    Button(action: { self.fk.showAnswerReport = false}) {
-                        Text("Envoyer")
-                            .bold()
-                            .padding(.vertical)
-                            .frame(maxWidth: .infinity)
-                            .background(Color.red)
-                            .foregroundColor(Color.white)
+                    if !(self.fk.answerReported?.idReport.contains(self.fk.currentUser!.idUser))! {
+                        Button(action: {
+                                if AnswerModel.report(idAnswer: self.fk.answerReported!.idPublication, token: self.fk.token){
+                                    self.fk.showAnswerReport = false
+                                }
+                            }) {
+                            Text("Envoyer")
+                                .bold()
+                                .padding(.vertical)
+                                .frame(maxWidth: .infinity)
+                                .background(Color.red)
+                                .foregroundColor(Color.white)
+                        }
                     }
                 }
             }

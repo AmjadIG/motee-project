@@ -29,7 +29,7 @@ struct Accueil: View {
                                 }
                             }
                         }
-                        SearchBar()
+                        SearchBar(textSearch: self.fk.textSearch)
                         VStack{
                             PropositionFiltred(props : PropositionModel.getFilteredProps(filter: fk.filtered, tags: fk.tags))
                         }

@@ -13,8 +13,12 @@ struct ReportAnswer: View {
     @Binding var answer : Answer
     var body: some View {
         Button(action:{
+            if self.fk.currentUser == nil {
+                self.fk.currentPage = "Se connecter"
+            }else{
             self.fk.showAnswerReport = true
             self.fk.answerReported = self.answer
+            }
         }){
             Image(systemName: "exclamationmark.triangle").padding(7)
                 .foregroundColor(.white)

@@ -13,8 +13,12 @@ struct ReportProposition: View {
     @Binding var proposition : Proposition
     var body: some View {
         Button(action:{
-            self.fk.showPropositionReport = true
-            self.fk.propositionReported = self.proposition
+            if self.fk.currentUser == nil {
+                self.fk.currentPage = "Se connecter"
+            }else{
+                self.fk.showPropositionReport = true
+                self.fk.propositionReported = self.proposition
+            }
         }){
             Image(systemName: "exclamationmark.triangle.fill").padding(7)
                 .foregroundColor(.white)

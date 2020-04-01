@@ -50,7 +50,13 @@ struct ReportPropositionView: View {
                             .background(lightGreyColor)
                             .foregroundColor(Color.black)
                     }
-                    Button(action: {self.fk.showPropositionReport = false }) {
+                    Button(action: {
+                        if PropositionModel.report(idProposition: self.fk.propositionReported!.idPublication, token: self.fk.token){
+                            self.fk.showPropositionReport = false
+                            print("Proposition reported")
+                        }
+                            
+                    }) {
                         Text("Envoyer")
                             .bold()
                             .padding(.vertical)

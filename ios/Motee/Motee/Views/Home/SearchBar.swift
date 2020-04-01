@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct SearchBar: View {
-    @State var textSearch : String = ""
+    @State var textSearch : String
     @EnvironmentObject var fk : FilterKit
     var body: some View {
         VStack{
@@ -27,8 +27,9 @@ struct SearchBar: View {
     }
 }
 
-struct SearchBar_Previews: PreviewProvider {
+/*struct SearchBar_Previews: PreviewProvider {
     static var previews: some View {
-        SearchBar()
+        SearchBar(textSearch: <#String#>)
     }
 }
+ */
