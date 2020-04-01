@@ -30,8 +30,9 @@ struct Accueil: View {
                             }
                         }
                         SearchBar()
-                        PropositionFiltred(props : PropositionModel.getFilteredProps(filter: fk.filtered, tags: fk.tags)
-                        )
+                        VStack{
+                            PropositionFiltred(props : PropositionModel.getFilteredProps(filter: fk.filtered, tags: fk.tags))
+                        }
                     }
                 }
             }

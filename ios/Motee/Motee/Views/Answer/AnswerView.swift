@@ -6,9 +6,7 @@
 //  Copyright © 2020 groupe3. All rights reserved.
 //
 
-import Combine
 import SwiftUI
-import UserNotifications
 
 struct AnswerView: View {
     @EnvironmentObject var fk : FilterKit
@@ -16,11 +14,7 @@ struct AnswerView: View {
     
     var body: some View {
         VStack{
-            HStack{
-                Text(UserModel.getUserById(idUser: answer.owner ).pseudo).bold().foregroundColor(.white)
-                Spacer()
-                Text(getGoodDate(wrongD: answer.datePublication)).bold().foregroundColor(.white)
-            }.padding()
+            AnswerHeader(answer: $answer)
             Text(answer.contentPub).foregroundColor(.white).padding([.leading, .bottom, .trailing])
             AnswerFooter(answer: $answer)
         }.frame(alignment: .leading)

@@ -348,18 +348,17 @@ class PropositionModel {
     }
     
     //Résultat : renvoie true si la proposition a bien été modifiée (requête envoyée et validée), false sinon
-    static func updateProp(idProp : String, contentProp : String, isAnonymous : Bool, idUser : String, token : String)->Bool {
-        // Prepare URL
-        
-        let stringurl = "https://mootee-api.herokuapp.com/propositions/"
-        let url = URL(string: stringurl)//ICI
-        
-        let body = [
-            "id" : idProp,
-            "contentProp" : contentProp,
-            "isAnonymous" : "\(isAnonymous)",
-            "ownerProp" : idUser
-        ]
+     static func updateProp(idProp : String, ownerProp: String, isAnonymous : Bool, token : String)->Bool {
+           // Prepare URL
+           
+           let stringurl = "https://mootee-api.herokuapp.com/propositions/"
+           let url = URL(string: stringurl)//ICI
+           
+           let body = [
+               "id" : idProp,
+               "isAnonymous" : "\(isAnonymous)",
+               "ownerProp" : ownerProp
+           ]
         
         guard let requestUrl = url else { fatalError() }
         // Prepare URL Request Object

@@ -263,19 +263,18 @@ class AnswerModel {
     }
     
     //Résultat : renvoie true si la proposition a bien été modifiée (requête envoyée et validée), false sinon
-    static func updateAns(idAns : String, contentAns : String, isAnonymous : Bool, idUser : String, token : String)->Bool {
-        // Prepare URL
-        //guard let token = currentUser?.authToken else{return false}
-        
-        let stringurl = "https://mootee-api.herokuapp.com/answers/update"
-        let url = URL(string: stringurl)//ICI
-        
-        let body = [
-            "_id" : idAns,
-            "contentAnswer" : contentAns,
-            "isAnonymous" : "\(isAnonymous)",
-            "ownerAnswer" : idUser
-        ]
+     static func updateAns(idAns : String, isAnonymous : Bool, ownerAnswer : String, token : String)->Bool {
+           // Prepare URL
+           //guard let token = currentUser?.authToken else{return false}
+           
+           let stringurl = "https://mootee-api.herokuapp.com/answers/"
+           let url = URL(string: stringurl)//ICI
+           
+           let body = [
+               "id" : idAns,
+               "isAnonymous" : "\(isAnonymous)",
+               "ownerAnswer" : ownerAnswer
+           ]
         
         guard let requestUrl = url else { fatalError() }
         // Prepare URL Request Object

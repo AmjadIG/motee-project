@@ -13,16 +13,13 @@ struct PropositionFooter : View {
     @Binding var proposition : Proposition
     @State var isNotHide :Bool = false
     @State var comment = ""
-    @Binding var editing : Bool
-    @Binding var editProposition : String
-    @Binding var editAnonymous : Bool
     var body: some View {
         VStack{
             VStack{
                 HStack {
                     PropositionLiked(proposition: $proposition)
                     Spacer()
-                    if(fk.currentUser != nil && !editing){
+                    if(fk.currentUser != nil){
                         Button(action:{
                             self.isNotHide.toggle()
                         }){
@@ -34,22 +31,7 @@ struct PropositionFooter : View {
                             .foregroundColor(.white)
                             .background(LinearGradient(gradient: Gradient(colors: [.yellow, .pink]), startPoint: .leading, endPoint: .trailing)).cornerRadius(20)
                         }
-                    }else if self.editing{
-                        Button(action: {
-                            if PropositionModel.updateProp(idProp: self.proposition.idPublication, contentProp: self.editProposition, isAnonymous: self.proposition.anonymous, idUser: self.fk.currentUser!.idUser, token: self.fk.token) {
-                                print("Proposition updated")
-                            }
-                            self.editing.toggle()
-                        }){
-                            HStack{
-                                Text("Editer")
-                                Image(systemName: "message.fill")
-                            }.padding(7)
-                                .foregroundColor(.green)
-                                .background(Color.white).cornerRadius(20)
-                        }
-                    }
-                    else{
+                    }else{
                         HStack{
                             Text("Connexion requise")
                             Image(systemName: "message.fill")
@@ -60,13 +42,6 @@ struct PropositionFooter : View {
                     Spacer()
                     
                     if (self.fk.currentUser?.idUser == proposition.owner){
-                        Button(action: {
-                            self.editing.toggle()
-                            self.editProposition = self.proposition.contentPub
-                            self.editAnonymous = self.proposition.anonymous
-                        }){
-                            Image(systemName: "square.and.pencil").foregroundColor(Color.gray).padding()
-                        }
                         Button( action :  {
                             if PropositionModel.deleteProposition(idProp: self.proposition.idPublication, token: self.fk.token){
                                 self.fk.currentPage = self.fk.currentPage
@@ -103,6 +78,6 @@ struct PropositionFooter_Previews: PreviewProvider {
     @State static var editProposition = ""
     @State static var editAnonymous = false
     static var previews: some View {
-        PropositionFooter(proposition: $proposition, editing: $editing, editProposition : $editProposition, editAnonymous: $editAnonymous).environmentObject(FilterKit())
+        PropositionFooter(proposition: $proposition).environmentObject(FilterKit())
     }
 }

@@ -15,33 +15,19 @@ struct PropositionView : View {
     @State var showAllAnswers = false
     @State var colorIfClicked = generateColor(name: "white")
     @State var colorIfClicked2 = generateColor(name: "black")
-    @State var editing = false
-    @State var editProposition = ""
-    @State var editAnonymous = false
     var body: some View {
         VStack{
             VStack(alignment: .center){
-                HStack{
-                    Text(UserModel.getUserById(idUser: proposition.owner).pseudo).bold().foregroundColor(colorIfClicked2)
-                    Spacer()
-                    Text(getGoodDate(wrongD: proposition.datePublication))
-                        .bold()
-                        .foregroundColor(colorIfClicked2)
-                }.padding(.all, 10.0).background(LinearGradient(gradient: Gradient(colors: [.yellow, .pink]), startPoint: .leading, endPoint: .trailing))
+                PropositionHeader(proposition: $proposition, colorIfClicked: $colorIfClicked, colorIfClicked2: $colorIfClicked2)
                 PropositionTagsView(proposition: $proposition).padding(.vertical,1)
-                if editing {
-                    FieldGenerator.plain(label: "",field: "Ecrivez votre propos", text: $editProposition)
-                }else{
-                    Text(proposition.title).bold().underline().padding(.horizontal).padding(.top,5)
-                    Text(proposition.contentPub).padding(.top, 10).padding(.horizontal)
-                }
-                PropositionFooter(proposition: $proposition, editing: $editing, editProposition: $editProposition, editAnonymous: $editAnonymous).padding(.horizontal)
-                
+                Text(proposition.title).bold().underline().padding(.horizontal).padding(.top,5)
+                Text(proposition.contentPub).padding(.top, 10).padding(.horizontal)
+                PropositionFooter(proposition: $proposition).padding(.horizontal)
             }.frame(alignment: .leading)
                 .background(lightGreyColor)
                 .cornerRadius(20).shadow(radius: 5)
                 .padding([.top, .leading, .trailing])
-            
+        
             AnswersPropsView(proposition: $proposition, showBestAnswer: $showBestAnswer, showAllAnswers: $showAllAnswers, colorIfClicked: $colorIfClicked, colorIfClicked2: $colorIfClicked2)
         }
     }
