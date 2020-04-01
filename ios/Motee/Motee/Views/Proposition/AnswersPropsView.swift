@@ -28,7 +28,7 @@ struct AnswersPropsView : View {
         }
         guard let bestAnswer = PropositionModel.getBestAnswer(proposition: proposition) else {
             return AnyView(VStack {
-                Text("il n'existe pas encore de réponse à afficher")
+                Text("Il n'existe pas encore de réponse à afficher")
             })
         }
         return AnyView(VStack{
