@@ -21,6 +21,8 @@ struct AnswerFooter: View {
                 if (self.fk.currentUser?.idUser == answer.owner){
                     Button(action : {
                         if AnswerModel.deleteAnswer(idAns: self.answer.idPublication, token: self.fk.token){
+                            self.fk.currentPage = ""
+                                self.fk.currentPage = "Mes réponses"
                             print("Answer supprimé")
                         }else{
                             print("Answer pas supprimé")

@@ -10,9 +10,9 @@ import SwiftUI
 
 struct MyAnswers: View {
     @EnvironmentObject var fk : FilterKit
-    @State var answers : [Answer]
     var body: some View {
-        NavigationView{
+        let answers : [Answer] = UserModel.getAnswersByUser(user: fk.currentUser!)
+        return NavigationView{
             ScrollView(.vertical){
                 VStack{
                     if answers.count == 0 {
@@ -30,7 +30,7 @@ struct MyAnswers: View {
                         }.padding()
                     }else{
                         ForEach(answers.indices){ index in
-                            AnswerView(answer: self.answers[index])
+                            AnswerView(answer: answers[index])
                         }
                     }
                 }.padding(.top, 80)

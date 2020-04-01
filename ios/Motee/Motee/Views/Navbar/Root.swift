@@ -9,7 +9,6 @@ import SwiftUI
 
 struct Root : View {
     @EnvironmentObject var fk : FilterKit
-    var currentPage : String
     var body: some View {
         VStack{
             if(fk.currentPage == "Accueil"){
@@ -21,9 +20,9 @@ struct Root : View {
             }else if fk.currentPage == "S'inscrire"{
                 RegisterForm()
             }else if fk.currentPage == "Mes propositions"{
-                MyProps(props: UserModel.getPropsByUser(user: fk.currentUser!))
+                MyProps()
             }else if fk.currentPage == "Mes réponses"{
-                MyAnswers(answers: UserModel.getAnswersByUser(user: fk.currentUser!))
+                MyAnswers()
                 }
             else if fk.currentPage == "Ajouter propos"{
                 AddProposition()
@@ -38,6 +37,6 @@ struct Root : View {
 struct Root_Previews: PreviewProvider {
     @State static var page = "Se connecter"
     static var previews: some View {
-        Root(currentPage: page).environmentObject(FilterKit())
+        Root().environmentObject(FilterKit())
     }
 }

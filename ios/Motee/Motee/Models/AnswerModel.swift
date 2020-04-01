@@ -208,7 +208,7 @@ class AnswerModel {
         let url = URL(string: stringurl)//ICI
         
         let body = [
-            "_id" : idAnswer
+            "id" : idAnswer
         ]
         
         guard let requestUrl = url else { fatalError() }
@@ -251,14 +251,14 @@ class AnswerModel {
     //Données : un id de proposition (String) et un token pour l'autorisation (String)
     //Résultat : renvoie true si la proposition a bien été likée, false sinon
     static func likeAns(idAnswer : String, token : String)->Bool{
-        print("propos liké")
+        print("answer liké")
         return answerLD(url: "https://mootee-api.herokuapp.com/answers/like", idAnswer: idAnswer, token: token)
     }
     
     //Données : un id de proposition (String) et un token pour l'autorisation (String)
     //Résultat : renvoie true si la proposition a bien été dislikée, false sinon
     static func dislikeAns(idAnswer : String, token : String)->Bool{
-        print("propos disliké")
+        print("answer disliké")
         return answerLD(url: "https://mootee-api.herokuapp.com/answers/dislike", idAnswer: idAnswer, token: token)
     }
     

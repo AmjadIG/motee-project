@@ -51,12 +51,12 @@ class Answer : Publication, Identifiable, Codable {
     //methods
     
     func liker(userLike : User){
-        self.idLikesAnswer.append(userLike.id)
+        self.idLikesAnswer.append(userLike.idUser)
     }
     
     func disliker(userDislike : User){
         for i in 0..<self.idLikesAnswer.count {
-            if self.idLikesAnswer[i] == userDislike.id {
+            if self.idLikesAnswer[i] == userDislike.idUser {
                 self.idLikesAnswer.remove(at: i)
             }
         }
@@ -84,12 +84,12 @@ class Answer : Publication, Identifiable, Codable {
     }
     
     func estLikee(utilisateur: User?)->Bool{
-        if utilisateur == nil {
+        guard let utilisateur = utilisateur else {
             return false
         }
         var isLiked : Bool = false
-        for id in idLikesAnswer {
-            if id == utilisateur!.id {
+        for idUser in self.idLikesAnswer {
+            if idUser == utilisateur.idUser {
                 isLiked = true
             }
         }

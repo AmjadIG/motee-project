@@ -10,9 +10,9 @@ import SwiftUI
 
 struct MyProps: View {
     @EnvironmentObject var fk : FilterKit
-    @State var props : [Proposition]
     var body: some View {
-        NavigationView{
+        let props = UserModel.getPropsByUser(user: fk.currentUser!)
+        return NavigationView{
             ScrollView(.vertical){
                 VStack{
                     if props.count == 0 {
@@ -30,7 +30,7 @@ struct MyProps: View {
                         }.padding()
                     }else{
                         ForEach(props.indices){ index in
-                            PropositionView(proposition: self.props[index])
+                            PropositionView(proposition: props[index])
                         }
                     }
                 }.padding(.top, 80)

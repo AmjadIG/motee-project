@@ -34,7 +34,7 @@ struct NavbarView: View {
             }
             GeometryReader { geometry in
                 ZStack(alignment: .leading) {
-                    Root(currentPage: self.fk.currentPage)
+                    Root()
                     if self.showMenu {
                         MenuView(showMenu: self.$showMenu)
                             .frame(width: geometry.size.width/2)
