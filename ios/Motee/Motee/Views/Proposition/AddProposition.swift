@@ -21,9 +21,9 @@ struct AddProposition: View {
     
     var body: some View {
         VStack{
-            Title(myTitle: "Ajouter un propos")
+            Title(myTitle: "Ajouter un propos") // Titre
             Divider()
-            ScrollView{
+            ScrollView{ //Formulaire d'ajout de Propos (+ Reponse)
                 FieldGenerator.plain(label: "Titre du propos :",field: "Ecrivez votre titre", text: $titleProposition)
                 FieldGenerator.plain(label: "Propos :",field: "Ecrivez votre propos", text: $newProposition)
                 HStack{
@@ -37,17 +37,17 @@ struct AddProposition: View {
                             self.newTag = ""
                         }
                     }){
-                        SymbolGenerator(mySymbol: "arrowtriangle.right.circle.fill", myColor: "blue")
+                        SymbolGenerator(mySymbol: "arrowtriangle.right.circle.fill", myColor: "pink")
                     }
                 }
-                if(tagList.count>0){
+                if(tagList.count>0){ //On affiche les tags si on en a ajouté !
                     TagListView(tagList: $tagList)
                 }
                 Toggle(isOn : $anonymousProposition){
-                    Text("Propos anonyme")
+                    Text("Propos anonyme") //Toggle button => Pour que le propos soit anonyme d'office !
                 }
                 Divider()
-                Toggle(isOn : $answerAdding){
+                Toggle(isOn : $answerAdding){ //Toggle button => Pour rajouter une première réponse au propos
                     Text("Proposer une réponse ?")
                 }
                 if answerAdding {
@@ -58,9 +58,8 @@ struct AddProposition: View {
                     }
                 }
                 Divider().padding()
-                Button(action:{
-                    // proposition + réponse
-                    if self.answerAdding {
+                Button(action:{ //Bouton d'envoi du Propos (+Réponse)
+                    if self.answerAdding { //On ajoute un propos ET une réponse
                         let idProp = PropositionModel.addProposition(titleProp : self.titleProposition, contentPub: self.newProposition, isAnonymous: self.anonymousProposition, tagsProp: self.tagList, token: self.fk.token)
                         if idProp != "noId" {
                             print("Proposition added")
@@ -72,10 +71,7 @@ struct AddProposition: View {
                         }else{
                             print("Proposition not added")
                         }
-                        
-                        
-                        // proposition
-                    }else{
+                    }else{ //On ajoute seulement un propos
                         let idProp = PropositionModel.addProposition(titleProp : self.titleProposition, contentPub: self.newProposition, isAnonymous: self.anonymousProposition, tagsProp: self.tagList, token: self.fk.token)
                         if idProp != "noId" {
                             print("Proposition added")

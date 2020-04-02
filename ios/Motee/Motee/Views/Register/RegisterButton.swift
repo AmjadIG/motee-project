@@ -21,10 +21,24 @@ struct RegisterButton: View {
                 Button(action: {
                     self.fk.currentPage = "Se connecter"
                 }){
-                    ButtonGenerator(myText: "S'inscrire", myColor: "blue")
+                    Text("S'inscrire")
+                    .font(.headline)
+                    .foregroundColor(.blue)
+                    .padding()
+                    .frame(width: 220, height: 60)
+                    .background(Color.white)
+                    .cornerRadius(40)
+                    .padding()
                 }
             }else{
-                ButtonGenerator(myText: "S'inscrire", myColor: "red")
+                Text("S'inscrire")
+                .font(.headline)
+                .foregroundColor(.red)
+                .padding()
+                .frame(width: 220, height: 60)
+                .background(Color.white)
+                .cornerRadius(40)
+                .padding()
             }
             
         }

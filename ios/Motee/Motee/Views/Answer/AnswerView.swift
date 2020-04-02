@@ -15,7 +15,7 @@ struct AnswerView: View {
     var body: some View {
         VStack{
             AnswerHeader(answer: $answer)
-            ShowTagAnswer(answer: $answer)
+            ShowTagAnswer(answer: $answer).padding()
             Text(answer.contentPub).foregroundColor(.white).padding([.leading, .bottom, .trailing])
             AnswerFooter(answer: $answer)
         }.frame(alignment: .leading)

@@ -26,7 +26,7 @@ struct AnswerFooter: View {
                             print("Answer pas supprimé")
                         }
                     }){
-                        Image( systemName: "trash.fill").foregroundColor(Color.red)
+                        Image( systemName: "trash.fill").foregroundColor(Color.white)
                     }
                 }else{
                     ReportAnswer(answer: $answer)
