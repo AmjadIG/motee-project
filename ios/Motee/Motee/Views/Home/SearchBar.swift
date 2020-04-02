@@ -22,14 +22,7 @@ struct SearchBar: View {
                 }){
                     SymbolGenerator(mySymbol: "magnifyingglass.circle.fill", myColor: "orange").padding(5)
                 }
-            }.padding()
+            }.padding([ .horizontal, .bottom], 10.0)
         }
     }
 }
-
-/*struct SearchBar_Previews: PreviewProvider {
-    static var previews: some View {
-        SearchBar(textSearch: <#String#>)
-    }
-}
- */

@@ -34,7 +34,7 @@ struct TagView: View {
                         .background(color)
                         .cornerRadius(5)
                         .foregroundColor(Color.white)
-                    }.frame(alignment : .center).padding(3).background(color).colorInvert()
+                    }.frame(alignment : .center).padding(3).background(Color.gray)
                 }else{
                     Text(" #\(tags[index].label) ")
                     .bold()

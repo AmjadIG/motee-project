@@ -17,10 +17,9 @@ struct TopTags : View {
         let honey = LinearGradient(gradient: Gradient(colors: [.yellow, .orange]), startPoint: .leading, endPoint: .trailing)
         return VStack{
             if topTags.count>0{
-                Title(myTitle: "Les tags les plus utilisés :")
+                Title(myTitle: "Tags les plus utilisés :")
             }
             HStack{
-                //First problem after cleaning database => No Top tags
                 TagView(tags: topTags, index : 0, color: mango)
                 TagView(tags: topTags, index : 1, color: honey)
                 TagView(tags: topTags, index : 2, color: juicy)

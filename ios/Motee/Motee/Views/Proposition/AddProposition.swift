@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct AddProposition: View {
-    var currentUser = (UIApplication.shared.delegate as! AppDelegate).currentUser
     @EnvironmentObject var fk : FilterKit
     @State var newProposition : String = ""
     @State var newAnswer : String = ""
@@ -18,7 +17,11 @@ struct AddProposition: View {
     @State var answerAdding : Bool = false
     @State var anonymousAnswer : Bool = false
     @State var titleProposition : String = ""
-    
+    @State var selection : String = ""
+    @State var emptyTitle = false
+    @State var emptyPropContent = false
+    @State var emptyAnsContent = false
+    @State private var offsetValue: CGFloat = 0.0
     var body: some View {
         VStack{
             Title(myTitle: "Ajouter un propos")
@@ -56,6 +59,8 @@ struct AddProposition: View {
                     Toggle(isOn : $anonymousAnswer){
                         Text("Propos anonyme")
                     }
+                    Text("Choisir un tag (optionnel) :").padding()
+                    ChooseTag(selection: $selection)
                 }
                 Divider().padding()
                 Button(action:{
@@ -64,7 +69,8 @@ struct AddProposition: View {
                         let idProp = PropositionModel.addProposition(titleProp : self.titleProposition, contentPub: self.newProposition, isAnonymous: self.anonymousProposition, tagsProp: self.tagList, token: self.fk.token)
                         if idProp != "noId" {
                             print("Proposition added")
-                            if AnswerModel.addAnswer(contentPub: self.newAnswer, isAnonymous: self.anonymousAnswer, tagsAns: [], idProposition: idProp, token: self.fk.token) {
+                            if AnswerModel.addAnswer(contentPub: self.newAnswer, isAnonymous: self.anonymousAnswer, tagsAns:  [Tag(label :self.selection)], idProposition: idProp, token: self.fk.token) {
+                                 self.fk.currentPage = "Accueil"
                                 print("Answer added")
                             }else{
                                 print("Answer not added")
@@ -109,4 +115,3 @@ struct AddProposition_Previews: PreviewProvider {
         AddProposition().environmentObject(FilterKit())
     }
 }
-

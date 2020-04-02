@@ -20,7 +20,9 @@ struct LoginForm: View {
                 Spacer()
                 Title(myTitle: "MoTee").foregroundColor(.white)
                 LoginPicture()
-                
+                if !noError {
+                    Text("Pseudo ou mot de passe incorrect").foregroundColor(Color.white)
+                }
                 FieldGenerator.plain(label: "",field: "Pseudo", text: $pseudo)
                 FieldGenerator.secure(label: "",field: "Mot de passe", text: $mdp)
                 Button(action: {
@@ -51,9 +53,7 @@ struct LoginForm: View {
                         .cornerRadius(40)
                         .padding()
                 }
-                if !noError {
-                    Text("Pseudo ou mot de passe incorrect").foregroundColor(Color.white)
-                }
+                
                 Spacer()
             }.background(LinearGradient(gradient: Gradient(colors: [.yellow, .pink]), startPoint: .leading, endPoint: .trailing)).edgesIgnoringSafeArea(.all)
             .keyboardSensible($offsetValue)
