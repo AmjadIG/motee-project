@@ -119,18 +119,42 @@ class PropositionModel {
     //Données : Proposition prop
     //Résultat : Récupère la réponse avec le plus de likes, parmi les réponses associées à la proposition prop en paramètre
     static func getBestAnswer(proposition : Proposition)->Answer?{
-        let answerArray = getAllAnswer(proposition: proposition)
-        if answerArray.count == 0 {
-            return nil
-        } else {
-            var bestAnswer = answerArray[0]
-            for answer in answerArray {
-                if answer.idLikesAnswer.count > bestAnswer.idLikesAnswer.count {
-                    bestAnswer = answer
+        // Prepare URL
+        let stringURL = "https://mootee-api.herokuapp.com/propositions/\(proposition.id)/answers/best"
+        let url = URL(string: stringURL)
+        guard let requestUrl = url else { fatalError() }
+        // Prepare URL Request Object (GET)
+        var request = URLRequest(url: requestUrl)
+        request.httpMethod = "GET"
+        let semaphore = DispatchSemaphore(value :0)
+        // Perform HTTP Request
+        var res : [String:Answer] = [:]
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            
+            // Vérifie si on récupère une erreur
+            if let error = error {
+                print("Error took place :\(error)")
+                return
+            }
+        
+            // On vérifie l'état de la donnée
+            if let data = data{
+                do{
+                    res = try JSONDecoder().decode([String:Answer].self, from: data)
+                }catch let error {
+                    print(error)
                 }
             }
-            print("Get Best Answer of Proposition[\(proposition.id)] ... done")
-            return bestAnswer
+            semaphore.signal()
+        }
+        task.resume()
+        
+        semaphore.wait()
+        print("Get Best Answer of Proposition[\(proposition.id)] ... done")
+        if purifyRequest(dictionary: res).isEmpty {
+            return nil
+        } else {
+            return purifyRequest(dictionary: res)[0] as? Answer
         }
     }
     
