@@ -11,7 +11,7 @@ import Foundation
 
 //Données : Dictionnaire prenant en clé un string, et en valeur, n'importe quel type
 //Résultat : Transforme le dictionnaire, en array => utile surtout pour les requêtes
-func purifyRequest(dictionary : [String:Any])->[Any]{
+func purifyRequest(dictionary : [String?:Any])->[Any]{
     var arrayAny : [Any] = []
     for(_,value) in dictionary {
         arrayAny.append(value)

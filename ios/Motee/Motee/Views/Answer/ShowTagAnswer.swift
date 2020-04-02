@@ -16,9 +16,9 @@ struct ShowTagAnswer : View {
             ForEach(answer.tagsAnswer,id: \.self){oneTag in
                 Text(" #\(TagModel.getTagById(idTag: oneTag).label) ")
                     .bold()
-                    .background(Color.pink)
+                    .background(Color.white)
                     .cornerRadius(5)
-                    .foregroundColor(Color.white)
+                    .foregroundColor(Color.pink)
             }
         }.padding(.horizontal)
     }

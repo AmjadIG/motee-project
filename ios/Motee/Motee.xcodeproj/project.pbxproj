@@ -48,6 +48,8 @@
 		A611C4C8242FF3CE00295DC5 /* PropositionTagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A611C4C7242FF3CE00295DC5 /* PropositionTagsView.swift */; };
 		A62B91932434FB6C00688497 /* AnswerHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62B91922434FB6C00688497 /* AnswerHeader.swift */; };
 		A62B91952434FC6100688497 /* PropositionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62B91942434FC6100688497 /* PropositionHeader.swift */; };
+		A686E2AB2436323F00A86015 /* ChooseTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = A686E2AA2436323F00A86015 /* ChooseTag.swift */; };
+		A686E2AD2436380000A86015 /* ShowTagAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A686E2AC2436380000A86015 /* ShowTagAnswer.swift */; };
 		A6B3250D2430D9D7002FABDA /* ReportPropositionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B3250C2430D9D7002FABDA /* ReportPropositionView.swift */; };
 		A6C7DFFF2433D487007EC2BA /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C7DFFE2433D487007EC2BA /* Keyboard.swift */; };
 		A6E9C46C24329ABF00B7C70B /* ReportAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E9C46B24329ABF00B7C70B /* ReportAnswer.swift */; };
@@ -140,6 +142,8 @@
 		A611C4C7242FF3CE00295DC5 /* PropositionTagsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropositionTagsView.swift; sourceTree = "<group>"; };
 		A62B91922434FB6C00688497 /* AnswerHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerHeader.swift; sourceTree = "<group>"; };
 		A62B91942434FC6100688497 /* PropositionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropositionHeader.swift; sourceTree = "<group>"; };
+		A686E2AA2436323F00A86015 /* ChooseTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseTag.swift; sourceTree = "<group>"; };
+		A686E2AC2436380000A86015 /* ShowTagAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTagAnswer.swift; sourceTree = "<group>"; };
 		A6B3250C2430D9D7002FABDA /* ReportPropositionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportPropositionView.swift; sourceTree = "<group>"; };
 		A6C7DFFE2433D487007EC2BA /* Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
 		A6E9C46B24329ABF00B7C70B /* ReportAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportAnswer.swift; sourceTree = "<group>"; };
@@ -367,6 +371,7 @@
 				F016E235240D4BD40063A034 /* AnswerView.swift */,
 				A62B91922434FB6C00688497 /* AnswerHeader.swift */,
 				F016E237240D4BF00063A034 /* AddAnswer.swift */,
+				A686E2AC2436380000A86015 /* ShowTagAnswer.swift */,
 				F016E239240D4C050063A034 /* ListAnswers.swift */,
 				F0A77C952418EB8000C5F3AA /* AnswerLiked.swift */,
 				F0C203E62417EC8000189E6A /* AnswerFooter.swift */,
@@ -397,6 +402,7 @@
 				8E5F72732429108800B89172 /* ShowTagsProposition.swift */,
 				A14296D22412C3D7005E73B5 /* PropositionLiked.swift */,
 				A14296D42412CFA7005E73B5 /* PropositionFooter.swift */,
+				A686E2AA2436323F00A86015 /* ChooseTag.swift */,
 				8E5F727524292C9D00B89172 /* PropositionFiltred.swift */,
 			);
 			path = Proposition;
@@ -548,6 +554,7 @@
 				A6E9C46C24329ABF00B7C70B /* ReportAnswer.swift in Sources */,
 				F016E243240D4C550063A034 /* Publication.swift in Sources */,
 				A14A254F241477390030039B /* SingleLinkNavBar.swift in Sources */,
+				A686E2AB2436323F00A86015 /* ChooseTag.swift in Sources */,
 				A1B5EAE324100D00001824C6 /* Filter.swift in Sources */,
 				A1A5A343240D42F20015CBBE /* Accueil.swift in Sources */,
 				A14A254924140DE80030039B /* NavbarView.swift in Sources */,
@@ -597,6 +604,7 @@
 				A14A254724140D810030039B /* MenuView.swift in Sources */,
 				8ECD8A4B241AA6C7007F2879 /* TagView.swift in Sources */,
 				A62B91932434FB6C00688497 /* AnswerHeader.swift in Sources */,
+				A686E2AD2436380000A86015 /* ShowTagAnswer.swift in Sources */,
 				F02350B92417C86B0069AB06 /* Root.swift in Sources */,
 				8E6E4D8A2418EC1B00517EC6 /* TrailingNavbar.swift in Sources */,
 				A14296CD2412AFE0005E73B5 /* PropositionView.swift in Sources */,

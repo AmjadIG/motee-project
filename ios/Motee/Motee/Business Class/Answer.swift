@@ -15,6 +15,7 @@ class Answer : Publication, Identifiable, Codable {
     @Published var datePublication : String = ""
     @Published var contentPub : String = ""
     @Published var idLikesAnswer : [String] = [] //Array d'object ID de User
+    @Published var tagsAnswer : [String] = []
     @Published var anonymous : Bool = false
     @Published var owner : String
     @Published var idReport : [String] = []
@@ -27,6 +28,7 @@ class Answer : Publication, Identifiable, Codable {
         case dateAnswer
         case contentAnswer
         case idLikesAnswer
+        case tagsAnswer
         case isAnonymous
         case ownerAnswer
         case idProp
@@ -43,6 +45,7 @@ class Answer : Publication, Identifiable, Codable {
         self.datePublication = try container.decode(String.self, forKey: .dateAnswer)
         self.contentPub = try container.decode(String.self, forKey: .contentAnswer)
         self.idLikesAnswer = try container.decode(Array.self, forKey: .idLikesAnswer)
+        self.tagsAnswer = try container.decode(Array.self, forKey: .tagsAnswer)
         self.anonymous = try container.decode(Bool.self, forKey: .isAnonymous)
         self.owner = try container.decode(String.self, forKey: .ownerAnswer)
         self.idProposition = try container.decode(String.self, forKey: .idProp)

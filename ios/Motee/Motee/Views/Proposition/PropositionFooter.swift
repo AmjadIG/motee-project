@@ -13,6 +13,7 @@ struct PropositionFooter : View {
     @Binding var proposition : Proposition
     @State var isNotHide :Bool = false
     @State var comment = ""
+    @State var selection = ""
     var body: some View {
         VStack{
             VStack{
@@ -49,6 +50,7 @@ struct PropositionFooter : View {
                             }else{
                                 print("Proposition not deleted ")
                             }
+                            self.fk.currentPage = self.fk.currentPage
                         }){
                             Image(systemName: "trash.fill").foregroundColor(Color.red).padding()
                         }
@@ -61,14 +63,17 @@ struct PropositionFooter : View {
                 HStack{
                     TextField("Commentaire...", text: $comment).cornerRadius(20)
                     Button(action:{
-                        if AnswerModel.addAnswer(contentPub: self.comment, isAnonymous: false, tagsAns: PropositionModel.getAllTags(proposition: self.proposition), idProposition: self.proposition.id, token: self.fk.token){
+                        if AnswerModel.addAnswer(contentPub: self.comment, isAnonymous: false, tagsAns: [Tag(label :self.selection)], idProposition: self.proposition.id, token: self.fk.token){
                             print("Answer added")
                         }
                         self.comment = ""
                     }){
                         Image(systemName: "arrowtriangle.right.circle.fill").padding(5).foregroundColor(Color.pink)
                     }
+                    
                 }.padding()
+                Text("Choisir un tag (optionnel) :").padding(.bottom)
+                ChooseTag(selection: $selection)
             }
         }.padding()
     }

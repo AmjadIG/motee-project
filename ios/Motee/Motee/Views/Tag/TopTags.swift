@@ -12,23 +12,25 @@ struct TopTags : View {
     var body : some View {
         let topTags = TagModel.getTop9Tags()
         return VStack{
-            Title(myTitle: "Les tags les plus utilisés :")
-            HStack{
-                TagView(tag: topTags[0], color: "pink")
-                TagView(tag: topTags[1], color: "yellow")
-                TagView(tag: topTags[2], color: "pink")
+            if topTags.count>0{
+                Title(myTitle: "Les tags les plus utilisés :")
             }
             HStack{
-                TagView(tag: topTags[3], color: "red")
-                TagView(tag: topTags[4], color: "orange")
-                TagView(tag: topTags[5], color: "red")
+                TagView(tags: topTags, index : 0, color: "pink")
+                TagView(tags: topTags, index : 1, color: "yellow")
+                TagView(tags: topTags, index : 2, color: "pink")
+            }
+            HStack{
+                TagView(tags: topTags, index : 3, color: "red")
+                TagView(tags: topTags, index : 4, color: "orange")
+                TagView(tags: topTags, index : 5, color: "red")
             }.padding()
             HStack{
-                TagView(tag: topTags[6], color: "orange")
-                TagView(tag: topTags[7], color: "yellow")
-                TagView(tag: topTags[8], color: "orange")
+                TagView(tags: topTags, index : 6, color: "orange")
+                TagView(tags: topTags, index : 7, color: "yellow")
+                TagView(tags: topTags, index : 8, color: "orange")
             }
-        }
+        }.padding()
     }
 }
 

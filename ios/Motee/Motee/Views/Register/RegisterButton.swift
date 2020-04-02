@@ -14,10 +14,13 @@ struct RegisterButton: View {
     @Binding var mdp : String
     @Binding var mdp2 : String
     @Binding var availablePseudo : Bool
+    @EnvironmentObject var fk : FilterKit
     var body: some View {
         VStack{
             if(availableRegistration(pseudo: pseudo, mail: mail, mdp: mdp, mdp2: mdp2)){
-                NavigationLink(destination : LoginForm()){
+                Button(action: {
+                    self.fk.currentPage = "Se connecter"
+                }){
                     ButtonGenerator(myText: "S'inscrire", myColor: "blue")
                 }
             }else{
