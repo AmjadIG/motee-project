@@ -65,9 +65,10 @@ struct PropositionFooter : View {
                     Button(action:{
                         if AnswerModel.addAnswer(contentPub: self.comment, isAnonymous: false, tagsAns: [Tag(label :self.selection)], idProposition: self.proposition.id, token: self.fk.token){
                             print("Answer added")
-                            self.fk.currentPage = "Mes réponses"
+                            
                         }
                         self.comment = ""
+                        self.fk.currentPage = "Mes réponses"
                     }){
                         Image(systemName: "arrowtriangle.right.circle.fill").padding(5).foregroundColor(Color.pink)
                     }
