@@ -32,6 +32,7 @@ class Answer : Publication, Identifiable, Codable {
         case isAnonymous
         case ownerAnswer
         case idProp
+        case idReport
     }
     //Encoder
     func encode(to encoder : Encoder) throws{
@@ -49,6 +50,8 @@ class Answer : Publication, Identifiable, Codable {
         self.anonymous = try container.decode(Bool.self, forKey: .isAnonymous)
         self.owner = try container.decode(String.self, forKey: .ownerAnswer)
         self.idProposition = try container.decode(String.self, forKey: .idProp)
+        self.idReport = try container.decode(Array.self, forKey: .idReport)
+
     }
     
     //methods
