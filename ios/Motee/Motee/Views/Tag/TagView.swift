@@ -10,22 +10,25 @@ import SwiftUI
 
 struct TagView: View {
     @EnvironmentObject var fk : FilterKit
-    @State var tag : Tag
+
+    @State var tags : [Tag]
+    @State var index : Int
     var color : LinearGradient
     var body : some View {
         VStack{
+            if(tags.count >= index){
             Button(action:{
                 if self.containsThisTag(){
                     self.removeTag()
                     self.fk.showFilters = true
                 }else{
-                    self.fk.tags.append(self.tag)
+                    self.fk.tags.append(self.tags[self.index])
                     self.fk.showFilters = true
                 }
             }){
                 if self.containsThisTag(){
                     VStack{
-                        Text(" #\(tag.label) ")
+                        Text(" #\(tags[index].label) ")
                         .bold()
                         .padding()
                         .background(color)
@@ -33,7 +36,7 @@ struct TagView: View {
                         .foregroundColor(Color.white)
                     }.frame(alignment : .center).padding(3).background(color).colorInvert()
                 }else{
-                    Text(" #\(tag.label) ")
+                    Text(" #\(tags[index].label) ")
                     .bold()
                     .padding()
                     .background(color)
@@ -41,12 +44,20 @@ struct TagView: View {
                     .foregroundColor(Color.white)
                 }
             }
+            }else{
+                Text(" #Indisponible")
+                .bold()
+                .padding()
+                .background(color)
+                .cornerRadius(5)
+                .foregroundColor(Color.white)
+            }
         }.lineLimit(1)
     }
     func containsThisTag()->Bool {
         var res = false
         for tag in fk.tags {
-            if tag.equals(otherTag: self.tag){
+            if tag.equals(otherTag: tags[index]){
                 res = true
             }
         }
@@ -55,7 +66,7 @@ struct TagView: View {
     
     func removeTag(){
         for i in 0..<self.fk.tags.count {
-            if self.fk.tags[i].equals(otherTag: self.tag) {
+            if self.fk.tags[i].equals(otherTag: tags[index]) {
                 self.fk.tags.remove(at: i)
             }
         }
@@ -63,10 +74,12 @@ struct TagView: View {
 }
 
 struct TagView_Previews: PreviewProvider {
-    @State static var tag = Tag(label: "Humour")
+
+    @State static var tags = [Tag(label: "Humour")]
     @State static var color = LinearGradient(gradient: Gradient(colors: [.yellow, .pink]), startPoint: .leading, endPoint: .trailing)
+    @State static var index = 0
     static var previews: some View {
-        TagView(tag: tag, color : color).environmentObject(FilterKit())
+        TagView(tags: tags,index : index, color : color).environmentObject(FilterKit())
     }
 }
 

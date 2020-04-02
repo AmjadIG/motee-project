@@ -37,7 +37,7 @@ struct RegisterForm: View {
             if availableRegistration(pseudo: pseudo, mail: mail, mdp: mdp, mdp2: mdp2){
                 Button( action : {
                     UserModel.register(pseudo: self.pseudo, password: self.mdp, mail: self.mail)
-                    self.fk.currentPage = "login"
+                    self.fk.currentPage = "Se connecter"
                     
                 }){
                     ButtonGenerator(myText: "S'inscrire", myColor: "green")

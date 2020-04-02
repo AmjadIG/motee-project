@@ -16,23 +16,26 @@ struct TopTags : View {
         let juicy = LinearGradient(gradient: Gradient(colors: [.orange, .red]), startPoint: .leading, endPoint: .trailing)
         let honey = LinearGradient(gradient: Gradient(colors: [.yellow, .orange]), startPoint: .leading, endPoint: .trailing)
         return VStack{
-            Title(myTitle: "Les tags les plus utilisés :")
-            HStack{
-                TagView(tag: topTags[0], color: mango) //First problem after cleaning database => No Top tags
-                TagView(tag: topTags[1], color: honey)
-                TagView(tag: topTags[2], color: juicy)
+            if topTags.count>0{
+                Title(myTitle: "Les tags les plus utilisés :")
             }
             HStack{
-                TagView(tag: topTags[3], color: pinky)
-                TagView(tag: topTags[4], color: mango)
-                TagView(tag: topTags[5], color: honey)
+                //First problem after cleaning database => No Top tags
+                TagView(tags: topTags, index : 0, color: mango)
+                TagView(tags: topTags, index : 1, color: honey)
+                TagView(tags: topTags, index : 2, color: juicy)
+            }
+            HStack{
+                TagView(tags: topTags, index : 3, color: pinky)
+                TagView(tags: topTags, index : 4, color: mango)
+                TagView(tags: topTags, index : 5, color: honey)
             }.padding()
             HStack{
-                TagView(tag: topTags[6], color: juicy)
-                TagView(tag: topTags[7], color: pinky)
-                TagView(tag: topTags[8], color: mango)
+                TagView(tags: topTags, index : 6, color: juicy)
+                TagView(tags: topTags, index : 7, color: pinky)
+                TagView(tags: topTags, index : 8, color: mango)
             }
-        }
+        }.padding()
     }
 }
 

@@ -182,6 +182,7 @@ struct Account: View {
                         self.fk.currentUser = nil
                         self.fk.token = ""
                         self.fk.currentPage = "Accueil"
+
                     }){
                         Text("Se déconnecter")
                         .font(.headline)
