@@ -69,8 +69,6 @@ func getFullToken(token : String)->String{
 func getGoodDate(wrongD : String)->String{
     var bufferDate = wrongD
     
-    
-    
     var year = ""
     var month = ""
     var day = ""
@@ -78,34 +76,30 @@ func getGoodDate(wrongD : String)->String{
     var hour = ""
     var minute = ""
 
+    //On récupère l'année,...
     year.append(bufferDate.first!);bufferDate.removeFirst()
     year.append(bufferDate.first!);bufferDate.removeFirst()
     year.append(bufferDate.first!);bufferDate.removeFirst()
     year.append(bufferDate.first!);bufferDate.removeFirst()
-    
     bufferDate.removeFirst()
-    
+    //...puis le mois,
     month.append(bufferDate.first!);bufferDate.removeFirst()
     month.append(bufferDate.first!);bufferDate.removeFirst()
-    
     bufferDate.removeFirst()
-    
+    //le jour,
     day.append(bufferDate.first!);bufferDate.removeFirst()
     day.append(bufferDate.first!);bufferDate.removeFirst()
-
-    bufferDate.removeFirst() //T
-    
+    bufferDate.removeFirst() //On retire le "T" du dateFormatter Mongo
+    //l'heure
     hour.append(bufferDate.first!);bufferDate.removeFirst()
     hour.append(bufferDate.first!);bufferDate.removeFirst()
-    
-    bufferDate.removeFirst() //T
-
+    bufferDate.removeFirst() //On retire le "T" du dateFormatter Mongo
+    //...et la minute
     minute.append(bufferDate.first!);bufferDate.removeFirst()
     minute.append(bufferDate.first!);bufferDate.removeFirst()
     
     let dateExactDay : String = "\(day)/\(month)/\(year)"
     let dateHour : String = "\(hour)h\(minute)"
     
-    return "le \(dateExactDay) à \(dateHour)"
-
+    return "le \(dateExactDay) à \(dateHour)" //Pour un meilleur affichage des dates !
 }

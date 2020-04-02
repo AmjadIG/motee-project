@@ -40,12 +40,27 @@ struct RegisterForm: View {
                     self.fk.currentPage = "Se connecter"
                     
                 }){
-                    ButtonGenerator(myText: "S'inscrire", myColor: "green")
+                    Text("S'inscrire")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .padding()
+                    .frame(width: 220, height: 60)
+                    .background(LinearGradient(gradient: Gradient(colors: [.green, .yellow]), startPoint: .leading, endPoint: .trailing))
+                    .cornerRadius(40)
+                    .padding()
                 }
             }else{
-                ButtonGenerator(myText: "S'inscrire", myColor: "red")
+                Text("S'inscrire")
+                .font(.headline)
+                .foregroundColor(.white)
+                .padding()
+                .frame(width: 220, height: 60)
+                .background(LinearGradient(gradient: Gradient(colors: [.yellow, .pink]), startPoint: .leading, endPoint: .trailing))
+                .cornerRadius(40)
+                .padding()
             }
-        }.keyboardSensible($offsetValue)
+        }
+            .keyboardSensible($offsetValue)
     }
     func availableRegistration(pseudo : String, mail : String, mdp : String, mdp2 : String ) -> Bool {
         return(isAvailablePseudo(pseudo : pseudo)

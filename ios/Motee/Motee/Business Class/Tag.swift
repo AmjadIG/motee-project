@@ -19,7 +19,7 @@ class Tag : Identifiable, ObservableObject, Codable {
     private var idPropositions : [String] = []
     private var idAnswers : [String] = []
     
-    //Enumeration utile pour l'encodage en JSON
+    //Enumération des Coding keys, utiles à l'encodage/décodage
     enum TagEncodingKeys : CodingKey {
         case _id
         case label
@@ -28,14 +28,14 @@ class Tag : Identifiable, ObservableObject, Codable {
         case idAnswers
     }
     
-    //Encoder
+    //Résultat : Encode un objet de type Proposition, en son homologue JSON
     func encode(to encoder : Encoder) throws{
         var container = encoder.container(keyedBy: TagEncodingKeys.self)
         try container.encode(idPropositions, forKey: .idProps)
         try container.encode(idAnswers, forKey: .idAnswers)
     }
     
-    //Decoder by require init
+    //Résultat : Décode un objet JSON en Proposition, à partir des Coding keys énumérées plus haut
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: TagEncodingKeys.self)
         self.idTag = try container.decode(String.self, forKey: ._id)

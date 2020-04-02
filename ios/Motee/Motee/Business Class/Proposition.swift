@@ -24,6 +24,7 @@ class Proposition : Publication, Identifiable, Codable {
 
     var id : String {return idPublication}
     
+    //Enumération des Coding keys, utiles à l'encodage/décodage
     enum PropositionEncodingKeys : CodingKey {
         case _id
         case titleProp
@@ -35,13 +36,15 @@ class Proposition : Publication, Identifiable, Codable {
         case tagsProp
         case idAnswers
     }
-    //Encoder
+    
+    //Résultat : Encode un objet de type Proposition, en son homologue JSON
     func encode(to encoder : Encoder) throws{
         var container = encoder.container(keyedBy: PropositionEncodingKeys.self)
         try container.encode(tags, forKey: .tagsProp)
         try container.encode(answers, forKey: .idAnswers)
     }
-    //Decoder by require init
+    
+    //Résultat : Décode un objet JSON en Proposition, à partir des Coding keys énumérées plus haut
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: PropositionEncodingKeys.self)
         self.idPublication = try container.decode(String.self, forKey: ._id)

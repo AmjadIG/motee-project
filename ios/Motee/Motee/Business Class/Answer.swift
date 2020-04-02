@@ -23,6 +23,7 @@ class Answer : Publication, Identifiable, Codable {
         
     var id : String {return idPublication}
     
+    //Enumération des Coding keys, utiles à l'encodage/décodage
     enum AnswerEncodingKeys : CodingKey {
         case _id
         case dateAnswer
@@ -34,12 +35,12 @@ class Answer : Publication, Identifiable, Codable {
         case idProp
         case idReport
     }
-    //Encoder
+    //Résultat : Encode un objet de type Proposition, en son homologue JSON
     func encode(to encoder : Encoder) throws{
         var container = encoder.container(keyedBy: AnswerEncodingKeys.self)
     }
-    //Decoder by require init
-    //No need of a second initializer
+    
+    //Résultat : Décode un objet JSON en Proposition, à partir des Coding keys énumérées plus haut
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: AnswerEncodingKeys.self)
         self.idPublication = try container.decode(String.self, forKey: ._id)

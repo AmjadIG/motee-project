@@ -28,7 +28,7 @@ struct AnswerHeader: View {
                             print("Answer updated")
                         }
                     }){
-                        Image(systemName: "xmark.shield")
+                        Image(systemName: "xmark.shield").foregroundColor(.red)
                     }
                 }else{
                     Button(action:{
@@ -38,7 +38,7 @@ struct AnswerHeader: View {
                             print("Answer updated")
                         }
                     }){
-                        Image(systemName: "lock.shield.fill")
+                        Image(systemName: "lock.shield.fill").foregroundColor(.white)
                     }
                 }
             }

@@ -32,7 +32,7 @@ class User : Identifiable, ObservableObject, Codable {
     
     var id : String {return email}
     
-    //Enumeration utile pour l'encodage en JSON
+    //Enumération des Coding keys, utiles à l'encodage/décodage
     enum UserEncodingKeys : CodingKey {
         case _id
         case pseudo
@@ -45,13 +45,15 @@ class User : Identifiable, ObservableObject, Codable {
         case idPropositions
         case idAnswers
     }
-    //Encoder
+    
+    //Résultat : Encode un objet de type Proposition, en son homologue JSON
     func encode(to encoder : Encoder) throws{
         var container = encoder.container(keyedBy: UserEncodingKeys.self)
         try container.encode(idPropositions, forKey: .idPropositions)
         try container.encode(idAnswers, forKey: .idAnswers)
     }
-    //Decoder by require init
+    
+    //Résultat : Décode un objet JSON en Proposition, à partir des Coding keys énumérées plus haut
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: UserEncodingKeys.self)
         self.idUser = try container.decode(String.self, forKey: ._id)
