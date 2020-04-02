@@ -238,13 +238,13 @@ class PropositionModel {
     //Résultat : Supprime une proposition, renvoie true si c'est bon, false sinon
     static func deleteProposition(idProp: String, token: String)->Bool{
         // Prepare URL
-        let stringurl = "https://mootee-api.herokuapp.com/propositions/"
+        let stringurl = "https://mootee-api.herokuapp.com/propositions"
         let url = URL(string: stringurl)
         guard let requestUrl = url else { fatalError() }
         // Prepare URL Request Object
         var request = URLRequest(url: requestUrl)
         request.httpMethod = "DELETE"
-        var res : Bool = false
+        var res : Bool = true
         
         // HTTP Request Parameters which will be sent in HTTP Request Body
         let body = [
@@ -394,7 +394,7 @@ class PropositionModel {
         var request = URLRequest(url: requestUrl)
         request.httpMethod = "PUT"
         let semaphore = DispatchSemaphore(value :0)
-        var res : Bool = true
+        var res : Bool = false
         // Set HTTP Request Body
         guard let requestBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {return false}
         

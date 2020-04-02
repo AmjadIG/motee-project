@@ -208,8 +208,8 @@
 			isa = PBXGroup;
 			children = (
 				8E5F727124290F4B00B89172 /* TopTags.swift */,
-				8E46C14B24266A4000DCC705 /* TagListView.swift */,
 				8ECD8A4A241AA6C7007F2879 /* TagView.swift */,
+				8E46C14B24266A4000DCC705 /* TagListView.swift */,
 			);
 			path = Tag;
 			sourceTree = "<group>";

@@ -45,7 +45,9 @@ struct PropositionFooter : View {
                         Button( action :  {
                             if PropositionModel.deleteProposition(idProp: self.proposition.idPublication, token: self.fk.token){
                                 self.fk.currentPage = self.fk.currentPage
-                                print("Proposition supprimé : \(self.proposition.contentPub)")
+                                print("Proposition deleted ")
+                            }else{
+                                print("Proposition not deleted ")
                             }
                         }){
                             Image(systemName: "trash.fill").foregroundColor(Color.red).padding()

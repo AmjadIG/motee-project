@@ -21,7 +21,6 @@ struct NavbarView: View {
                     }
                 }
             }
-        
         return NavigationView {
             if self.fk.showFilters {
                 Filter()
@@ -40,7 +39,7 @@ struct NavbarView: View {
                             .frame(width: geometry.size.width/2)
                             .transition(.move(edge: .leading))
                     }
-                }//.gesture(drag)
+                }.gesture(drag)
                 .edgesIgnoringSafeArea(.all)
             }
             .navigationBarTitle(Text(self.fk.currentPage), displayMode: .inline)

@@ -10,17 +10,18 @@ import SwiftUI
 
 struct TagView: View {
     @EnvironmentObject var fk : FilterKit
-    @Binding var tag : Tag
+    @State var tag : Tag
     var color : String
     var body : some View {
         VStack{
             Button(action:{
                 if self.containsThisTag(){
                     self.removeTag()
+                    self.fk.showFilters = true
                 }else{
                     self.fk.tags.append(self.tag)
+                    self.fk.showFilters = true
                 }
-                self.fk.currentPage = "Accueil"
             }){
                 if self.containsThisTag(){
                     VStack{
@@ -65,7 +66,7 @@ struct TagView_Previews: PreviewProvider {
     @State static var tag = Tag(label: "Humour")
     @State static var color = "red"
     static var previews: some View {
-        TagView(tag: $tag, color : color).environmentObject(FilterKit())
+        TagView(tag: tag, color : color).environmentObject(FilterKit())
     }
 }
 

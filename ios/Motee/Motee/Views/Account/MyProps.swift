@@ -11,11 +11,11 @@ import SwiftUI
 struct MyProps: View {
     @EnvironmentObject var fk : FilterKit
     var body: some View {
-        let props = UserModel.getPropsByUser(user: fk.currentUser!)
+        let props : [Proposition] = UserModel.getPropsByUserId(idUser: fk.currentUser!.idUser)
         return NavigationView{
             ScrollView(.vertical){
                 VStack{
-                    if props.count == 0 {
+                    if props.count == 0 || props[0] == nil{
                         Text("Aucune contribution pour le moment").padding()
                         Button( action : {
                             self.fk.currentPage = "Ajouter propos"

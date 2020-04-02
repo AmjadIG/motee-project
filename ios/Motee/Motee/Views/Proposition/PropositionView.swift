@@ -17,6 +17,7 @@ struct PropositionView : View {
     @State var colorIfClicked2 = generateColor(name: "black")
     var body: some View {
         VStack{
+            if proposition.owner != nil {
             VStack(alignment: .center){
                 PropositionHeader(proposition: $proposition, colorIfClicked: $colorIfClicked, colorIfClicked2: $colorIfClicked2)
                 PropositionTagsView(proposition: $proposition).padding(.vertical,1)
@@ -29,6 +30,9 @@ struct PropositionView : View {
                 .padding([.top, .leading, .trailing])
         
             AnswersPropsView(proposition: $proposition, showBestAnswer: $showBestAnswer, showAllAnswers: $showAllAnswers, colorIfClicked: $colorIfClicked, colorIfClicked2: $colorIfClicked2)
+            }else{
+                Text("Chargement")
+            }
         }
     }
 }

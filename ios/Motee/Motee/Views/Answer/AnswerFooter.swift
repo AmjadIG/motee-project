@@ -9,7 +9,6 @@
 import SwiftUI
 
 struct AnswerFooter: View {
-    @State var isNotHide :Bool = false
     @Binding var answer : Answer
     @EnvironmentObject var fk : FilterKit
     var body: some View {
@@ -21,14 +20,13 @@ struct AnswerFooter: View {
                 if (self.fk.currentUser?.idUser == answer.owner){
                     Button(action : {
                         if AnswerModel.deleteAnswer(idAns: self.answer.idPublication, token: self.fk.token){
-                            self.fk.currentPage = ""
-                            self.fk.currentPage = "Mes réponses"
+                            self.fk.currentPage = self.fk.currentPage
                             print("Answer supprimé")
                         }else{
                             print("Answer pas supprimé")
                         }
                     }){
-                        Image( systemName: "trash").foregroundColor(Color.red)
+                        Image( systemName: "trash.fill").foregroundColor(Color.red)
                     }
                 }else{
                     ReportAnswer(answer: $answer)

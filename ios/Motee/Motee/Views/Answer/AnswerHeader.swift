@@ -19,7 +19,7 @@ struct AnswerHeader: View {
             }else{
                 Text(UserModel.getUserById(idUser: answer.owner ).pseudo).bold().foregroundColor(.white)
             }
-            if(self.answer.owner == fk.currentUser?.idUser){
+            if(self.answer.owner == fk.currentUser!.idUser){
                 if answer.anonymous{
                     Button(action:{
                         self.answer.anonymous = false

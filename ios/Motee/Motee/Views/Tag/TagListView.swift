@@ -21,7 +21,7 @@ struct TagListView: View {
             }){
                 Image(systemName: "trash")
                     .font(.title)
-                    .foregroundColor(Color.white)
+                    .foregroundColor(Color.gray)
             }
         }
     }

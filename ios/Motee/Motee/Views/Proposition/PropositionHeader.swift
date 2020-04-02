@@ -15,12 +15,13 @@ struct PropositionHeader : View {
     @Binding var colorIfClicked2 : Color
     var body: some View {
         HStack{
+            if proposition.owner != nil {
             if proposition.anonymous{
                 Text("Anonyme").bold().foregroundColor(colorIfClicked2)
             }else{
                 Text(UserModel.getUserById(idUser: proposition.owner).pseudo).bold().foregroundColor(colorIfClicked2)
             }
-            if(self.proposition.owner == fk.currentUser?.idUser){
+                if(self.proposition.owner == fk.currentUser?.idUser){
                 if proposition.anonymous{
                     Button(action:{
                         self.proposition.anonymous = false
@@ -47,6 +48,9 @@ struct PropositionHeader : View {
             Text(getGoodDate(wrongD: proposition.datePublication))
                 .bold()
                 .foregroundColor(colorIfClicked2)
+            }else{
+                Text("Chargement")
+            }
         }.padding(.all, 10.0).background(LinearGradient(gradient: Gradient(colors: [.yellow, .pink]), startPoint: .leading, endPoint: .trailing))
     }
 }
