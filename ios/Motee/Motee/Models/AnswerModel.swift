@@ -14,7 +14,7 @@ class AnswerModel {
     
     //Get All : https://mootee-api.herokuapp.com/answers => 200
     //Get by id : https://mootee-api.herokuapp.com/answers/id => 200
-    //Post : https://mootee-api.herokuapp.com/answers/newAnswer => 200
+    //Post - AddAnswer : https://mootee-api.herokuapp.com/answers/ => 200
     //Delete(=>Post) : https://mootee-api.herokuapp.com/answers/delete => 500
     //Put : https://mootee-api.herokuapp.com/answers/like => 200
     //Put : https://mootee-api.herokuapp.com/answers/dislike => 200

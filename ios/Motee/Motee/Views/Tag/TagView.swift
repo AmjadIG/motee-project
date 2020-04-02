@@ -11,7 +11,7 @@ import SwiftUI
 struct TagView: View {
     @EnvironmentObject var fk : FilterKit
     @State var tag : Tag
-    var color : String
+    var color : LinearGradient
     var body : some View {
         VStack{
             Button(action:{
@@ -28,15 +28,15 @@ struct TagView: View {
                         Text(" #\(tag.label) ")
                         .bold()
                         .padding()
-                        .background(generateColor(name: color))
+                        .background(color)
                         .cornerRadius(5)
                         .foregroundColor(Color.white)
-                    }.frame(alignment : .center).padding(3).background(generateColor(name: color).colorInvert())
+                    }.frame(alignment : .center).padding(3).background(color).colorInvert()
                 }else{
                     Text(" #\(tag.label) ")
                     .bold()
                     .padding()
-                    .background(generateColor(name: color))
+                    .background(color)
                     .cornerRadius(5)
                     .foregroundColor(Color.white)
                 }
@@ -64,7 +64,7 @@ struct TagView: View {
 
 struct TagView_Previews: PreviewProvider {
     @State static var tag = Tag(label: "Humour")
-    @State static var color = "red"
+    @State static var color = LinearGradient(gradient: Gradient(colors: [.yellow, .pink]), startPoint: .leading, endPoint: .trailing)
     static var previews: some View {
         TagView(tag: tag, color : color).environmentObject(FilterKit())
     }

@@ -77,13 +77,14 @@ class PropositionModel {
                 print("Error took place :\(error)")
                 return
             }
-        
+            print("Get Proposition by id[\(idProp)] ... done")
             // On vérifie l'état de la donnée
             if let data = data{
                 do{
                     res = try JSONDecoder().decode([String:Proposition].self, from: data)
-                }catch let error {
-                    print(error)
+                    print(">> OK !! Proposition loaded !")
+                }catch _ {
+                    print(">> No Proposition ...")
                 }
             }
             semaphore.signal()
@@ -91,7 +92,6 @@ class PropositionModel {
         task.resume()
         
         semaphore.wait()
-        print("Get Proposition by id[\(idProp)] ... done")
         return (purifyRequest(dictionary: res)[0] as! Proposition)
     }
     
@@ -136,13 +136,14 @@ class PropositionModel {
                 print("Error took place :\(error)")
                 return
             }
-        
+            print("Get Best Answer of Proposition[\(proposition.id)] ... done")
             // On vérifie l'état de la donnée
             if let data = data{
                 do{
                     res = try JSONDecoder().decode([String:Answer].self, from: data)
-                }catch let error {
-                    print(error)
+                    print(">> OK !! Best Answer loaded !")
+                }catch _ {
+                    print(">> No Best Answer ...")
                 }
             }
             semaphore.signal()
@@ -150,7 +151,6 @@ class PropositionModel {
         task.resume()
         
         semaphore.wait()
-        print("Get Best Answer of Proposition[\(proposition.id)] ... done")
         if purifyRequest(dictionary: res).isEmpty {
             return nil
         } else {

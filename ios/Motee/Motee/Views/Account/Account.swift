@@ -178,11 +178,10 @@ struct Account: View {
                     }.padding()
                      */
                     Button(action:{
-                        if UserModel.logout(token: self.fk.token){
-                            self.fk.currentUser = nil
-                            self.fk.token = ""
-                            self.fk.currentPage = "Accueil"
-                        }
+                        UserModel.logout(token: self.fk.token)
+                        self.fk.currentUser = nil
+                        self.fk.token = ""
+                        self.fk.currentPage = "Accueil"
                     }){
                         Text("Se déconnecter")
                         .font(.headline)

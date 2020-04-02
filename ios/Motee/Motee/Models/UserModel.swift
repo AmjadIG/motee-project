@@ -15,8 +15,10 @@ class UserModel {
     //Get All : https://mootee-api.herokuapp.com/users => 200
     //Get by id : https://mootee-api.herokuapp.com/users/id => 200
     //authenticate : https://mootee-api.herokuapp.com/users/authenticate => 200
-    //register : https://mootee-api.herokuapp.com/users/register => 200
-    //ban a user : https://mootee-api.herokuapp.com/users/admin/ban => ?
+    //register : https://mootee-api.herokuapp.com/users/ => 200
+    //logout : https://mootee-api.herokuapp.com/users/logout => 200
+    //ban a user : https://mootee-api.herokuapp.com/users/admin/ban => ok but not used
+    //change password : https://mootee-api.herokuapp.com/users/password/change => 200
     
     static func getAll()->[User]{
         // Prepare URL
@@ -196,7 +198,7 @@ class UserModel {
     static func register(pseudo: String, password: String, mail: String)->Bool{
         // Prepare URL
         
-        let stringurl = "https://mootee-api.herokuapp.com/users/register"
+        let stringurl = "https://mootee-api.herokuapp.com/users/"
         let url = URL(string: stringurl)
         
         let body = [
